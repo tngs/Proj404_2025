@@ -1,0 +1,97 @@
+.card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.card:hover {
+  background: #f9f9f9;
+}
+.image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.description {
+  color: #666;
+  font-size: 0.875rem;
+}
+.company {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #343a40; /* Dark background */
+  color: #fff;
+  height: 60px; /* Set a fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.navbar a {
+  color: #fff;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem; /* Add padding for button-like appearance */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #007bff; /* Button background color */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar a:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.navbar a:active {
+  background-color: #004085; /* Even darker blue on click */
+  transform: translateY(0); /* Reset lift effect */
+}
+
+.logoutButton {
+  color: #fff;
+  margin: 0 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #dc354500; /* Red background for logout */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #dc354500; /* Darker red on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.logoutButton:active {
+  background-color: #dc354500; /* Even darker red on click */
+  transform: translateY(0); /* Reset lift effect */
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.spacer {
+  flex-grow: 1; /* This will push the logout button to the right */
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}

@@ -1,0 +1,47 @@
+.card {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.card:hover {
+  background: #f9f9f9;
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: #343a40;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  color: #495057;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.description {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.company {
+  font-size: 0.75rem;
+  color: #999;
+}

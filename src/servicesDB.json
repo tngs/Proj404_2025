@@ -1,0 +1,62 @@
+[
+  {
+    "id": 201,
+    "title": "International Cargo Shipping",
+    "description": "Reliable and secure cargo transport across continents, with end-to-end tracking and customs support.",
+    "companyName": "CargoPro Logistics",
+    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
+    "location": "Hamburg, Germany",
+    "serviceType": "Air & Sea Freight",
+    "rating": 4.7
+  },
+  {
+    "id": 202,
+    "title": "Express Same-Day Delivery",
+    "description": "Guaranteed door-to-door delivery within 24 hours for packages under 25kg in major cities.",
+    "companyName": "Express Co.",
+    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
+    "location": "New York, USA",
+    "serviceType": "Domestic Courier",
+    "rating": 4.5
+  },
+  {
+    "id": 203,
+    "title": "Heavy Equipment Freight",
+    "description": "Specialized freight services for industrial machinery, construction equipment, and oversized loads.",
+    "companyName": "FreightMasters",
+    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
+    "location": "Houston, USA",
+    "serviceType": "Land Freight",
+    "rating": 4.3
+  },
+  {
+    "id": 204,
+    "title": "Custom Logistics Solutions",
+    "description": "Integrated logistics tailored to your supply chain needs, with real-time analytics and optimization.",
+    "companyName": "LogisticsPro",
+    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
+    "location": "Singapore",
+    "serviceType": "3PL / 4PL",
+    "rating": 4.9
+  },
+  {
+    "id": 205,
+    "title": "Temperature-Controlled Shipping",
+    "description": "Ensure freshness of perishable goods with our advanced cold chain shipping infrastructure.",
+    "companyName": "CoolTrans Global",
+    "companyImage": "https://t4.ftcdn.net/jpg/03/16/40/45/360_F_316404516_rpxPb7rzDQDO7RYdf7eYzSsoIqYFCJHd.jpg",
+    "location": "Rotterdam, Netherlands",
+    "serviceType": "Refrigerated Transport",
+    "rating": 4.8
+  },
+  {
+    "id": 206,
+    "title": "E-commerce Fulfillment Services",
+    "description": "Scalable fulfillment centers for fast and efficient order processing, packing, and delivery.",
+    "companyName": "ShipNow Fulfillment",
+    "companyImage": "https://t4.ftcdn.net/jpg/02/52/19/90/360_F_252199006_YtsO9GnVRmZZB5GlN0xTOdfLmJu7kCD4.jpg",
+    "location": "Toronto, Canada",
+    "serviceType": "E-commerce Logistics",
+    "rating": 4.6
+  }
+]

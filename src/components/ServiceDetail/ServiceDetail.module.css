@@ -1,0 +1,28 @@
+.card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .card:hover {
+    background: #f9f9f9;
+  }
+  .image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+  }
+  .title {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .description {
+    color: #666;
+    font-size: 0.875rem;
+  }
+  .company {
+    font-size: 0.75rem;
+    color: #999;
+  }

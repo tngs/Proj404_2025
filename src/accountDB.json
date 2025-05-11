@@ -1,0 +1,103 @@
+[
+    {
+      "username": "111",
+      "password": "111",
+      "role": "user",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "bio": "Web Developer | Open Source Contributor | Tech Enthusiast",
+      "profilePic": "https://randomuser.me/api/portraits/men/1.jpg",
+      "location": "San Francisco, USA"
+    },
+    {
+      "username": "112",
+      "password": "112",
+      "role": "provider",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "bio": "Full-stack Developer | UI/UX Designer | Passionate about creating beautiful apps",
+      "profilePic": "https://randomuser.me/api/portraits/women/1.jpg",
+      "location": "Los Angeles, USA"
+    },
+    {
+      "username": "113",
+      "password": "113",
+      "role": "user",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "bio": "Mobile App Developer | Tech Blogger | Always learning",
+      "profilePic": "https://randomuser.me/api/portraits/women/2.jpg",
+      "location": "Chicago, USA"
+    },
+    {
+      "username": "114",
+      "password": "114",
+      "role": "provider",
+      "name": "David Brown",
+      "email": "david.brown@example.com",
+      "bio": "DevOps Engineer | Cloud Architect | Building scalable infrastructure",
+      "profilePic": "https://randomuser.me/api/portraits/men/2.jpg",
+      "location": "Austin, USA"
+    },
+    {
+      "username": "115",
+      "password": "115",
+      "role": "user",
+      "name": "Sophia Davis",
+      "email": "sophia.davis@example.com",
+      "bio": "Data Scientist | AI/ML Enthusiast | Exploring the future of tech",
+      "profilePic": "https://randomuser.me/api/portraits/women/3.jpg",
+      "location": "Miami, USA"
+    },
+    {
+      "username": "116",
+      "password": "116",
+      "role": "provider",
+      "name": "William Martinez",
+      "email": "william.martinez@example.com",
+      "bio": "Backend Developer | Architect | Building the core systems that power apps",
+      "profilePic": "https://randomuser.me/api/portraits/men/3.jpg",
+      "location": "New York, USA"
+    },
+    {
+      "username": "117",
+      "password": "117",
+      "role": "user",
+      "name": "Ethan Wilson",
+      "email": "ethan.wilson@example.com",
+      "bio": "Front-end Developer | Passionate about responsive web design",
+      "profilePic": "https://randomuser.me/api/portraits/men/4.jpg",
+      "location": "Seattle, USA"
+    },
+    {
+      "username": "118",
+      "password": "118",
+      "role": "provider",
+      "name": "Emily Moore",
+      "email": "emily.moore@example.com",
+      "bio": "Product Manager | Entrepreneur | Focused on user-centric product design",
+      "profilePic": "https://randomuser.me/api/portraits/women/4.jpg",
+      "location": "Dallas, USA"
+    },
+    {
+      "username": "119",
+      "password": "119",
+      "role": "user",
+      "name": "Michael Taylor",
+      "email": "michael.taylor@example.com",
+      "bio": "Cybersecurity Expert | Ethical Hacker | Keeping the web safe",
+      "profilePic": "https://randomuser.me/api/portraits/men/5.jpg",
+      "location": "Boston, USA"
+    },
+    {
+      "username": "120",
+      "password": "120",
+      "role": "provider",
+      "name": "Olivia Lee",
+      "email": "olivia.lee@example.com",
+      "bio": "Software Engineer | Architect | Building the next generation of tech solutions",
+      "profilePic": "https://randomuser.me/api/portraits/women/5.jpg",
+      "location": "San Diego, USA"
+    }
+  ]
+  
