@@ -3,5 +3,6 @@ export default {
     error: 'error',
     success: 'success',
     unsuccess: 'unsuccess',
+    null: "null",
 };
   

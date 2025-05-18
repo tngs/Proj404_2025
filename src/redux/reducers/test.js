@@ -1,4 +1,4 @@
-const test = (state = null, action) => {
+const test = (state = "new reducer", action) => {
   switch (action.type) {
     case "TEST":
       console.log("TEST rducer\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
