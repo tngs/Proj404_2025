@@ -6,7 +6,7 @@ const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
   const service = location.state?.service;
-
+  
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
