@@ -24,13 +24,13 @@ function App() {
   };
   return (
     <Routes>
-      {ProtectedRoutes({path: "/user/*", element: <UserRoute />, condition: account.loggedIn && account.user.role === "user"})}
+      <Route path="/" element={<UserRoute />} />
+      {/* {ProtectedRoutes({path: "/user/*", element: <UserRoute />, condition: account.loggedIn && account.user.role === "user"})} */}
       {ProtectedRoutes({path: "/transporter/*", element: <TransporterRoute />, condition: account.loggedIn && account.user.role === "transporter"})}
       {ProtectedRoutes({path: "/admin/*", element: <AdminRoute />, condition: account.loggedIn && account.user.role === "admin"})}
       <Route path="/login" element={<Login />} />
       <Route path="/simple" element={<Simple />} />
-      {ProtectedRoutes({path:"*", element:<Navigate to={'/'+account?.user?.role} replace />, condition: account.loggedIn})}
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

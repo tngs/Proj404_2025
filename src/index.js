@@ -15,6 +15,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { storeUnauthenticated, storeAuthenticated } from "./redux/reducers"; // Ensure you have a rootReducer defined
 import { combineReducers } from "redux";
 import testReducer from "./redux/reducers/test";
+import { motion } from "framer-motion";
 
 const persistConfig = {
   key: "root",
@@ -25,8 +26,14 @@ const persistConfig = {
   },
 };
 
-const persistedReducerUnauthed = persistReducer(persistConfig, storeUnauthenticated);
-const persistedReducerAuthed = persistReducer(persistConfig, storeAuthenticated);
+const persistedReducerUnauthed = persistReducer(
+  persistConfig,
+  storeUnauthenticated
+);
+const persistedReducerAuthed = persistReducer(
+  persistConfig,
+  storeAuthenticated
+);
 
 const composeEnhancers =
   (process.env.NODE_ENV === "development"
@@ -49,22 +56,37 @@ const storeToUnauthed = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
-        <BrowserRouter>
-          <button onClick={() => storeToAuthed()} style={{ height: "20px" }}>
-            storeToAuthed
-          </button>
-          <button onClick={() => storeToUnauthed()} style={{ height: "20px" }}>
-            storeToUnauthed
-          </button>
-          <button onClick={() => {persistor.purge()}} style={{ height: "20px" }}>
-            purge
-          </button>
-          <App />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <Provider store={store}>
+        <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
+          <BrowserRouter>
+            <App />
+            <button onClick={() => storeToAuthed()} style={{ height: "20px" }}>
+              storeToAuthed
+            </button>
+            <button
+              onClick={() => storeToUnauthed()}
+              style={{ height: "20px" }}
+            >
+              storeToUnauthed
+            </button>
+            <button
+              onClick={() => {
+                persistor.purge();
+              }}
+              style={{ height: "20px" }}
+            >
+              purge
+            </button>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </motion.div>
   </React.StrictMode>
 );
 

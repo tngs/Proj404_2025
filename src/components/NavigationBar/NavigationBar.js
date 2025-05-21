@@ -5,40 +5,49 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/account";
-import { home as homeIcon, logout as logoutIcon } from "../icon";
+import { home as homeIcon, logout as logoutIcon, login as loginIcon } from "../../components/icon";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
+  const role = account.user.role;
   const username = account.user ? account.user.username : "";
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
   };
 
+  const handleLogin = () => {
+    // dispatch(logout());
+    navigate("/login");
+  };
+
   const goToProfile = () => {
     navigate("./profile/" + username);
   };
   const goToHome = () => {
-    navigate("/" + account.user.role);
+    navigate("/");
   };
 
   return (
     <div className={styles.navbar}>
-      <button className={styles.logoutButton} onClick={goToHome}>
+      <button className={styles.icons} onClick={goToHome}>
         <img src={homeIcon} alt="Home" className={styles.icon} />
       </button>
-      <button className={styles.logoutButton} onClick={handleLogout}>
+      {role != "user" && <button className={styles.icons} onClick={handleLogout}>
         <img src={logoutIcon} alt="Logout" className={styles.icon} />
-      </button>
+      </button>}
+      {role == "user" && <button className={styles.icons} onClick={handleLogin}>
+        <img src={loginIcon} alt="Login" className={styles.icon} />
+      </button>}
       <div className={styles.spacer}></div>
-      <img
+      {role != "user" && <img
         src={account?.user?.profilePic}
         alt="Profile Picture"
         class={styles["profile-pic"]}
         onClick={goToProfile}
-      />
+      />}
     </div>
   );
 };

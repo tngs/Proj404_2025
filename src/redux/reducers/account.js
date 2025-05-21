@@ -1,7 +1,10 @@
 import { ACCOUNT } from "../actions/types";
 import fetchStates from "../fetchStates";
 
-const DEFAULT_ACCOUNT = { loggedIn: false };
+const DEFAULT_ACCOUNT = {
+  loggedIn: false,
+  user: { role: "user"},
+};
 
 //...state, sould be used to fill it with prev state, cuz then when you update only the target
 const account = (state = DEFAULT_ACCOUNT, action) => {
@@ -9,29 +12,32 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
     // SIGNUP
     case ACCOUNT.SIGNING_UP:
       console.log(ACCOUNT.SIGNING_UP, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
       });
-      return { loggedIn: false, status: action.status };
+      return {
+        ...DEFAULT_ACCOUNT,
+        status: action.status,
+      };
     case ACCOUNT.SIGNUP_UNSUCCESS:
       console.log(ACCOUNT.SIGNUP_UNSUCCESS, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       });
       return {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       };
     case ACCOUNT.SIGNUP_SUCCESS:
       console.log(ACCOUNT.SIGNUP_SUCCESS, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       });
       return {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
         createdUser: action.payload,
@@ -39,17 +45,23 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
     // LOGIN
     case ACCOUNT.LOGING_IN:
       console.log(ACCOUNT.LOGING_IN, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
       });
-      return { loggedIn: false, status: action.status };
+      return {
+        ...DEFAULT_ACCOUNT,
+        status: action.status,
+      };
     case ACCOUNT.LOGIN_ERROR:
       console.log(ACCOUNT.LOGIN_ERROR, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       });
-      return { loggedIn: false, message: action.message };
+      return {
+        ...DEFAULT_ACCOUNT,
+        message: action.message,
+      };
     case ACCOUNT.LOGIN_SUCCESS:
       console.log(ACCOUNT.LOGIN_SUCCESS, {
         loggedIn: true,
@@ -65,23 +77,27 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
       };
     case ACCOUNT.LOGIN_UNSUCCESS:
       console.log(ACCOUNT.LOGIN_UNSUCCESS, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       });
       return {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       };
     // LOAD
     case ACCOUNT.LOADING:
       console.log(ACCOUNT.LOADING, {
-        loggedIn: false,
+        ...DEFAULT_ACCOUNT,
         status: action.status,
         message: action.message,
       });
-      return { loggedIn: false, status: action.status, message: action.message };
+      return {
+        ...DEFAULT_ACCOUNT,
+        status: action.status,
+        message: action.message,
+      };
     case ACCOUNT.LOADED:
       console.log(ACCOUNT.LOADED, {
         loggedIn: action.payload.loggedIn,
@@ -98,7 +114,10 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
     //LOGOUT
     case ACCOUNT.LOGOUT:
       console.log(ACCOUNT.LOGOUT, { message: action.message });
-      return { loggedIn: false, message: action.message };
+      return {
+        ...DEFAULT_ACCOUNT,
+        message: action.message,
+      };
     //UPDATE
     case ACCOUNT.UPDATE:
       console.log(ACCOUNT.UPDATE, {
@@ -106,7 +125,7 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
         message: action.message,
         user: {
           ...state?.user, // all existing user data
-          ...action.payload       // overwrite or add fields from payload
+          ...action.payload, // overwrite or add fields from payload
         },
       });
       return {

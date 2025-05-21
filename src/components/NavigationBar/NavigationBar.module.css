@@ -59,7 +59,7 @@
   transform: translateY(0); /* Reset lift effect */
 }
 
-.logoutButton {
+.icons {
   color: #fff;
   margin: 0 1rem;
   font-weight: bold;
@@ -70,12 +70,12 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.logoutButton:hover {
+.icons:hover {
   background-color: #dc354500; /* Darker red on hover */
   transform: translateY(-2px); /* Slight lift effect */
 }
 
-.logoutButton:active {
+.icons:active {
   background-color: #dc354500; /* Even darker red on click */
   transform: translateY(0); /* Reset lift effect */
 }
