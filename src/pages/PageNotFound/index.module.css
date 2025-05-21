@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-body {
+.body {
   overflow: hidden;
   background-color: #f4f6ff;
 }
