@@ -7,7 +7,8 @@ import "./App.css";
 // react-router
 import Simple from "./pages/Simple";
 import UserRoute from "./pages/User/UserRoute";
-import ProviderRoute from "./pages/Provider/ProviderRoute";
+import TransporterRoute from "./pages/Transporter/TransporterRoute";
+import AdminRoute from "./pages/Admin/AdminRoute";
 import Login from "./pages/Login";
 
 //redux
@@ -24,7 +25,8 @@ function App() {
   return (
     <Routes>
       {ProtectedRoutes({path: "/user/*", element: <UserRoute />, condition: account.loggedIn && account.user.role === "user"})}
-      {ProtectedRoutes({path: "/provider/*", element: <ProviderRoute />, condition: account.loggedIn && account.user.role === "provider"})}
+      {ProtectedRoutes({path: "/transporter/*", element: <TransporterRoute />, condition: account.loggedIn && account.user.role === "transporter"})}
+      {ProtectedRoutes({path: "/admin/*", element: <AdminRoute />, condition: account.loggedIn && account.user.role === "admin"})}
       <Route path="/login" element={<Login />} />
       <Route path="/simple" element={<Simple />} />
       {ProtectedRoutes({path:"*", element:<Navigate to={'/'+account?.user?.role} replace />, condition: account.loggedIn})}

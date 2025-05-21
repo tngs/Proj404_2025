@@ -1,6 +1,6 @@
 RequestLogin {email and password}
 
-//Transporter = provider
+//Transporter = transporter
 //TransportUser = user
 public class ResponseTransportUser {
     private String email;
@@ -27,7 +27,7 @@ ResponseTransportService.java
 }
 //login and member registration
 //login
-//provider -> transporter-service/login
+//transporter -> transporter-service/login
 //            transporter-service/transporter
 //user     -> transport-user-service/login
 //            transporter-service/transporter
@@ -40,8 +40,8 @@ ResponseTransportService.java
 
 
 //signing up
-//if provider -> "Transporter:"; user -> "TransportUser:"
-//return provider
+//if transporter -> "Transporter:"; user -> "TransportUser:"
+//return transporter
 ResponseEntity<ResponseTransporter>
 //return user
 ResponseEntity<ResponseTransportUser>
@@ -82,7 +82,7 @@ ResponseEntity<ResponsePermit>
 
 @GetMapping("/administration-service/getServicesByEmail/{administratorEmail}")
 ResponseEntity<List<ResponseService>>
-//probably all the services the provider have
+//probably all the services the transporter have
 
 @GetMapping("/administration-service/permitService/{serviceId}/byAdministrator/{administratorEmail}")
 ResponseEntity<ResponseService>

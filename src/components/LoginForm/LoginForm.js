@@ -116,7 +116,7 @@ const LoginForm = () => {
           className={styles.select}
         >
           <option value="user">User</option>
-          <option value="provider">Provider</option>
+          <option value="transporter">Provider</option>
         </select>
       </div>
       <button

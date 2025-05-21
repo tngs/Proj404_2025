@@ -12,7 +12,7 @@
     {
       "username": "112",
       "password": "112",
-      "role": "provider",
+      "role": "transporter",
       "name": "Jane Smith",
       "email": "jane.smith@example.com",
       "bio": "Full-stack Developer | UI/UX Designer | Passionate about creating beautiful apps",
@@ -32,7 +32,7 @@
     {
       "username": "114",
       "password": "114",
-      "role": "provider",
+      "role": "transporter",
       "name": "David Brown",
       "email": "david.brown@example.com",
       "bio": "DevOps Engineer | Cloud Architect | Building scalable infrastructure",
@@ -52,7 +52,7 @@
     {
       "username": "116",
       "password": "116",
-      "role": "provider",
+      "role": "transporter",
       "name": "William Martinez",
       "email": "william.martinez@example.com",
       "bio": "Backend Developer | Architect | Building the core systems that power apps",
@@ -72,7 +72,7 @@
     {
       "username": "118",
       "password": "118",
-      "role": "provider",
+      "role": "transporter",
       "name": "Emily Moore",
       "email": "emily.moore@example.com",
       "bio": "Product Manager | Entrepreneur | Focused on user-centric product design",
@@ -92,7 +92,7 @@
     {
       "username": "120",
       "password": "120",
-      "role": "provider",
+      "role": "transporter",
       "name": "Olivia Lee",
       "email": "olivia.lee@example.com",
       "bio": "Software Engineer | Architect | Building the next generation of tech solutions",
