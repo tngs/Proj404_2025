@@ -1,6 +1,6 @@
-import home from "./home-agreement.png";
-import logout from "./log-out.png";
-import login from "./log-in.png";
-import document from "./document.png";
+import homeIcon from "./home-agreement.png";
+import logoutIcon from "./log-out.png";
+import loginIcon from "./log-in.png";
+import documentIcon from "./document.png";
 
-export { home, logout, login, document };
+export { homeIcon, logoutIcon, loginIcon, documentIcon };

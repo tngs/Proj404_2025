@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/account";
-import { home as homeIcon, logout as logoutIcon, login as loginIcon, document as documentIcon } from "../../components/icon";
+import { homeIcon, logoutIcon, loginIcon, documentIcon } from "../../components/icon";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -47,11 +47,11 @@ const goToMyPage = () => {
       {role != "user" && loggedIn && <button className={styles.icons} onClick={goToMyPage}>
         <img src={documentIcon} alt="mypage" className={styles.icon} />
       </button>}
-      <div className={styles.spacer}></div>
+      <div className={styles.spacer} />
       {loggedIn && <img
         src={account?.user?.profilePic}
         alt="Profile Picture"
-        class={styles["profile-pic"]}
+        className={styles["profile-pic"]}
         onClick={goToProfile}
       />}
     </div>

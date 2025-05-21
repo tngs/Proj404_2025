@@ -10,6 +10,7 @@ import UserRoute from "./pages/User/UserRoute";
 import TransporterRoute from "./pages/Transporter/TransporterRoute";
 import AdminRoute from "./pages/Admin/AdminRoute";
 import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 
 //redux
 import { useSelector } from "react-redux";
@@ -19,18 +20,35 @@ import { useDispatch } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
-  const ProtectedRoutes = ({path, element, condition}) => {
+  const ProtectedRoutes = ({ path, element, condition }) => {
     return condition ? <Route path={path} element={element} /> : null;
   };
   return (
     <Routes>
       <Route path="/user/*" element={<UserRoute />} />
-      {ProtectedRoutes({path: "/user/*", element: <UserRoute />, condition: account.loggedIn && account.user.role === "user"})}
-      {ProtectedRoutes({path: "/transporter/*", element: <TransporterRoute />, condition: account.loggedIn && account.user.role === "transporter"})}
-      {ProtectedRoutes({path: "/admin/*", element: <AdminRoute />, condition: account.loggedIn && account.user.role === "admin"})}
+      {ProtectedRoutes({
+        path: "/user/*",
+        element: <UserRoute />,
+        condition: account.loggedIn && account.user.role === "user",
+      })}
+      {ProtectedRoutes({
+        path: "/transporter/*",
+        element: <TransporterRoute />,
+        condition: account.loggedIn && account.user.role === "transporter",
+      })}
+      {ProtectedRoutes({
+        path: "/admin/*",
+        element: <AdminRoute />,
+        condition: account.loggedIn && account.user.role === "admin",
+      })}
       <Route path="/login" element={<Login />} />
       <Route path="/simple" element={<Simple />} />
-      {ProtectedRoutes({path:"*", element:<Navigate to={'/'+account?.user?.role} replace />, condition: account.loggedIn})}
+      <Route path="/pnf" element={<PageNotFound />} />
+      {ProtectedRoutes({
+        path: "*",
+        element: <Navigate to={"/" + account?.user?.role} replace />,
+        condition: account.loggedIn,
+      })}
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
