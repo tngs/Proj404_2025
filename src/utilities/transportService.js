@@ -9,3 +9,7 @@ export const get = () => {
         transporterName
     */
 };
+
+export const getByServiceId = (id) => {
+  return axios.get(`/transport-service/byServiceId/${id}`); //ResponseTransportService
+}

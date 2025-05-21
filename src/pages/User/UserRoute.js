@@ -10,6 +10,7 @@ import SimplePage from "../Simple";
 import ProfilePage from "../Profile";
 import PageNotFoundPage from "../PageNotFound";
 import ServicePage  from "./Service/ServicePage";
+import OrderPage from "./Order/OrderPage";
 
 import { useSelector } from "react-redux"; // Import useSelector from react-redux
 
@@ -20,6 +21,7 @@ const MainRoutes = () => {
       {auth ? <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/service/:id" element={<ServicePage />} />
+        <Route path="/order/:id" element={<OrderPage />} />
         <Route path="/profile/:username" element={<ProfilePage />} />
         <Route path="/profile/" element={<PageNotFoundPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
