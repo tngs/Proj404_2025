@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import styles from "./OrderPage.module.css";
+import styles from "./OrderDetailPage.module.css";
 import servicesDB from "../../../servicesDB.json";
 
 const OrderPage = () => {
@@ -69,11 +69,8 @@ const OrderPage = () => {
             <h4>Service ID</h4>
             <p>{service.id}</p>
           </div>
-          <div>
-            Selected weight:{" "}
-            {weightConverter(weightRangeTable[optionNumber][0]) +
-              " to " +
-              weightConverter(weightRangeTable[optionNumber][1])}{" "}
+          <div className={styles.weightDisplay}>
+            Selected weight: {weightConverter(weightRangeTable[optionNumber][0])} to {weightConverter(weightRangeTable[optionNumber][1])}
           </div>
         </div>
       </div>

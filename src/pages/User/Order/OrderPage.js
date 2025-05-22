@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./OrderPage.module.css";
 import servicesDB from "../../../servicesDB.json";
 
@@ -7,12 +7,13 @@ const OrderPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const [service, setService] = useState(location.state?.service);
+  const navigate = useNavigate();
   const weightRangeTable = [
     [0, 100],
     [100, 1000],
     [1000, 9000],
   ];
-  const [weightRange, setWeightRange] = useState(0);//later send as optionNumber
+  const [weightRange, setWeightRange] = useState(0); //later send as optionNumber
   useEffect(() => {
     if (!service) {
       setService(servicesDB.find((p) => p.id === parseInt(id)));
@@ -33,6 +34,7 @@ const OrderPage = () => {
     e.preventDefault();
     // You can replace this with your actual form handling logic
     console.log("Selected weight id:", weightRange);
+    navigate("../orderDetail/" + id);
   };
   ////////////////////////////////////
   const weightConverter = (weight) => {

@@ -98,4 +98,25 @@
     font-size: 18px;
     color: #888;
   }
-  
+  .buttonWrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.orderButton {
+  padding: 12px 24px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.orderButton:hover {
+  background-color: #005fa3;
+}

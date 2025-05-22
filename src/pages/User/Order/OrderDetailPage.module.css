@@ -142,3 +142,7 @@
 .submitButton:hover {
   background-color: #005fa3;
 }
+
+.weightDisplay {
+  width: max-content;
+}

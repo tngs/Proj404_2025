@@ -1,16 +1,19 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
 
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
   const service = location.state?.service;
-  
+
+  const navigate = useNavigate();
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
-
+  const handleOrder = () => {
+    navigate("../order/" + id);
+  };
   return (
     <div className={styles.page}>
       <div
@@ -46,6 +49,11 @@ const ServicePage = () => {
           <div className={styles.infoBox}>
             <h4>Service ID</h4>
             <p>{service.id}</p>
+          </div>
+          <div className={styles.buttonWrapper}>
+            <button className={styles.orderButton} onClick={handleOrder}>
+              Order Now
+            </button>
           </div>
         </div>
       </div>
