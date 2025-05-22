@@ -31,30 +31,33 @@ const ServicePage = () => {
         <p>{service.description}</p>
 
         <div className={styles.infoGrid}>
-          <div className={styles.infoBox}>
-            <h4>Location</h4>
-            <p>{service.location}</p>
-          </div>
+          <>
+            <div className={styles.infoBox}>
+              <h4>Location</h4>
+              <p>{service.location}</p>
+            </div>
 
-          <div className={styles.infoBox}>
-            <h4>Service Type</h4>
-            <p>{service.serviceType}</p>
-          </div>
+            <div className={styles.infoBox}>
+              <h4>Service Type</h4>
+              <p>{service.serviceType}</p>
+            </div>
 
-          <div className={styles.infoBox}>
-            <h4>Rating</h4>
-            <p>⭐ {service.rating} / 5</p>
-          </div>
+            <div className={styles.infoBox}>
+              <h4>Rating</h4>
+              <p>⭐ {service.rating} / 5</p>
+            </div>
 
-          <div className={styles.infoBox}>
-            <h4>Service ID</h4>
-            <p>{service.id}</p>
-          </div>
-          <div className={styles.buttonWrapper}>
-            <button className={styles.orderButton} onClick={handleOrder}>
-              Order Now
-            </button>
-          </div>
+            <div className={styles.infoBox}>
+              <h4>Service ID</h4>
+              <p>{service.id}</p>
+            </div>
+          </>
+        </div>
+
+        <div className={styles.buttonWrapper}>
+          <button className={styles.orderButton} onClick={handleOrder}>
+            Order Now
+          </button>
         </div>
       </div>
     </div>
