@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./OrderPage.module.css";
 import servicesDB from "../../../servicesDB.json";
+import * as request from "../../../utilities/URLs";
 
 const OrderPage = () => {
   const { id, state } = useParams();
@@ -28,6 +29,8 @@ const OrderPage = () => {
     e.preventDefault();
     // You can replace this with your actual form handling logic
     console.log("Selected weight id:", weightRange);
+    request.transport_apply_service.postApplyByTransportUser({ serviceId:id, weight: weightRangeTable[weightRange] });//example
+
     navigate("../orderDetail/" + id);
   };
   ////////////////////////////////////
