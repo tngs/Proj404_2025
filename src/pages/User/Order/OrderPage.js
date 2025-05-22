@@ -4,7 +4,7 @@ import styles from "./OrderPage.module.css";
 import servicesDB from "../../../servicesDB.json";
 
 const OrderPage = () => {
-  const { id } = useParams();
+  const { id, state } = useParams();
   const location = useLocation();
   const [service, setService] = useState(location.state?.service);
   const navigate = useNavigate();
@@ -14,12 +14,6 @@ const OrderPage = () => {
     [1000, 9000],
   ];
   const [weightRange, setWeightRange] = useState(0); //later send as optionNumber
-  useEffect(() => {
-    if (!service) {
-      setService(servicesDB.find((p) => p.id === parseInt(id)));
-      console.log("service", service);
-    }
-  }, []);
 
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;

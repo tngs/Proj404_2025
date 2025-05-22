@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "strict": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    
+    "allowJs": true,                     // ✅ allows JS files to be compiled
+    "checkJs": false,                   // ✅ don't check types inside JS files
+    "noImplicitAny": false,            // ✅ allows 'any' types without error
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*"]
+}

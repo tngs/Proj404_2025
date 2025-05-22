@@ -1,3 +1,3 @@
-export interface ResponsePermit {
+export default interface ResponsePermit {
   permit: boolean;
 }

@@ -1,4 +1,4 @@
-export interface ResponseService {
+export default interface ResponseService {
   serviceId: string;
   serviceName: string;
   serviceDescription: string;

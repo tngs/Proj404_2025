@@ -1,4 +1,4 @@
-export interface ResponseAdministrator {
+export default interface ResponseAdministrator {
   administratorName: string;
   email: string;
 }

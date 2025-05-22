@@ -1,4 +1,4 @@
-export interface RequestTransportServiceByTransporterId {
+export default interface RequestTransportServiceByTransporterId {
   serviceName: string;
   serviceDescription: string;
   departures: string;

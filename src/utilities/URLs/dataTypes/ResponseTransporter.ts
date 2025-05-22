@@ -1,4 +1,4 @@
-export interface ResponseTransporter {
+export default interface ResponseTransporter {
   email: string;
   username: string;
   transporterId: string;

@@ -1,4 +1,4 @@
-export interface ResponseTransportService {
+export default interface ResponseTransportService {
   serviceName: string;
   serviceDescription: string;
   departures: string;

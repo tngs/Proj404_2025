@@ -1,4 +1,4 @@
-export interface ResponseServiceApply {
+export default interface ResponseServiceApply {
   departure: string;
   destination: string;
   serviceName: string;

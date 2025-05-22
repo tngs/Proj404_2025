@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
+import * as request from "../../../utilities/URLs";
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -8,12 +9,16 @@ const ServicePage = () => {
   const service = location.state?.service;
 
   const navigate = useNavigate();
+  useEffect(() => {
+    request.transport_service.getByServiceId(id);
+  }, []);
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
   const handleOrder = () => {
-    navigate("../order/" + id);
+    navigate("../order/" + id, { state: { service } });
   };
+
   return (
     <div className={styles.page}>
       <div

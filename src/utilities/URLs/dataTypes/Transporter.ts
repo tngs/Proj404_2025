@@ -1,4 +1,4 @@
-export interface Transporter {
+export default interface Transporter {
   username: string;
   password: string;
   email: string;

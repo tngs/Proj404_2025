@@ -1,4 +1,4 @@
-export interface RequestServiceApply {
+export default interface RequestServiceApply {
   departure: string;
   destination: string;
   serviceId: string;
