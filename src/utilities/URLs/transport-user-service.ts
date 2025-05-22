@@ -10,7 +10,6 @@ export const postLogin = (user: TransportUser) => {
     })
     .catch((error) => {
       console.log("error", error);
-      const user: ResponseTransportUser = {username:123}
       console.log(user)
       return error;
     });

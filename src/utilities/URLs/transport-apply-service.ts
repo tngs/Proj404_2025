@@ -2,10 +2,10 @@ import axios from "../../axios";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
 
 export const postApplyByTransportUser = (request: RequestServiceApply) => {
-  const { serviceId, optionNumber } = request;
+  const { serviceId, weight } = request;//option number
   axios
     .post<ResponseServiceApply>(
-      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${optionNumber}`
+      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`//?????????
     )
     .then((response) => {
       console.log("response", response);
