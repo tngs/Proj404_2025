@@ -14,3 +14,18 @@ export const postLogin = (user: TransportUser) => {
       return error;
     });
 };
+
+export const postTransportUser = (user: TransportUser) => {
+  axios
+    .post<ResponseTransportUser>("/transport-user", { body: user})
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      console.log(user)
+      return error;
+    });
+};
+

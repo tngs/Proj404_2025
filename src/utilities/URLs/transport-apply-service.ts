@@ -5,7 +5,8 @@ export const postApplyByTransportUser = (request: RequestServiceApply) => {
   const { serviceId, weight } = request; //option number
   axios
     .post<ResponseServiceApply>(
-      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}` //?????????
+      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`, //?????????
+      { body: request }
     )
     .then((response) => {
       console.log("response", response);
@@ -41,7 +42,7 @@ export const getGetUnpaidByTransportUser = () => {
       console.log("error", error);
       return error;
     });
-}
+};
 
 export const getGetPaidByTransportUser = () => {
   axios
@@ -54,11 +55,11 @@ export const getGetPaidByTransportUser = () => {
       console.log("error", error);
       return error;
     });
-}
+};
 
-export const getGetByApplyId = ({applyId}) => {
+export const getGetByApplyId = ({ applyId }) => {
   axios
-    .get<ResponseServiceApply>("/getByApplyId"+ applyId)
+    .get<ResponseServiceApply>("/getByApplyId" + applyId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -67,4 +68,4 @@ export const getGetByApplyId = ({applyId}) => {
       console.log("error", error);
       return error;
     });
-}
+};
