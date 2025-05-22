@@ -2,11 +2,27 @@ import axios from "../../axios";
 import { ResponseTransportService } from "./dataTypes";
 
 export const get = () => {
-  return axios.get<ResponseTransportService[]>("/");
+  axios
+    .get<ResponseTransportService[]>("/")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
 };
 
 export const getByServiceId = (id) => {
-  return axios.get<ResponseTransportService>(
-    `/transport-service/byServiceId/${id}`
-  );
+  axios
+    .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
 };

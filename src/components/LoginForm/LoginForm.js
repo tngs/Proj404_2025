@@ -5,8 +5,6 @@ import styles from "./LoginForm.module.css";
 import { signup, login } from "../../redux/actions/account"; // Import your action
 import { ACCOUNT } from '../../redux/actions/types';
 
-import * as request from "../../utilities/URLs";
-
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Initialize useNavigate
@@ -55,7 +53,7 @@ const LoginForm = () => {
         alert("Please fill in all fields!");
         return;
       }
-      const result = dispatch(login({username, password, role})).type; // Dispatch login action with user data
+      const result = dispatch(login({username, password, role}))?.type; // Dispatch login action with user data
       if (result === ACCOUNT.LOGIN_SUCCESS) {
         navigate(`/${role}`); // Redirect to the appropriate route based on role
       } else if (result === ACCOUNT.LOGIN_UNSUCCESS) {

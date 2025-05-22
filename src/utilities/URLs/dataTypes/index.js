@@ -13,6 +13,7 @@ import TransportUser from "TransportUser.ts";
 import ResponsePermit from "ResponsePermit.ts";
 import Transporter from "Transporter.ts";
 import ResponseService from "ResponseService.ts";
+import RequestTransporter from "RequestTransporter.ts";
 
 export {
   RequestAdministrator,
@@ -28,6 +29,7 @@ export {
   ResponseTransportUser,
   ResponseTransporter,
   ResponseWeightRange,
+  RequestTransporter,
   Transporter,
   TransportUser,
 };

@@ -14,10 +14,11 @@ import ServicePage  from "./Service/ServicePage";
 import { useSelector } from "react-redux"; // Import useSelector from react-redux
 
 const MainRoutes = () => {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(true);//make it better
   return <>
       <NavigationBar />
       {auth ? <Routes>
+        {console.log("At admin")}
         <Route path="/" element={<Home />} />
         <Route path="/service/:id" element={<ServicePage />} />
         <Route path="/profile/:username" element={<ProfilePage />} />

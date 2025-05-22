@@ -1,6 +1,15 @@
 import axios from "../../axios";
-import {TransportUser,ResponseTransportUser} from "./dataTypes";
+import { TransportUser, ResponseTransportUser } from "./dataTypes";
 
 export const postLogin = (user: TransportUser) => {
-    return axios.post<ResponseTransportUser>("/transport-user-service/login");
-}
+  axios
+    .post<ResponseTransportUser>("/transport-user-service/login")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
