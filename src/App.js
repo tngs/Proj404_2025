@@ -25,12 +25,6 @@ function App() {
   };
   return (
     <Routes>
-      <Route path="/user/*" element={<UserRoute />} />
-      {ProtectedRoutes({
-        path: "/user/*",
-        element: <UserRoute />,
-        condition: account.loggedIn && account.user.role === "user",
-      })}
       {ProtectedRoutes({
         path: "/transporter/*",
         element: <TransporterRoute />,
@@ -44,11 +38,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/simple" element={<Simple />} />
       <Route path="/pnf" element={<PageNotFound />} />
-      {ProtectedRoutes({
-        path: "*",
-        element: <Navigate to={"/" + account?.user?.role} replace />,
-        condition: account.loggedIn,
-      })}
+      <Route path="/*" element={<UserRoute />} />
+      
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

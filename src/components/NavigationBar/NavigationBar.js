@@ -28,7 +28,7 @@ const NavigationBar = () => {
     navigate("./profile/" + username);
   };
   const goToHome = () => {
-    navigate("/user");
+    navigate("/");
   };
 const goToMyPage = () => {
     navigate("/" + role);
