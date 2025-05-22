@@ -115,8 +115,8 @@ const LoginForm = () => {
           onChange={handleInputChange}
           className={styles.select}
         >
-          <option value="user">User</option>
-          <option value="transporter">Provider</option>
+          <option value="user">General User</option>
+          <option value="transporter">Transporter</option>
         </select>
       </div>
       <button
