@@ -3,74 +3,86 @@ import { useLocation, useParams } from "react-router-dom";
 import styles from "./OrderDetailPage.module.css";
 import servicesDB from "../../../servicesDB.json";
 
-const OrderPage = () => {
+const OrderDetailPage = () => {
   const { id } = useParams();
   const location = useLocation();
-  //////////////////////
-  const [service, setService] = useState(location.state?.service);
-  const [optionNumber, setOptionNumber] = useState(1);
-  //   const [weightRange, setWeightRange] = useState(0);//later send as optionNumber
-  /////////////////////
+  const [service, setService] = useState(location.state?.service || null);
+  const [weightRange, setWeightRange] = useState(location.state?.weightReport || null);
+
   const weightRangeTable = [
     [0, 100],
     [100, 1000],
     [1000, 9000],
   ];
+
   useEffect(() => {
-    ////////////////
     if (!service) {
-      setService(servicesDB.find((p) => p.id === parseInt(id)));
-      console.log("service", service);
+      const found = servicesDB.find((p) => p.serviceId === id || p.id === parseInt(id));
+      if (found) setService(found);
     }
-    ////////////////
-  }, []);
-  //////////////////////
+  }, [id, service]);
+
+  const weightConverter = (weight) => {
+    return weight < 1000 ? `${weight}g` : `${weight / 1000}kg`;
+  };
+
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
-  //////////////////////
-  const weightConverter = (weight) => {
-    if (weight < 1000) return weight + "g";
-    return weight / 1000 + "kg";
-  };
+
   return (
     <div className={styles.page}>
-      <div
-        className={styles.cover}
-        style={{ backgroundImage: `url(${service.companyImage})` }}
-      >
+      <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
         <div className={styles.overlay}>
-          <h1 className={styles.coverTitle}>{service.title}</h1>
-          <p className={styles.companyName}>{service.companyName}</p>
+          <h1 className={styles.coverTitle}>
+            {service.serviceName || service.title}
+          </h1>
+          <p className={styles.companyName}>
+            Transported by {service.transporterName || service.companyName}
+          </p>
         </div>
       </div>
 
       <div className={styles.details}>
         <h2>Description</h2>
-        <p>{service.description}</p>
+        <p>{service.serviceDescription || service.description}</p>
 
         <div className={styles.infoGrid}>
           <div className={styles.infoBox}>
-            <h4>Location</h4>
-            <p>{service.location}</p>
+            <h4>Departures</h4>
+            <p>{service.departures}</p>
           </div>
 
           <div className={styles.infoBox}>
-            <h4>Service Type</h4>
-            <p>{service.serviceType}</p>
+            <h4>Destinations</h4>
+            <p>{service.destinations}</p>
           </div>
 
           <div className={styles.infoBox}>
-            <h4>Rating</h4>
-            <p>⭐ {service.rating} / 5</p>
+            <h4>Transporter</h4>
+            <p>{service.transporterName}</p>
+          </div>
+
+          <div className={styles.infoBox}>
+            <h4>Transporter ID</h4>
+            <p>{service.transporterId}</p>
           </div>
 
           <div className={styles.infoBox}>
             <h4>Service ID</h4>
-            <p>{service.id}</p>
+            <p>{service.serviceId || service.id}</p>
           </div>
-          <div className={styles.weightDisplay}>
-            Selected weight: {weightConverter(weightRangeTable[optionNumber][0])} to {weightConverter(weightRangeTable[optionNumber][1])}
+
+          <div className={styles.infoBox}>
+            <h4>Permitted</h4>
+            <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
+          </div>
+
+          <div className={styles.infoBox}>
+            <h4>Selected Weight</h4>
+            <p>
+              {weightRange}
+            </p>
           </div>
         </div>
       </div>
@@ -78,4 +90,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default OrderDetailPage;

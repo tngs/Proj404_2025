@@ -146,3 +146,13 @@
 .weightDisplay {
   width: max-content;
 }
+
+.weightDisplay {
+  background-color: #f8fafc;
+  border: 1px solid #e1e5eb;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  font-size: 15px;
+  color: #555;
+}

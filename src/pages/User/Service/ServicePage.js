@@ -9,54 +9,62 @@ const ServicePage = () => {
   const service = location.state?.service;
 
   const navigate = useNavigate();
+
   useEffect(() => {
     request.transport_service.getByServiceId(id);
-  }, []);
+  }, [id]);
+
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
+
   const handleOrder = () => {
     navigate("../order/" + id, { state: { service } });
   };
 
   return (
     <div className={styles.page}>
-      <div
-        className={styles.cover}
-        style={{ backgroundImage: `url(${service.companyImage})` }}
-      >
+      <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
         <div className={styles.overlay}>
-          <h1 className={styles.coverTitle}>{service.title}</h1>
-          <p className={styles.companyName}>{service.companyName}</p>
+          <h1 className={styles.coverTitle}>{service.serviceName}</h1>
+          <p className={styles.companyName}>Transported by {service.transporterName}</p>
         </div>
       </div>
 
       <div className={styles.details}>
         <h2>Description</h2>
-        <p>{service.description}</p>
+        <p>{service.serviceDescription}</p>
 
         <div className={styles.infoGrid}>
-          <>
-            <div className={styles.infoBox}>
-              <h4>Location</h4>
-              <p>{service.location}</p>
-            </div>
+          <div className={styles.infoBox}>
+            <h4>Departures</h4>
+            <p>{service.departures}</p>
+          </div>
 
-            <div className={styles.infoBox}>
-              <h4>Service Type</h4>
-              <p>{service.serviceType}</p>
-            </div>
+          <div className={styles.infoBox}>
+            <h4>Destinations</h4>
+            <p>{service.destinations}</p>
+          </div>
 
-            <div className={styles.infoBox}>
-              <h4>Rating</h4>
-              <p>⭐ {service.rating} / 5</p>
-            </div>
+          <div className={styles.infoBox}>
+            <h4>Transporter</h4>
+            <p>{service.transporterName}</p>
+          </div>
 
-            <div className={styles.infoBox}>
-              <h4>Service ID</h4>
-              <p>{service.id}</p>
-            </div>
-          </>
+          <div className={styles.infoBox}>
+            <h4>Transporter ID</h4>
+            <p>{service.transporterId}</p>
+          </div>
+
+          <div className={styles.infoBox}>
+            <h4>Service ID</h4>
+            <p>{service.serviceId}</p>
+          </div>
+
+          <div className={styles.infoBox}>
+            <h4>Permitted</h4>
+            <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
+          </div>
         </div>
 
         <div className={styles.buttonWrapper}>

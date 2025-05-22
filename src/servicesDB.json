@@ -1,62 +1,152 @@
 [
   {
-    "id": 201,
-    "title": "International Cargo Shipping",
-    "description": "Reliable and secure cargo transport across continents, with end-to-end tracking and customs support.",
-    "companyName": "CargoPro Logistics",
-    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
-    "location": "Hamburg, Germany",
-    "serviceType": "Air & Sea Freight",
-    "rating": 4.7
+    "serviceId": "1",
+    "serviceName": "SkyLink Express",
+    "serviceDescription": "Offers fast international cargo flights.",
+    "departures": "New York",
+    "destinations": "London",
+    "transporterName": "John Carter",
+    "transporterId": "A8F7K3P2XQ",
+    "permitted": true
   },
   {
-    "id": 202,
-    "title": "Express Same-Day Delivery",
-    "description": "Guaranteed door-to-door delivery within 24 hours for packages under 25kg in major cities.",
-    "companyName": "Express Co.",
-    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
-    "location": "New York, USA",
-    "serviceType": "Domestic Courier",
-    "rating": 4.5
+    "serviceId": "2",
+    "serviceName": "OceanTrade Logistics",
+    "serviceDescription": "Global shipping for bulk goods and containers.",
+    "departures": "Shanghai",
+    "destinations": "Hamburg",
+    "transporterName": "Emily Zhao",
+    "transporterId": "QW9XZ1MKLO",
+    "permitted": false
   },
   {
-    "id": 203,
-    "title": "Heavy Equipment Freight",
-    "description": "Specialized freight services for industrial machinery, construction equipment, and oversized loads.",
-    "companyName": "FreightMasters",
-    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
-    "location": "Houston, USA",
-    "serviceType": "Land Freight",
-    "rating": 4.3
+    "serviceId": "3",
+    "serviceName": "EuroTransit Lines",
+    "serviceDescription": "Passenger and freight transport across Europe.",
+    "departures": "Paris",
+    "destinations": "Rome",
+    "transporterName": "Marco Rossi",
+    "transporterId": "TR7PO8MJQL",
+    "permitted": true
   },
   {
-    "id": 204,
-    "title": "Custom Logistics Solutions",
-    "description": "Integrated logistics tailored to your supply chain needs, with real-time analytics and optimization.",
-    "companyName": "LogisticsPro",
-    "companyImage": "https://t4.ftcdn.net/jpg/01/71/45/49/360_F_171454970_ESzMFnymIcJOHjTL8iTUHhCkMZYLQoDV.jpg",
-    "location": "Singapore",
-    "serviceType": "3PL / 4PL",
-    "rating": 4.9
+    "serviceId": "4",
+    "serviceName": "DesertWinds Cargo",
+    "serviceDescription": "Specialized in desert and remote region deliveries.",
+    "departures": "Dubai",
+    "destinations": "Cairo",
+    "transporterName": "Ahmed Faisal",
+    "transporterId": "BNZ7PL4MTA",
+    "permitted": false
   },
   {
-    "id": 205,
-    "title": "Temperature-Controlled Shipping",
-    "description": "Ensure freshness of perishable goods with our advanced cold chain shipping infrastructure.",
-    "companyName": "CoolTrans Global",
-    "companyImage": "https://t4.ftcdn.net/jpg/03/16/40/45/360_F_316404516_rpxPb7rzDQDO7RYdf7eYzSsoIqYFCJHd.jpg",
-    "location": "Rotterdam, Netherlands",
-    "serviceType": "Refrigerated Transport",
-    "rating": 4.8
+    "serviceId": "5",
+    "serviceName": "PolarTrack Freight",
+    "serviceDescription": "Cold chain logistics across Arctic routes.",
+    "departures": "Reykjavik",
+    "destinations": "Oslo",
+    "transporterName": "Lena Andersen",
+    "transporterId": "XK3J9WQHGD",
+    "permitted": true
   },
   {
-    "id": 206,
-    "title": "E-commerce Fulfillment Services",
-    "description": "Scalable fulfillment centers for fast and efficient order processing, packing, and delivery.",
-    "companyName": "ShipNow Fulfillment",
-    "companyImage": "https://t4.ftcdn.net/jpg/02/52/19/90/360_F_252199006_YtsO9GnVRmZZB5GlN0xTOdfLmJu7kCD4.jpg",
-    "location": "Toronto, Canada",
-    "serviceType": "E-commerce Logistics",
-    "rating": 4.6
+    "serviceId": "6",
+    "serviceName": "AsiaSky Haul",
+    "serviceDescription": "Airfreight solutions for East and Southeast Asia.",
+    "departures": "Seoul",
+    "destinations": "Bangkok",
+    "transporterName": "Min-Jun Lee",
+    "transporterId": "HK8PLW3TZN",
+    "permitted": true
+  },
+  {
+    "serviceId": "7",
+    "serviceName": "TransAndes Transport",
+    "serviceDescription": "Freight movement through South American mountain ranges.",
+    "departures": "Santiago",
+    "destinations": "Lima",
+    "transporterName": "Carlos Mendoza",
+    "transporterId": "RPQ9Z4TNCV",
+    "permitted": false
+  },
+  {
+    "serviceId": "8",
+    "serviceName": "Nordic Rail Cargo",
+    "serviceDescription": "Eco-friendly rail freight solutions in Northern Europe.",
+    "departures": "Helsinki",
+    "destinations": "Stockholm",
+    "transporterName": "Erik Holm",
+    "transporterId": "JD7G2ZKHPL",
+    "permitted": true
+  },
+  {
+    "serviceId": "9",
+    "serviceName": "AeroSwift Couriers",
+    "serviceDescription": "Premium express parcel services worldwide.",
+    "departures": "Los Angeles",
+    "destinations": "Tokyo",
+    "transporterName": "Sarah Kim",
+    "transporterId": "MNC8W2KJQX",
+    "permitted": false
+  },
+  {
+    "serviceId": "10",
+    "serviceName": "Continental Move",
+    "serviceDescription": "Door-to-door freight forwarding solutions.",
+    "departures": "Toronto",
+    "destinations": "Mexico City",
+    "transporterName": "Daniel Lopez",
+    "transporterId": "RWL7J5ZKMO",
+    "permitted": true
+  },
+  {
+    "serviceId": "11",
+    "serviceName": "Global Wheels Transit",
+    "serviceDescription": "Long-haul trucking services across continents.",
+    "departures": "Berlin",
+    "destinations": "Istanbul",
+    "transporterName": "Hakan Yildiz",
+    "transporterId": "PUO6TZJRXB",
+    "permitted": false
+  },
+  {
+    "serviceId": "12",
+    "serviceName": "IslandLink Ferries",
+    "serviceDescription": "Transporting goods and people between island chains.",
+    "departures": "Athens",
+    "destinations": "Valletta",
+    "transporterName": "Sofia Georgiou",
+    "transporterId": "LW7ZX1PKMN",
+    "permitted": true
+  },
+  {
+    "serviceId": "13",
+    "serviceName": "MetroAir Cargo",
+    "serviceDescription": "Efficient cargo delivery between major cities.",
+    "departures": "Chicago",
+    "destinations": "Madrid",
+    "transporterName": "Anthony Rogers",
+    "transporterId": "FZG4K2MCXN",
+    "permitted": true
+  },
+  {
+    "serviceId": "14",
+    "serviceName": "Savanna Freight Lines",
+    "serviceDescription": "Land freight through Sub-Saharan routes.",
+    "departures": "Nairobi",
+    "destinations": "Lagos",
+    "transporterName": "Blessing Okoye",
+    "transporterId": "YRN2TVKPUJ",
+    "permitted": false
+  },
+  {
+    "serviceId": "15",
+    "serviceName": "PacificSky Link",
+    "serviceDescription": "Air cargo bridging Asia-Pacific nations.",
+    "departures": "Sydney",
+    "destinations": "Manila",
+    "transporterName": "Isabella Cruz",
+    "transporterId": "ZXM5RQJWBN",
+    "permitted": true
   }
 ]

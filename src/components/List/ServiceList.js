@@ -8,7 +8,7 @@ const ServiceList = ({ services }) => {
       <div className={styles.grid}>
         {services.map((service) => (
           <ServiceCard
-            key={service.id}
+            key={service.serviceId}
             service={service}
           />
         ))}
