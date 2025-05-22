@@ -1,5 +1,5 @@
-import axios from "../axios";
-import { Transporter, ResponseTransporter } from "./URLs/dataTypes";
+import axios from "../../axios";
+import { Transporter, ResponseTransporter } from "./dataTypes";
 
 // Parameter name changed to avoid conflict
 export const postTransporter = (transporter: Transporter) => {

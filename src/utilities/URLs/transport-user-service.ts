@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "../../axios";
 import {TransportUser,ResponseTransportUser} from "./dataTypes";
 
 export const postLogin = (user: TransportUser) => {

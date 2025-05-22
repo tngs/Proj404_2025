@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "../../axios";
 import { ResponseTransportService } from "./dataTypes";
 
 export const get = () => {

@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "../../axios";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
 
 export const postApplyByTransportUser = (request: RequestServiceApply) => {

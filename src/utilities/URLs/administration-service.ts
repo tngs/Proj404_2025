@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "../../axios";
 import { ResponseService } from "./dataTypes";
 
 export const getGetServiceByEmail = (administratorEmail) => {
