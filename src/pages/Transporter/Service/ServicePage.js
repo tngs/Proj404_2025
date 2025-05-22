@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
 import * as request from "../../../utilities/URLs";
+import { useSelector } from "react-redux";
 
 const ServicePage = () => {
   const { id } = useParams();
+  const user = useSelector((state) => state.account.user);
   const location = useLocation();
   const service = location.state?.service;
   const [modifyMode, setModifyMode] = React.useState(false);
@@ -19,11 +21,13 @@ const ServicePage = () => {
   }
 
   const handleModify = () => {
-    setModifyMode(true);
+    if (user.id == service.transporterId) setModifyMode(true);
   };
   const handleSave = () => {
-    console.log("Updated Data:", formData);
-    setModifyMode(false); // exit modify mode after save
+    if (user.id == service.transporterId) {
+      console.log("Updated Data:", formData);
+      setModifyMode(false); // exit modify mode after save
+    }
   };
   return (
     <div className={styles.page}>
