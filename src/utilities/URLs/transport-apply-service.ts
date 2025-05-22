@@ -2,10 +2,10 @@ import axios from "../../axios";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
 
 export const postApplyByTransportUser = (request: RequestServiceApply) => {
-  const { serviceId, weight } = request;//option number
+  const { serviceId, weight } = request; //option number
   axios
     .post<ResponseServiceApply>(
-      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`//?????????
+      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}` //?????????
     )
     .then((response) => {
       console.log("response", response);
@@ -16,3 +16,55 @@ export const postApplyByTransportUser = (request: RequestServiceApply) => {
       return error;
     });
 };
+
+export const getGetByTransporterId = (transporterId) => {
+  axios
+    .get<ResponseServiceApply[]>(`/getByTransporterId/${transporterId}`)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
+export const getGetUnpaidByTransportUser = () => {
+  axios
+    .get<ResponseServiceApply[]>("/getUnpaidByTransportUser")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+
+export const getGetPaidByTransportUser = () => {
+  axios
+    .get<ResponseServiceApply[]>("/getPaidByTransportUser")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+
+export const getGetByApplyId = ({applyId}) => {
+  axios
+    .get<ResponseServiceApply>("/getByApplyId"+ applyId)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
