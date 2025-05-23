@@ -81,7 +81,7 @@ export const getByTransporterId = (transporterId) => {
 
 export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
   axios
-    .post<ResponseTransportService[]>("/modifyService/" + serviceId, { body: request })
+    .post<RequestTransportServiceByTransporterId>("/modifyService/" + serviceId, { body: request })
     .then((response) => {
       console.log("response", response);
       return response;
