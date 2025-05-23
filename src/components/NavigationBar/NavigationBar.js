@@ -45,9 +45,9 @@ const NavigationBar = () => {
   }; 
   return (
     <div className={styles.navbar}>
-      <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={goToHome}>Home</NavButton>
-      {role=="user" && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35, lineHeight: 1  }} onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
-      {role=="transporter" && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35, lineHeight: 1  }} onClick={goToMyPage}>Transporter ist</NavButton>}
+      <NavButton onClick={goToHome}>Home</NavButton>
+      {role=="user" && <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
+      {role=="transporter" && <NavButton onClick={goToMyPage}>Transporter ist</NavButton>}
       {/* <button className={styles.icons} onClick={goToHome}>
         <img src={homeIcon} alt="Home" className={styles.icon} />
       </button> */}
@@ -66,10 +66,10 @@ const NavigationBar = () => {
         </button>
       )} */}
       <div className={styles.spacer} />
-      {!loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleLogin}>Log in</NavButton>}
-      {!loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleSignup}>Sign-up</NavButton>}
-      {loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleLogout}>Log out</NavButton>}
-      {loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={goToProfile}>Profile</NavButton>}
+      {!loggedIn && <NavButton onClick={handleLogin}>Log in</NavButton>}
+      {!loggedIn && <NavButton onClick={handleSignup}>Sign-up</NavButton>}
+      {loggedIn && <NavButton onClick={handleLogout}>Log out</NavButton>}
+      {loggedIn && <NavButton onClick={goToProfile}>Profile</NavButton>}
 {/*       
 fontWeight: "bold",;
     fontFamily: "system-ui";

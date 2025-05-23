@@ -8,6 +8,11 @@
   width: 100px;
   height: 45px;
   transition: 0.3s;
+  font-weight: bold;
+  font-family: system-ui;
+  height: 35px;
+  line-height: 1;
+  margin-left: 10px;
 }
 
 .button:hover {
