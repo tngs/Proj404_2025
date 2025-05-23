@@ -17,7 +17,7 @@ export const postLogin = (user: TransportUser) => {
 
 export const postTransportUser = (user: TransportUser) => {
   axios
-    .post<ResponseTransportUser>("/transport-user", { body: user})
+    .post<ResponseTransportUser>("/transport-user-service/transport-user", { body: user})
     .then((response) => {
       console.log("response", response);
       return response;

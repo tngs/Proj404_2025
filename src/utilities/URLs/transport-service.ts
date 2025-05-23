@@ -3,7 +3,7 @@ import { ResponseTransportService,RequestTransportServiceByTransporterId, Reques
 
 export const get = () => {
   axios
-    .get<ResponseTransportService[]>("/")
+    .get<ResponseTransportService[]>("/transport-service")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -29,7 +29,7 @@ export const getByServiceId = (id) => {
 
 export const getMakingService = (transporterId) => {
   axios
-    .get<ResponseTransportService[]>("/makingService/" + transporterId)
+    .get<ResponseTransportService[]>("/transport-service/makingService/" + transporterId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -42,7 +42,7 @@ export const getMakingService = (transporterId) => {
 
 export const getMakingWeightRange = (serviceId) => {
   axios
-    .get<RequestWeightRange[]>("/makingWeightRange/" + serviceId)
+    .get<RequestWeightRange[]>("/transport-service/makingWeightRange/" + serviceId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -55,7 +55,7 @@ export const getMakingWeightRange = (serviceId) => {
 
 export const getByServiceName = (serviceName) => {
   axios
-    .get<ResponseTransportService[]>("/byServiceName/" + serviceName)
+    .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -68,7 +68,7 @@ export const getByServiceName = (serviceName) => {
 
 export const getByTransporterId = (transporterId) => {
   axios
-    .get<ResponseTransportService[]>("/byTransporterId/" + transporterId)
+    .get<ResponseTransportService[]>("/transport-service/byTransporterId/" + transporterId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -81,7 +81,7 @@ export const getByTransporterId = (transporterId) => {
 
 export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
   axios
-    .post<RequestTransportServiceByTransporterId>("/modifyService/" + serviceId, { body: request })
+    .post<RequestTransportServiceByTransporterId>("/transport-service/modifyService/" + serviceId, { body: request })
     .then((response) => {
       console.log("response", response);
       return response;
@@ -95,7 +95,7 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
 
 export const deleteDeleteServiceByServiceId = (serviceId) => {
   axios
-    .delete<String>("/deleteServiceByServiceId/" + serviceId)
+    .delete<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
     .then((response) => {
       console.log("response", response);
       return response;

@@ -3,7 +3,7 @@ import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes
 
 export const getPayServiceByApplyId = (applyId) => {
   axios
-    .get<ResponseServiceApplyForPayment>("/payServiceByApplyId/" + applyId)
+    .get<ResponseServiceApplyForPayment>("/payment-service/payment-servi/payServiceByApplyId/" + applyId)
     .then((response) => {
       
       console.log("response", response);
@@ -18,7 +18,7 @@ export const getPayServiceByApplyId = (applyId) => {
 
 export const getPayment = () => {
   axios
-    .get<String>("/payment/")
+    .get<String>("/payment-service/payment/")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -32,7 +32,7 @@ export const getPayment = () => {
 
 export const postPayment = (request: PaymentCallbackRequest) => {
   axios
-    .get<String>("/payment/")//<IamportResponse<Payment>> // no idea
+    .get<String>("/payment-service/payment/")//<IamportResponse<Payment>> // no idea
     .then((response) => {
       console.log("response", response);
       return response;
@@ -46,7 +46,7 @@ export const postPayment = (request: PaymentCallbackRequest) => {
 
 export const getSuccessPayment = () => {
   axios
-    .get<String>("/success-payment/")
+    .get<String>("/payment-service/success-payment/")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -60,7 +60,7 @@ export const getSuccessPayment = () => {
 
 export const getFailPayment = () => {
   axios
-    .get<String>("/fail-payment/")
+    .get<String>("/payment-service/fail-payment/")
     .then((response) => {
       console.log("response", response);
       return response;

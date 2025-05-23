@@ -20,7 +20,7 @@ export const postApplyByTransportUser = (request: RequestServiceApply) => {
 
 export const getGetByTransporterId = (transporterId) => {
   axios
-    .get<ResponseServiceApply[]>(`/getByTransporterId/${transporterId}`)
+    .get<ResponseServiceApply[]>(`/transport-apply-service/getByTransporterId/${transporterId}`)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -33,7 +33,7 @@ export const getGetByTransporterId = (transporterId) => {
 
 export const getGetUnpaidByTransportUser = () => {
   axios
-    .get<ResponseServiceApply[]>("/getUnpaidByTransportUser")
+    .get<ResponseServiceApply[]>("/transport-apply-service/getUnpaidByTransportUser")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -46,7 +46,7 @@ export const getGetUnpaidByTransportUser = () => {
 
 export const getGetPaidByTransportUser = () => {
   axios
-    .get<ResponseServiceApply[]>("/getPaidByTransportUser")
+    .get<ResponseServiceApply[]>("/transport-apply-service/getPaidByTransportUser")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -59,7 +59,7 @@ export const getGetPaidByTransportUser = () => {
 
 export const getGetByApplyId = ({ applyId }) => {
   axios
-    .get<ResponseServiceApply>("/getByApplyId" + applyId)
+    .get<ResponseServiceApply>("/transport-apply-service/getByApplyId" + applyId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -72,7 +72,7 @@ export const getGetByApplyId = ({ applyId }) => {
 
 export const getSetCompleteByApplyId = (applyId) => {
   axios
-    .get<String>("/setCompleteByApplyId/" + applyId)
+    .get<String>("/transport-apply-service/setCompleteByApplyId/" + applyId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -86,7 +86,7 @@ export const getSetCompleteByApplyId = (applyId) => {
 
 export const deleteDeleteByApplyId = (applyId) => {
   axios
-    .delete<String>("/deleteByApplyId/" + applyId)
+    .delete<String>("/transport-apply-service/deleteByApplyId/" + applyId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -100,7 +100,7 @@ export const deleteDeleteByApplyId = (applyId) => {
 
 export const postUpdateByApplyId = (applyId, request: RequestServiceApply) => {
   axios
-    .post<ResponseServiceApply>("/updateByApplyId/" + applyId)
+    .post<ResponseServiceApply>("/transport-apply-service/updateByApplyId/" + applyId)
     .then((response) => {
       console.log("response", response);
       return response;
