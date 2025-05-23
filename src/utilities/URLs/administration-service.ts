@@ -36,10 +36,10 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
 };
 
 //Grant Administrator Permissions
-export const getPermitAdministrator = (administratorEmail) => {
+export const getPermitAdministratorToAdministrator = (administratorEmail,UnPermittedAdministratorEmail) => {
   axios
     .get<ResponsePermit>(
-      `/administration-service/permitAdministrator/${administratorEmail}`
+      `/permitAdministrator/${administratorEmail}/toAdministrator/${UnPermittedAdministratorEmail}`
     )
     .then((response) => {
       console.log("response", response);
