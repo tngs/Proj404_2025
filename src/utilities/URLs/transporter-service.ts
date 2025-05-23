@@ -20,9 +20,9 @@ export const postTransporter = (transporter: Transporter) => {
     });
 };
 
-export const getTransporter = (transporterId) => {
+export const getTransporter = (administratorEmail) => {
   axios
-    .get(`/transporter-service/transporter/${transporterId}`)
+    .get<ResponseTransporter[]>(`/transporter-service/transporter/${administratorEmail}`)
     .then((response) => {
       console.log("response", response);
       return response;

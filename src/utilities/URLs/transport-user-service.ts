@@ -15,9 +15,9 @@ export const postLogin = (user: TransportUser) => {
     });
 };
 
-export const postTransportUser = (user: TransportUser) => {
+export const getTransportUser = (administratorEmail) => {
   axios
-    .post<ResponseTransportUser>("/transport-user-service/transport-user", { body: user})
+    .get<ResponseTransportUser[]>("/transport-user-service/transport-user/"+administratorEmail)
     .then((response) => {
       console.log("response", response);
       return response;

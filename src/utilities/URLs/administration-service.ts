@@ -1,5 +1,10 @@
 import axios from "../../axios";
-import { ResponseService, ResponseAdministrator,RequestAdministrator,ResponsePermit } from "./dataTypes";
+import {
+  ResponseService,
+  ResponseAdministrator,
+  RequestAdministrator,
+  ResponsePermit,
+} from "./dataTypes";
 
 export const getGetServiceByEmail = (administratorEmail) => {
   axios
@@ -17,11 +22,9 @@ export const getGetServiceByEmail = (administratorEmail) => {
 };
 
 //Create Administrator
-export const postMakeAdministrator = (request:RequestAdministrator) => {
+export const postMakeAdministrator = (request: RequestAdministrator) => {
   axios
-    .post<ResponseAdministrator>(
-      "/administration-service/makeAdministrator"
-    )
+    .post<ResponseAdministrator>("/administration-service/makeAdministrator")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -30,7 +33,7 @@ export const postMakeAdministrator = (request:RequestAdministrator) => {
       console.log("error", error);
       return error;
     });
-}
+};
 
 //Grant Administrator Permissions
 export const getPermitAdministrator = (administratorEmail) => {
@@ -46,7 +49,7 @@ export const getPermitAdministrator = (administratorEmail) => {
       console.log("error", error);
       return error;
     });
-}
+};
 
 //View Services by Administrator
 export const getGetServicesByEmail = (administratorEmail) => {
@@ -62,7 +65,7 @@ export const getGetServicesByEmail = (administratorEmail) => {
       console.log("error", error);
       return error;
     });
-}
+};
 
 // Admin View of Service Detail
 export const getPermitServiceByAdministrator = (
@@ -91,6 +94,21 @@ export const postPermitServiceByAdministrator = (
   axios
     .post<ResponseService>(
       `/administration-service/permitService/${serviceId}/byAdministrator/${administratorEmail}`
+    )
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
+export const getGetServiceByAdministrator = (serviceId,administratorEmail) => {
+  axios
+    .get<ResponseService>(
+      `/getService/${serviceId}/byAdministrator/${administratorEmail}`
     )
     .then((response) => {
       console.log("response", response);
