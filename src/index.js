@@ -16,6 +16,7 @@ import { storeUnauthenticated, storeAuthenticated } from "./redux/reducers"; // 
 import { combineReducers } from "redux";
 import testReducer from "./redux/reducers/test";
 import { motion } from "framer-motion";
+import {login} from "./redux/actions/account";
 
 const persistConfig = {
   key: "root",
@@ -82,6 +83,18 @@ root.render(
               style={{ height: "20px" }}
             >
               purge
+            </button>
+            <button
+              onClick={() => {
+                store.dispatch(login({
+                  username: "admin",
+                  password: "admin",
+                  role: "admin",
+                }))
+              }}
+              style={{ height: "20px" }}
+            >
+              admin
             </button>
           </BrowserRouter>
         </PersistGate>

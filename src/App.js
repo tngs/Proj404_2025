@@ -11,6 +11,7 @@ import TransporterRoute from "./pages/Transporter/TransporterRoute";
 import AdminRoute from "./pages/Admin/AdminRoute";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
+import AdminPage from "./pages/Admin/Home/AdminPage";
 
 //redux
 import { useSelector } from "react-redux";
@@ -36,7 +37,7 @@ function App() {
         condition: account.loggedIn && account.user.role === "admin",
       })}
       <Route path="/login" element={<Login />} />
-      <Route path="/simple" element={<Simple />} />
+      <Route path="/simple" element={<AdminPage />} />
       <Route path="/pnf" element={<PageNotFound />} />
       <Route path="/*" element={<UserRoute />} />
       

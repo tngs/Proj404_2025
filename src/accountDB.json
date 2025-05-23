@@ -108,5 +108,16 @@
     "bio": "Software Engineer | Architect | Building the next generation of tech solutions",
     "profilePic": "https://randomuser.me/api/portraits/women/5.jpg",
     "location": "San Diego, USA"
+  },
+  {
+    "id": "11",
+    "username": "admin",
+    "password": "admin",
+    "role": "admin",
+    "name": "admin",
+    "email": "admin@example.com",
+    "bio": "admin",
+    "profilePic": "https://randomuser.me/api/portraits/man/5.jpg",
+    "location": "global"
   }
 ]

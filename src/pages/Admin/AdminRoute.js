@@ -5,7 +5,7 @@ import NavigationBar from "../../components/NavigationBar/NavigationBar";
 // import ServiceListPage from '../pages/ServiceListPage';
 // import ServiceDetailPage from '../pages/ServiceDetailPage'
 // import ProfilePage from '../pages/ProfilePage';
-import Home from "./Home";
+import Home from "./Home/AdminPage";
 import SimplePage from "../Simple";
 import ProfilePage from "../Profile";
 import PageNotFoundPage from "../PageNotFound";

@@ -3,7 +3,7 @@ import fetchStates from "../fetchStates";
 
 const DEFAULT_ACCOUNT = {
   loggedIn: false,
-  user: { role: "user"},
+  user: { role: "user" },
 };
 
 //...state, sould be used to fill it with prev state, cuz then when you update only the target
