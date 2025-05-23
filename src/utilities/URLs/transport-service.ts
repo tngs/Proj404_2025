@@ -91,3 +91,18 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
       return error;
     });
 }
+
+
+export const deleteDeleteServiceByServiceId = (serviceId) => {
+  axios
+    .delete<String>("/deleteServiceByServiceId/" + serviceId)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+

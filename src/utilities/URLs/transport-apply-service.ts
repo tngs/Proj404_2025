@@ -69,3 +69,45 @@ export const getGetByApplyId = ({ applyId }) => {
       return error;
     });
 };
+
+export const getSetCompleteByApplyId = (applyId) => {
+  axios
+    .get<String>("/setCompleteByApplyId/" + applyId)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+
+
+export const deleteDeleteByApplyId = (applyId) => {
+  axios
+    .delete<String>("/deleteByApplyId/" + applyId)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+
+
+export const postUpdateByApplyId = (applyId, request: RequestServiceApply) => {
+  axios
+    .post<ResponseServiceApply>("/updateByApplyId/" + applyId)
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+}
+

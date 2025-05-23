@@ -13,6 +13,8 @@ import TransportUser from "./TransportUser";
 import ResponsePermit from "./ResponsePermit";
 import Transporter from "./Transporter";
 import ResponseService from "./ResponseService";
+import ResponseServiceApplyForPayment from "./ResponseServiceApplyForPayment";
+import PaymentCallbackRequest from "./PaymentCallbackRequest";
 
 export {
   RequestAdministrator,
@@ -30,4 +32,6 @@ export {
   ResponseWeightRange,
   Transporter,
   TransportUser,
+  ResponseServiceApplyForPayment,
+  PaymentCallbackRequest,
 };

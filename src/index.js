@@ -16,7 +16,7 @@ import { storeUnauthenticated, storeAuthenticated } from "./redux/reducers"; // 
 import { combineReducers } from "redux";
 import testReducer from "./redux/reducers/test";
 import { motion } from "framer-motion";
-import {login} from "./redux/actions/account";
+import { login } from "./redux/actions/account";
 
 const persistConfig = {
   key: "root",
@@ -54,6 +54,24 @@ const storeToAuthed = () => {
 const storeToUnauthed = () => {
   store.replaceReducer(persistedReducerUnauthed);
 };
+const storePurge = () => {
+  persistor.purge();
+};
+const loginAsAdmin = () => {
+  store.dispatch(
+    login({
+      username: "admin",
+      password: "admin",
+      role: "admin",
+    })
+  );
+};
+
+window.storeToAuthed = storeToAuthed;
+window.storeToUnauthed = storeToUnauthed;
+window.storePurge = storePurge;
+window.loginAsAdmin = loginAsAdmin;
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -67,35 +85,6 @@ root.render(
         <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
           <BrowserRouter>
             <App />
-            <button onClick={() => storeToAuthed()} style={{ height: "20px" }}>
-              storeToAuthed
-            </button>
-            <button
-              onClick={() => storeToUnauthed()}
-              style={{ height: "20px" }}
-            >
-              storeToUnauthed
-            </button>
-            <button
-              onClick={() => {
-                persistor.purge();
-              }}
-              style={{ height: "20px" }}
-            >
-              purge
-            </button>
-            <button
-              onClick={() => {
-                store.dispatch(login({
-                  username: "admin",
-                  password: "admin",
-                  role: "admin",
-                }))
-              }}
-              style={{ height: "20px" }}
-            >
-              admin
-            </button>
           </BrowserRouter>
         </PersistGate>
       </Provider>

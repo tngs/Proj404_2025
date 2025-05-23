@@ -37,7 +37,7 @@ function App() {
         condition: account.loggedIn && account.user.role === "admin",
       })}
       <Route path="/login" element={<Login />} />
-      <Route path="/simple" element={<AdminPage />} />
+      <Route path="/simple" element={<Simple />} />
       <Route path="/pnf" element={<PageNotFound />} />
       <Route path="/*" element={<UserRoute />} />
       

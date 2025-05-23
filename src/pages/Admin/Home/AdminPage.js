@@ -136,7 +136,7 @@ const AdminPage = () => {
       </header>
       <main className={styles.main}>
         {filteredServices.map((service) => (
-            <ServiceCardWithEditAndDelete service={service} editHandler={()=>{}} deleteHandler={()=>{}}/>
+            <ServiceCardWithEditAndDelete key = {service.serviceId} service={service} editHandler={()=>{}} deleteHandler={()=>{}}/>
         ))}
       </main>
     </div>

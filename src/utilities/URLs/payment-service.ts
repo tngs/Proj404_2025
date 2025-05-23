@@ -1,8 +1,24 @@
 import axios from "../../axios";
+import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes";
 
 export const getPayServiceByApplyId = (applyId) => {
   axios
-    .get<String>("/payServiceByApplyId/" + applyId)
+    .get<ResponseServiceApplyForPayment>("/payServiceByApplyId/" + applyId)
+    .then((response) => {
+      
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
+
+export const getPayment = () => {
+  axios
+    .get<String>("/payment/")
     .then((response) => {
       console.log("response", response);
       return response;
@@ -12,3 +28,46 @@ export const getPayServiceByApplyId = (applyId) => {
       return error;
     });
 };
+
+
+export const postPayment = (request: PaymentCallbackRequest) => {
+  axios
+    .get<String>("/payment/")//<IamportResponse<Payment>> // no idea
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
+
+export const getSuccessPayment = () => {
+  axios
+    .get<String>("/success-payment/")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
+
+export const getFailPayment = () => {
+  axios
+    .get<String>("/fail-payment/")
+    .then((response) => {
+      console.log("response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return error;
+    });
+};
+
