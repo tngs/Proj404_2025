@@ -36,6 +36,7 @@ const ServicePage = () => {
           <h1
             className={styles.coverTitle}
             contentEditable={modifyMode}
+            suppressContentEditableWarning={true}
             style={{ border: `${modifyMode ? 1 : 0}px solid white` }}
             onChange={(e) => {
               setFormData({ ...formData, serviceName: e.target.value });
@@ -53,6 +54,7 @@ const ServicePage = () => {
         <h2>Description</h2>
         <p
           contentEditable={modifyMode}
+          suppressContentEditableWarning={true}
           style={{ border: `${modifyMode ? 1 : 0}px solid black` }}
           onChange={(e) => {
             setFormData({ ...formData, serviceDescription: e.target.value });
@@ -66,6 +68,7 @@ const ServicePage = () => {
             <h4>Departures</h4>
             <p
               contentEditable={modifyMode}
+              suppressContentEditableWarning={true}
               style={{ border: `${modifyMode ? 1 : 0}px solid black` }}
               onChange={(e) => {
                 setFormData({ ...formData, departures: e.target.value });
@@ -79,6 +82,7 @@ const ServicePage = () => {
             <h4>Destinations</h4>
             <p
               contentEditable={modifyMode}
+              suppressContentEditableWarning={true}
               style={{ border: `${modifyMode ? 1 : 0}px solid black` }}
               onChange={(e) => {
                 setFormData({ ...formData, destinations: e.target.value });
