@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import NavButton from "../../components/Button/NavButton";
 
 class Simple extends Component {
   constructor(props) {
@@ -8,13 +9,7 @@ class Simple extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <iframe
-          src="/HTMLfile/payment.html"
-          style={{ width: "100%", height: "100%", border: "none" }}
-          title="Foo Page"
-        />
-      </div>
+      <NavButton></NavButton>
     );
   }
 }

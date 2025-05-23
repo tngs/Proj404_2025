@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import styles from "./LoginForm.module.css";
 import { signup, login } from "../../redux/actions/account"; // Import your action
 import { ACCOUNT } from '../../redux/actions/types';
+import { useLocation } from "react-router-dom";
 
 const LoginForm = () => {
+  const location = useLocation();
+  console.log("location?.state", location?.state);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Initialize useNavigate
-  const [isSignupMode, setIsSignupMode] = useState(false);
+  const [isSignupMode, setIsSignupMode] = useState(location?.state?.isSignUp ? location.state.isSignUp : false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     confirmPassword: "",
-    role: "user",
+    role: location?.state?.role ? location.state.role : "user",
   });
   const createAccount = (username, password, role) => {
     const result = dispatch(signup({ username, password, role })).type; // Dispatch signup action

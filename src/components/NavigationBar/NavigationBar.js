@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/account";
-import { homeIcon, logoutIcon, loginIcon, documentIcon } from "../../components/icon";
+import {
+  homeIcon,
+  logoutIcon,
+  loginIcon,
+  documentIcon,
+} from "../../components/icon";
+import NavButton from "../Button/NavButton"
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -20,40 +26,61 @@ const NavigationBar = () => {
   };
 
   const handleLogin = () => {
-    // dispatch(logout());
-    navigate("/login");
+    navigate("/login", {state: {role: "user", isSignUp: false}});
   };
-
+  const handleSignup = () => {
+    navigate("/login", {state: {role: "user", isSignUp: true}});
+  };
   const goToProfile = () => {
-    navigate("./profile/" + username);
+    navigate("/profile/" + username);
   };
   const goToHome = () => {
     navigate("/");
   };
-const goToMyPage = () => {
+  const goToMyPage = () => {
     navigate("/" + role);
   };
+  const handleLoginAsTransporter = () => {
+    navigate("/login", {state: {role: "transporter", isSignUp: false}});
+  }; 
   return (
     <div className={styles.navbar}>
-      <button className={styles.icons} onClick={goToHome}>
+      <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={goToHome}>Home</NavButton>
+      {role=="user" && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35, lineHeight: 1  }} onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
+      {role=="transporter" && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35, lineHeight: 1  }} onClick={goToMyPage}>Transporter ist</NavButton>}
+      {/* <button className={styles.icons} onClick={goToHome}>
         <img src={homeIcon} alt="Home" className={styles.icon} />
-      </button>
-      {loggedIn ? <button className={styles.icons} onClick={handleLogout}>
-        <img src={logoutIcon} alt="Logout" className={styles.icon} />
-      </button>:
-      <button className={styles.icons} onClick={handleLogin}>
-        <img src={loginIcon} alt="Login" className={styles.icon} />
-      </button>}
-      {role != "user" && loggedIn && <button className={styles.icons} onClick={goToMyPage}>
-        <img src={documentIcon} alt="mypage" className={styles.icon} />
-      </button>}
+      </button> */}
+      {/* {loggedIn ? (
+        <button className={styles.icons} onClick={handleLogout}>
+          <img src={logoutIcon} alt="Logout" className={styles.icon} />
+        </button>
+      ) : (
+        <button className={styles.icons} onClick={handleLogin}>
+          <img src={loginIcon} alt="Login" className={styles.icon} />
+        </button>
+      )}
+      {role !== "user" && loggedIn && (
+        <button className={styles.icons} onClick={goToMyPage}>
+          <img src={documentIcon} alt="mypage" className={styles.icon} />
+        </button>
+      )} */}
       <div className={styles.spacer} />
-      {loggedIn && <img
-        src={account?.user?.profilePic}
-        alt="Profile Picture"
-        className={styles["profile-pic"]}
-        onClick={goToProfile}
-      />}
+      {!loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleLogin}>Log in</NavButton>}
+      {!loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleSignup}>Sign-up</NavButton>}
+      {loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={handleLogout}>Log out</NavButton>}
+      {loggedIn && <NavButton style={{marginLeft: 10, fontWeight: "bold", fontFamily: "system-ui", height: 35  }} onClick={goToProfile}>Profile</NavButton>}
+{/*       
+fontWeight: "bold",;
+    fontFamily: "system-ui";
+      {loggedIn && (
+        <img
+          src={account?.user?.profilePic}
+          alt="Profile"
+          className={styles["profile-pic"]}
+          onClick={goToProfile}
+        />
+      )} */}
     </div>
   );
 };

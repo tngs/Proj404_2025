@@ -24,7 +24,6 @@ export const getTransportUser = (administratorEmail) => {
     })
     .catch((error) => {
       console.log("error", error);
-      console.log(user)
       return error;
     });
 };
