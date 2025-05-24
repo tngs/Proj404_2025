@@ -1,7 +1,6 @@
 /* From Uiverse.io by Mhyar-nsi */ 
 .button {
   background-color: #f3f7fe;
-  color: #3f5873;
   border: none;
   cursor: pointer;
   border-radius: 8px;
@@ -13,10 +12,4 @@
   height: 35px;
   line-height: 1;
   margin-left: 10px;
-}
-
-.button:hover {
-  background-color: #3b82f6;
-  box-shadow: 0 0 0 5px #3b83f65f;
-  color: #fff;
 }

@@ -26,10 +26,10 @@ const NavigationBar = () => {
   };
 
   const handleLogin = () => {
-    navigate("/login", {state: {role: "user", isSignUp: false}});
+    navigate("/login", { state: { role: "user", isSignUp: false } });
   };
   const handleSignup = () => {
-    navigate("/login", {state: {role: "user", isSignUp: true}});
+    navigate("/login", { state: { role: "user", isSignUp: true } });
   };
   const goToProfile = () => {
     navigate("/profile/" + username);
@@ -41,13 +41,13 @@ const NavigationBar = () => {
     navigate("/" + role);
   };
   const handleLoginAsTransporter = () => {
-    navigate("/login", {state: {role: "transporter", isSignUp: false}});
-  }; 
+    navigate("/login", { state: { role: "transporter", isSignUp: false } });
+  };
   return (
     <div className={styles.navbar}>
       <NavButton onClick={goToHome}>Home</NavButton>
-      {role=="user" && <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
-      {role=="transporter" && <NavButton onClick={goToMyPage}>Transporter ist</NavButton>}
+      {role == "user" && <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
+      {role == "transporter" && <NavButton onClick={goToMyPage}>Transporter ist</NavButton>}
       {/* <button className={styles.icons} onClick={goToHome}>
         <img src={homeIcon} alt="Home" className={styles.icon} />
       </button> */}
@@ -70,7 +70,7 @@ const NavigationBar = () => {
       {!loggedIn && <NavButton onClick={handleSignup}>Sign-up</NavButton>}
       {loggedIn && <NavButton onClick={handleLogout}>Log out</NavButton>}
       {loggedIn && <NavButton onClick={goToProfile}>Profile</NavButton>}
-{/*       
+      {/*       
 fontWeight: "bold",;
     fontFamily: "system-ui";
       {loggedIn && (
