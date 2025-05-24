@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AdminPage.module.css";
 import ServiceCardWithEditAndDelete from "../../../components/ServiceCardWithEditAndDelete/ServiceCardWithEditAndDelete";
+import servicesDB from '../../../servicesDB.json';
 
 const AdminPage = () => {
   const [services, setServices] = useState([]);
@@ -14,57 +15,7 @@ const AdminPage = () => {
   useEffect(() => {
     // Mock data fetching
     const fetchData = async () => {
-      const data = [
-        {
-          serviceId: "1",
-          serviceName: "Express Bus Service",
-          serviceDescription:
-            "Fast and comfortable bus service with minimal stops",
-          departures: "New York",
-          destinations: "Boston",
-          transporterName: "East Coast Transit",
-          permitted: true,
-        },
-        {
-          serviceId: "2",
-          serviceName: "City Shuttle",
-          serviceDescription:
-            "Frequent shuttle service connecting major city landmarks",
-          departures: "Downtown",
-          destinations: "Airport",
-          transporterName: "Metro Connect",
-          permitted: true,
-        },
-        {
-          serviceId: "3",
-          serviceName: "Rural Connection",
-          serviceDescription:
-            "Service connecting rural communities to urban centers",
-          departures: "Farmville",
-          destinations: "Central City",
-          transporterName: "Country Roads Transport",
-          permitted: false,
-        },
-        {
-          serviceId: "4",
-          serviceName: "Tourist Explorer",
-          serviceDescription:
-            "Scenic route connecting major tourist attractions",
-          departures: "Hotel District",
-          destinations: "National Park",
-          transporterName: "Vacation Transit",
-          permitted: true,
-        },
-        {
-          serviceId: "5",
-          serviceName: "Night Owl",
-          serviceDescription: "Late night service for evening commuters",
-          departures: "Entertainment District",
-          destinations: "Residential Areas",
-          transporterName: "Metro Connect",
-          permitted: false,
-        },
-      ];
+      const data = servicesDB;
       setServices(data);
     };
     fetchData();

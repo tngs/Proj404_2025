@@ -21,14 +21,15 @@ const ServicePage = () => {
   }
 
   const handleModify = () => {
-    if (user.id == service.transporterId) setModifyMode(true);
+    if (user.id == service.transporterId || user.role == "admin") setModifyMode(true);
   };
   const handleSave = () => {
-    if (user.id == service.transporterId) {
+    if (user.id == service.transporterId || user.role == "admin") {
       console.log("Updated Data:", formData);
       setModifyMode(false); // exit modify mode after save
     }
   };
+  console.log('modifyMode', modifyMode)
   return (
     <div className={styles.page}>
       <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
