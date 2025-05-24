@@ -47,7 +47,8 @@ const NavigationBar = () => {
     <div className={styles.navbar}>
       <NavButton onClick={goToHome}>Home</NavButton>
       {role == "user" && <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
-      {role == "transporter" && <NavButton onClick={goToMyPage}>Transporter ist</NavButton>}
+      {role == "transporter" && <NavButton onClick={goToMyPage}>Transporter list</NavButton>}
+      {role == "admin" && <NavButton onClick={goToMyPage}>Admin list</NavButton>}
       {/* <button className={styles.icons} onClick={goToHome}>
         <img src={homeIcon} alt="Home" className={styles.icon} />
       </button> */}

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist", 
     "target": "ES6",
     "module": "ESNext",
     "strict": true,
@@ -14,5 +15,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/utilities/**/*.ts",
+  ],
+  "exclude": [
+    "src/**/*.js"  // Exclude JavaScript files
+  ]
 }

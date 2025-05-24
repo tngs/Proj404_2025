@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // react-router
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate, useNavigate } from "react-router-dom";
 // redux
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
@@ -65,6 +65,7 @@ const loginAsAdmin = () => {
       role: "admin",
     })
   );
+  window.location.href = "/admin";
 };
 
 window.storeToAuthed = storeToAuthed;

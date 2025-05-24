@@ -119,6 +119,8 @@ const LoginForm = () => {
         >
           <option value="user">General User</option>
           <option value="transporter">Transporter</option>
+          
+          <option value="admin" hidden>Admin</option>
         </select>
       </div>
       <button
