@@ -18,12 +18,12 @@ const ServiceCard = ({ service }) => {
         <p><strong>From:</strong> {service.departures}</p>
         <p><strong>To:</strong> {service.destinations}</p>
         <p><strong>Transporter:</strong> {service.transporterName}</p>
-        <p>
+        {/* <p>
           <strong>Status:</strong>{' '}
           <span style={{ color: service.permitted ? '#10b981' : '#ef4444' }}>
             {service.permitted ? 'Permitted ✅' : 'Pending ❌'}
           </span>
-        </p>
+        </p> */}
       </div>
     </div>
   );

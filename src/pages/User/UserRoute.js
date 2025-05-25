@@ -13,6 +13,8 @@ import ServicePage from "./Service/ServicePage";
 import OrderPage from "./Order/OrderPage";
 import OrderDetailPage from "./Order/OrderDetailPage";
 import PageNotFound from "../PageNotFound";
+import PaidOrders from './Orders/PaidOrders/PaidOrders'
+import UnpaidOrders from './Orders/UnpaidOrders/UnpaidOrders'
 
 import { useSelector } from "react-redux"; // Import useSelector from react-redux
 
@@ -23,11 +25,12 @@ const MainRoutes = () => {
       <NavigationBarUser />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/paid-orders" element={<PaidOrders />} />
+        <Route path="/unpaid-orders" element={<UnpaidOrders />} />
         <Route path="/service/:id" element={<ServicePage />} />
         <Route path="/order/:id" element={<OrderPage />} />
         <Route path="/orderDetail/:id" element={<OrderDetailPage />} />
-        <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/profile/" element={<PageNotFoundPage />} />
+
         <Route path="/pnf" element={<PageNotFound />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

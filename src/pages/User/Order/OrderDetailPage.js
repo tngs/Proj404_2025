@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import styles from "./OrderDetailPage.module.css";
 import servicesDB from "../../../servicesDB.json";
+import { getGetByApplyId } from "../../../utilities/URLs/transport-apply-service";
 
 const OrderDetailPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const [service, setService] = useState(location.state?.service || null);
-  const [weightRange, setWeightRange] = useState(location.state?.weightReport || null);
+  const [weightRange, setWeightRange] = useState(
+    location.state?.weightReport || null
+  );
 
   const weightRangeTable = [
     [0, 100],
@@ -15,9 +18,21 @@ const OrderDetailPage = () => {
     [1000, 9000],
   ];
 
+  //? departure: departures;
+  //? destination: destinations;
+  //? serviceName: serviceName;
+  //? transporterName: transporterName;
+  //? transportUserName: none;
+  //? weightRange: weightRange;
+  //? description: description;
+
   useEffect(() => {
+    //TODO have to setService later
+    getGetByApplyId({ applyId: id }).then((obj) => console.log("obj", obj));
     if (!service) {
-      const found = servicesDB.find((p) => p.serviceId === id || p.id === parseInt(id));
+      const found = servicesDB.find(
+        (p) => p.serviceId === id || p.id === parseInt(id)
+      );
       if (found) setService(found);
     }
   }, [id, service]);
@@ -63,7 +78,7 @@ const OrderDetailPage = () => {
             <p>{service.transporterName}</p>
           </div>
 
-          <div className={styles.infoBox}>
+          {/* <div className={styles.infoBox}>
             <h4>Transporter ID</h4>
             <p>{service.transporterId}</p>
           </div>
@@ -71,18 +86,11 @@ const OrderDetailPage = () => {
           <div className={styles.infoBox}>
             <h4>Service ID</h4>
             <p>{service.serviceId || service.id}</p>
-          </div>
-
-          <div className={styles.infoBox}>
-            <h4>Permitted</h4>
-            <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
-          </div>
+          </div> */}
 
           <div className={styles.infoBox}>
             <h4>Selected Weight</h4>
-            <p>
-              {weightRange}
-            </p>
+            <p>{weightRange}</p>
           </div>
         </div>
       </div>

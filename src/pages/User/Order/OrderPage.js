@@ -71,7 +71,7 @@ const OrderPage = () => {
             <p>{service.transporterName}</p>
           </div>
 
-          <div className={styles.infoBox}>
+          {/* <div className={styles.infoBox}>
             <h4>Transporter ID</h4>
             <p>{service.transporterId}</p>
           </div>
@@ -79,12 +79,7 @@ const OrderPage = () => {
           <div className={styles.infoBox}>
             <h4>Service ID</h4>
             <p>{service.serviceId}</p>
-          </div>
-
-          <div className={styles.infoBox}>
-            <h4>Permitted</h4>
-            <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
-          </div>
+          </div> */}
 
           {/* Dropdown Form */}
         </div>

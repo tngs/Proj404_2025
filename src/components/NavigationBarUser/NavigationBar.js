@@ -1,6 +1,6 @@
 import styles from "./NavigationBar.module.css";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavButton from "../Button/NavButton"
 
 import { useSelector,useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ const NavigationBarUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
+  const location = useLocation();
   const role = "user";
   const loggedIn = account.loggedIn;
   const handleLogout = () => {
@@ -27,11 +28,9 @@ const NavigationBarUser = () => {
     navigate("/");
   };
   const goToUnpaidOrders = () => {
-    alert("make /unpaid-orders")
     navigate("/unpaid-orders");
   };
   const goToPaidOrders = () => {
-    alert("make /paid-orders")
     navigate("/paid-orders");
   };
   const handleLoginAsTransporter = () => {
@@ -40,8 +39,8 @@ const NavigationBarUser = () => {
   return (
     <div className={styles.navbar}>
       <NavButton onClick={goToHome}>Home</NavButton>
-      <NavButton onClick={goToUnpaidOrders}>Unpaid Orders</NavButton>
-      <NavButton onClick={goToPaidOrders}>Paid Orders</NavButton>
+      {location.pathname!="/unpaid-orders" && location.pathname!="/unpaid-orders/" && <NavButton onClick={goToUnpaidOrders}>Unpaid Orders</NavButton>}
+      {location.pathname!="/paid-orders" && location.pathname!="/paid-orders/" && <NavButton onClick={goToPaidOrders}>Paid Orders</NavButton>}
       
       <div className={styles.spacer} />
       <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>

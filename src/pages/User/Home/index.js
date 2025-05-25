@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 import ServiceList from "../../../components/List/ServiceList";
 import servicesDB from "../../../servicesDB.json";
-import {transport_service} from '../../../utilities/URLs'
-import axios from 'axios'
+import { transport_service } from "../../../utilities/URLs";
+import { get } from "../../../utilities/URLs/transport-service";
 
 const Home = () => {
   const [services, setServices] = useState(servicesDB);
   useEffect(() => {
-    const response = transport_service.get();
-    console.log('response', response)
-    // /transport-service
-    return () => {};
+    //TODO setServices
+    get().then((obj) => console.log("obj", obj));
   }, []);
 
   return (

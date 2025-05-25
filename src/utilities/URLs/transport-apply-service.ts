@@ -18,7 +18,7 @@ export const postApplyByTransportUser = (serviceId, weight, request: RequestServ
       return error;
     });
 };
-
+//DONE
 //*get unpaid order list //user gets the unpaid order list
 export const getGetUnpaidByTransportUser = () => {
   return axios
@@ -32,7 +32,7 @@ export const getGetUnpaidByTransportUser = () => {
       return error;
     });
 };
-
+//DONE
 //*get paid order list //user gets the paid order list
 export const getGetPaidByTransportUser = () => {
   return axios
@@ -47,6 +47,7 @@ export const getGetPaidByTransportUser = () => {
     });
 };
 
+//DONE
 //*orderDetailPage //user get the details of order
 export const getGetByApplyId = ({ applyId }) => {
   return axios
@@ -75,6 +76,7 @@ export const getSetCompleteByApplyId = (applyId) => {//applyId
     });
 }
 
+//DONE
 //*                     user discards the unpaid order 
 export const getDeleteByApplyId = (applyId) => {
   return axios
