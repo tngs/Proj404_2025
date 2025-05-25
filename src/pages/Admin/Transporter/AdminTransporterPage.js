@@ -1,11 +1,11 @@
-// AdminUsersPage.js
+// AdminTransporterPage.js
 import React, { useEffect, useState } from "react";
-import styles from "./AdminUsersPage.module.css";
-import UserCard from "../../../components/UserCard/UserCard";
+import styles from "./AdminTransporterPage.module.css";
+import TransporterCard from "../../../components/TransporterCard/TransporterCard";
 import servicesDB from "../../../servicesDB.json";
 import { getTransportUser } from "../../../utilities/URLs/transport-user-service";
 
-const AdminUsersPage = () => {
+const AdminTransporterPage = () => {
   const [services, setServices] = useState(servicesDB);
   useEffect(() => {
     getTransportUser().then((obj) => {
@@ -57,7 +57,7 @@ const AdminUsersPage = () => {
       </header> */}
       <main className={styles.main}>
         {services.map((service) => (
-          <UserCard
+          <TransporterCard
             key={service.serviceId}
             service={service}
             permitHandler={permitHandler}
@@ -68,4 +68,4 @@ const AdminUsersPage = () => {
   );
 };
 
-export default AdminUsersPage;
+export default AdminTransporterPage;
