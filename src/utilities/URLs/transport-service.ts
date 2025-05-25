@@ -6,11 +6,11 @@ export const get = () => {
   return axios
     .get<ResponseTransportService[]>("/transport-service")
     .then((response) => {
-      console.log("response", response);
+      console.log("get response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("get error", error);
       return error;
     });
 };
@@ -20,11 +20,11 @@ export const getByServiceId = (id) => {
   return axios
     .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
     .then((response) => {
-      console.log("response", response);
+      console.log("getByServiceId response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getByServiceId error", error);
       return error;
     });
 };
@@ -35,11 +35,11 @@ export const getMakingService = (transporterId) => {
   return axios
     .get<ResponseTransportService[]>("/transport-service/makingService/" + transporterId)
     .then((response) => {
-      console.log("response", response);
+      console.log("getMakingService response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getMakingService error", error);
       return error;
     });
 }
@@ -50,11 +50,11 @@ export const postMakingWeightRange = (serviceId, request: RequestWeightRange) =>
   return axios
     .post<RequestWeightRange[]>("/transport-service/makingWeightRange/" + serviceId)
     .then((response) => {
-      console.log("response", response);
+      console.log("postMakingWeightRange response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postMakingWeightRange error", error);
       return error;
     });
 }
@@ -65,11 +65,11 @@ export const getByServiceName = (serviceName) => {
   return axios
     .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
     .then((response) => {
-      console.log("response", response);
+      console.log("getByServiceName response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getByServiceName error", error);
       return error;
     });
 }
@@ -79,11 +79,11 @@ export const getByTransporterId = (transporterId) => {
   return axios
     .get<ResponseTransportService[]>("/transport-service/byTransporterId/" + transporterId)
     .then((response) => {
-      console.log("response", response);
+      console.log("getByTransporterId response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getByTransporterId error", error);
       return error;
     });
 }
@@ -94,11 +94,11 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
   return axios
     .post<RequestTransportServiceByTransporterId>("/transport-service/modifyService/" + serviceId, { body: request })
     .then((response) => {
-      console.log("response", response);
+      console.log("postModifyService response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postModifyService error", error);
       return error;
     });
 }
@@ -110,11 +110,11 @@ export const getDeleteServiceByServiceId = (serviceId) => {
   return axios
     .get<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
     .then((response) => {
-      console.log("response", response);
+      console.log("getDeleteServiceByServiceId response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getDeleteServiceByServiceId error", error);
       return error;
     });
 }

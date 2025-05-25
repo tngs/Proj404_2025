@@ -12,11 +12,11 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
   return axios
     .post<ResponseAdministrator>("/administration-service/makeAdministrator", request)
     .then((response) => {
-      console.log("response", response);
+      console.log("postMakeAdministrator response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postMakeAdministrator error", error);
       return error;
     });
 };
@@ -33,11 +33,11 @@ export const getPermitAdministrator = (
     )
     .then((response) => {
       //TODO should save the response to store
-      console.log("response", response);
+      console.log("getPermitAdministrator response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getPermitAdministrator error", error);
       return error;
     });
 };
@@ -49,11 +49,11 @@ export const getGetServicesByEmail = () => {
       `/administration-service/getServicesByEmail`
     )
     .then((response) => {
-      console.log("response", response);
+      console.log("getGetServicesByEmail response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getGetServicesByEmail error", error);
       return error;
     });
 };
@@ -68,11 +68,11 @@ export const getPermitServiceByAdministrator = (
       `/administration-service/permitService/${serviceId}/byAdministrator/`
     )
     .then((response) => {
-      console.log("response", response);
+      console.log("getPermitServiceByAdministrator response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getPermitServiceByAdministrator error", error);
       return error;
     });
 };
@@ -82,11 +82,11 @@ export const getGetServiceByAdministrator = (serviceId) => {
   return axios
     .get<ResponseService>(`/getService/${serviceId}/byAdministrator`)
     .then((response) => {
-      console.log("response", response);
+      console.log("getGetServiceByAdministrator response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getGetServiceByAdministrator error", error);
       return error;
     });
 };

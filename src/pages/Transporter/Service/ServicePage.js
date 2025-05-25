@@ -109,7 +109,7 @@ const ServicePage = () => {
 
           <div className={styles.infoBox}>
             <h4>Permitted</h4>
-            {modifyMode ? (
+            {/* {modifyMode ? (
               <select
                 value={formData.permitted ? "true" : "false"}
                 onChange={(e) =>
@@ -125,7 +125,7 @@ const ServicePage = () => {
               </select>
             ) : (
               <p>{formData.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
-            )}
+            )} */}
           </div>
         </div>
 

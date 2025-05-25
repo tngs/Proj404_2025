@@ -60,11 +60,11 @@ const ServicePage = () => {
             <h4>Service ID</h4>
             <p>{service.serviceId}</p>
           </div>
-
+{/* 
           <div className={styles.infoBox}>
             <h4>Permitted</h4>
             <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.buttonWrapper}>

@@ -9,11 +9,11 @@ export const getPayServiceByApplyId = (applyId) => {
     .get<ResponseServiceApplyForPayment>("/payment-service/payment-servi/payServiceByApplyId/" + applyId)
     .then((response) => {
       
-      console.log("response", response);
+      console.log("getPayServiceByApplyId response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getPayServiceByApplyId error", error);
       return error;
     });
 };
@@ -23,11 +23,11 @@ export const getPayment = () => {
   return axios
     .get<String>("/payment-service/payment/")
     .then((response) => {
-      console.log("response", response);
+      console.log("getPayment response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getPayment error", error);
       return error;
     });
 };
@@ -37,11 +37,11 @@ export const postPayment = (request: PaymentCallbackRequest) => {
   return axios
     .get<String>("/payment-service/payment/")//<IamportResponse<Payment>> // no idea
     .then((response) => {
-      console.log("response", response);
+      console.log("postPayment response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postPayment error", error);
       return error;
     });
 };
@@ -51,11 +51,11 @@ export const getSuccessPayment = () => {
   return axios
     .get<String>("/payment-service/success-payment/")
     .then((response) => {
-      console.log("response", response);
+      console.log("getSuccessPayment response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getSuccessPayment error", error);
       return error;
     });
 };
@@ -65,11 +65,11 @@ export const getFailPayment = () => {
   return axios
     .get<String>("/payment-service/fail-payment/")
     .then((response) => {
-      console.log("response", response);
+      console.log("getFailPayment response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getFailPayment error", error);
       return error;
     });
 };

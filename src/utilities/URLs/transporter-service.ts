@@ -12,11 +12,11 @@ export const postTransporter = (transporter: Transporter) => {
       address: transporter.address,
     })
     .then((response) => {
-      console.log("response", response);
+      console.log("postTransporter response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postTransporter error", error);
       return error;
     });
 };
@@ -28,11 +28,11 @@ export const getTransporter = (administratorEmail) => {
       `/transporter-service/transporter/${administratorEmail}`
     )
     .then((response) => {
-      console.log("response", response);
+      console.log("getTransporter response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("getTransporter error", error);
       return error;
     });
 };
@@ -42,11 +42,11 @@ export const postLogin = (request: Transporter) => {
   return axios
     .post<ResponseTransporter>("/transporter-service/login", { body: request })
     .then((response) => {
-      console.log("response", response);
+      console.log("postLogin response", response);
       return response;
     })
     .catch((error) => {
-      console.log("error", error);
+      console.log("postLogin error", error);
       return error;
     });
 };
