@@ -1,6 +1,6 @@
 import axios from "../../axios";
 import { TransportUser, ResponseTransportUser } from "./dataTypes";
-
+//*login
 export const postLogin = (user: TransportUser) => {
   axios
     .post<ResponseTransportUser>("/transport-user-service/login")
@@ -15,6 +15,7 @@ export const postLogin = (user: TransportUser) => {
     });
 };
 
+//*admin gets all users
 export const getTransportUser = (administratorEmail) => {
   axios
     .get<ResponseTransportUser[]>("/transport-user-service/transport-user/"+administratorEmail)
@@ -28,3 +29,4 @@ export const getTransportUser = (administratorEmail) => {
     });
 };
 
+//TODO make registradtion

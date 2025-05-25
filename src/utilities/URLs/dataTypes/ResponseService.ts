@@ -6,5 +6,5 @@ export default interface ResponseService {
   destinations: string;
   transporterName: string;
   transporterId: string;
-  permitted: boolean;
+  permitted: boolean;//
 }

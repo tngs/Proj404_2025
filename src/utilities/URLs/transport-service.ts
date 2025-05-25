@@ -1,6 +1,7 @@
 import axios from "../../axios";
 import { ResponseTransportService,RequestTransportServiceByTransporterId, RequestWeightRange, } from "./dataTypes";
 
+//*user get services list in user home-> "/" 
 export const get = () => {
   axios
     .get<ResponseTransportService[]>("/transport-service")
@@ -14,6 +15,7 @@ export const get = () => {
     });
 };
 
+//* user?? gets service in sevice/:id page
 export const getByServiceId = (id) => {
   axios
     .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
@@ -27,6 +29,8 @@ export const getByServiceId = (id) => {
     });
 };
 
+//* transporter make service
+//TODO make MakeService Page
 export const getMakingService = (transporterId) => {
   axios
     .get<ResponseTransportService[]>("/transport-service/makingService/" + transporterId)
@@ -40,9 +44,11 @@ export const getMakingService = (transporterId) => {
     });
 }
 
-export const getMakingWeightRange = (serviceId) => {
+//* transporter making a weight range in service
+//TODO add a button besides the weight that send the data
+export const postMakingWeightRange = (serviceId, request: RequestWeightRange) => {
   axios
-    .get<RequestWeightRange[]>("/transport-service/makingWeightRange/" + serviceId)
+    .post<RequestWeightRange[]>("/transport-service/makingWeightRange/" + serviceId)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -53,6 +59,8 @@ export const getMakingWeightRange = (serviceId) => {
     });
 }
 
+//* user search service by name
+//TODO make search bar
 export const getByServiceName = (serviceName) => {
   axios
     .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
@@ -66,6 +74,7 @@ export const getByServiceName = (serviceName) => {
     });
 }
 
+//* transporter gets his services at home page
 export const getByTransporterId = (transporterId) => {
   axios
     .get<ResponseTransportService[]>("/transport-service/byTransporterId/" + transporterId)
@@ -79,6 +88,8 @@ export const getByTransporterId = (transporterId) => {
     });
 }
 
+//* transporter: this is the edit service button in service/:id page
+//* on edit mode
 export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
   axios
     .post<RequestTransportServiceByTransporterId>("/transport-service/modifyService/" + serviceId, { body: request })
@@ -92,10 +103,12 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
     });
 }
 
-
-export const deleteDeleteServiceByServiceId = (serviceId) => {
+//* transporter: this is the delete service button in service/:id page
+//* on edit mode
+//TODO: add delete button
+export const getDeleteServiceByServiceId = (serviceId) => {
   axios
-    .delete<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
+    .get<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
     .then((response) => {
       console.log("response", response);
       return response;

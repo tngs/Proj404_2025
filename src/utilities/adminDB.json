@@ -1,0 +1,8 @@
+[
+  {
+    "administratorName": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "response": { "administratorName": "admin", "email": "admin@gmail.com" }
+  }
+]

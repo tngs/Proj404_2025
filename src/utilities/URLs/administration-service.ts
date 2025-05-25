@@ -6,25 +6,11 @@ import {
   ResponsePermit,
 } from "./dataTypes";
 
-export const getGetServiceByEmail = (administratorEmail) => {
-  axios
-    .get<ResponseService[]>(
-      "/administration-service/getServicesByEmail/" + administratorEmail
-    )
-    .then((response) => {
-      console.log("response", response);
-      return response;
-    })
-    .catch((error) => {
-      console.log("error", error);
-      return error;
-    }); //List of services tied to that administrator
-};
-
-//Create Administrator
+//* admin signup
+//TODO alert the response
 export const postMakeAdministrator = (request: RequestAdministrator) => {
   axios
-    .post<ResponseAdministrator>("/administration-service/makeAdministrator")
+    .post<ResponseAdministrator>("/administration-service/makeAdministrator", request)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -35,13 +21,18 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
     });
 };
 
-//Grant Administrator Permissions
-export const getPermitAdministratorToAdministrator = (administratorEmail,UnPermittedAdministratorEmail) => {
+//*    give the admin permitted
+//TODO alert success
+//TODO dispatch "permitted"
+export const getPermitAdministrator = (
+  UnPermittedAdministratorEmail 
+) => {
   axios
     .get<ResponsePermit>(
-      `/permitAdministrator/${administratorEmail}/toAdministrator/${UnPermittedAdministratorEmail}`
+      `/permitAdministrator/toAdministrator/${UnPermittedAdministratorEmail}`
     )
     .then((response) => {
+      //TODO should save the response to store
       console.log("response", response);
       return response;
     })
@@ -51,11 +42,11 @@ export const getPermitAdministratorToAdministrator = (administratorEmail,UnPermi
     });
 };
 
-//View Services by Administrator
-export const getGetServicesByEmail = (administratorEmail) => {
-  axios
+//*admin page gets the services
+export const getGetServicesByEmail = () => {
+  return axios
     .get<ResponseService[]>(
-      `/administration-service/getServicesByEmail/${administratorEmail}`
+      `/administration-service/getServicesByEmail`
     )
     .then((response) => {
       console.log("response", response);
@@ -67,14 +58,14 @@ export const getGetServicesByEmail = (administratorEmail) => {
     });
 };
 
-// Admin View of Service Detail
+//* admin sets the service permit to true
+//TODO just make Permit Buttton at Service/:id
 export const getPermitServiceByAdministrator = (
   serviceId,
-  administratorEmail
 ) => {
   axios
     .get<ResponseService>(
-      `/administration-service/permitService/${serviceId}/byAdministrator/${administratorEmail}`
+      `/administration-service/permitService/${serviceId}/byAdministrator/}`
     )
     .then((response) => {
       console.log("response", response);
@@ -86,15 +77,11 @@ export const getPermitServiceByAdministrator = (
     });
 };
 
-//Approve Service
-export const postPermitServiceByAdministrator = (
-  serviceId,
-  administratorEmail
-) => {
+//*admin gets the service data at Sevice/:id page
+//TODO make Service/:id page at admin
+export const getGetServiceByAdministrator = (serviceId) => {
   axios
-    .post<ResponseService>(
-      `/administration-service/permitService/${serviceId}/byAdministrator/${administratorEmail}`
-    )
+    .get<ResponseService>(`/getService/${serviceId}/byAdministrator`)
     .then((response) => {
       console.log("response", response);
       return response;
@@ -105,17 +92,5 @@ export const postPermitServiceByAdministrator = (
     });
 };
 
-export const getGetServiceByAdministrator = (serviceId,administratorEmail) => {
-  axios
-    .get<ResponseService>(
-      `/getService/${serviceId}/byAdministrator/${administratorEmail}`
-    )
-    .then((response) => {
-      console.log("response", response);
-      return response;
-    })
-    .catch((error) => {
-      console.log("error", error);
-      return error;
-    });
-};
+
+//TODO make login

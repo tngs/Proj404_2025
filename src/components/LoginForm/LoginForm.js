@@ -109,20 +109,6 @@ const LoginForm = () => {
           />
         </div>
       )}
-      <div className={styles.inputGroup}>
-        <label className={styles.label}>Role</label>
-        <select
-          name="role"
-          value={formData.role}
-          onChange={handleInputChange}
-          className={styles.select}
-        >
-          <option value="user">General User</option>
-          <option value="transporter">Transporter</option>
-          
-          <option value="admin" hidden>Admin</option>
-        </select>
-      </div>
       <button
         type="submit"
         className={`${styles.button} ${styles.buttonPrimary}`}

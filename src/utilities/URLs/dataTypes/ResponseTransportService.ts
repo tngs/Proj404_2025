@@ -1,3 +1,4 @@
+import ResponseWeightRanges from './ResponseWeightRange'
 export default interface ResponseTransportService {
   //serviceId
   serviceName: string;
@@ -6,5 +7,6 @@ export default interface ResponseTransportService {
   destinations: string;
   transporterName: string;
   transporterId: string;
+  responseWeightRanges: ResponseWeightRanges[],
   //permitted
 }

@@ -6,13 +6,12 @@ import NavButton from "../Button/NavButton"
 import { useSelector,useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/account";
 
-const NavigationBar = () => {
+const NavigationBarUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
-  const role = account.user.role;
+  const role = "user";
   const loggedIn = account.loggedIn;
-  const username = account.user ? account.user.username : "";
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
@@ -24,14 +23,16 @@ const NavigationBar = () => {
   const handleSignup = () => {
     navigate("/login", { state: { role: "user", isSignUp: true } });
   };
-  const goToProfile = () => {
-    navigate("/profile/" + username);
-  };
   const goToHome = () => {
     navigate("/");
   };
-  const goToMyPage = () => {
-    navigate("/" + role);
+  const goToUnpaidOrders = () => {
+    alert("make /unpaid-orders")
+    navigate("/unpaid-orders");
+  };
+  const goToPaidOrders = () => {
+    alert("make /paid-orders")
+    navigate("/paid-orders");
   };
   const handleLoginAsTransporter = () => {
     navigate("/login", { state: { role: "transporter", isSignUp: false } });
@@ -39,11 +40,11 @@ const NavigationBar = () => {
   return (
     <div className={styles.navbar}>
       <NavButton onClick={goToHome}>Home</NavButton>
-      {role == "user" && <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>}
-      {role == "transporter" && <NavButton onClick={goToMyPage}>Transporter list</NavButton>}
-
+      <NavButton onClick={goToUnpaidOrders}>Unpaid Orders</NavButton>
+      <NavButton onClick={goToPaidOrders}>Paid Orders</NavButton>
       
       <div className={styles.spacer} />
+      <NavButton onClick={handleLoginAsTransporter}>Log in as transporter</NavButton>
       {!loggedIn && <NavButton onClick={handleLogin}>Log in</NavButton>}
       {!loggedIn && <NavButton onClick={handleSignup}>Sign-up</NavButton>}
       {loggedIn && <NavButton onClick={handleLogout}>Log out</NavButton>}
@@ -52,4 +53,4 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+export default NavigationBarUser;

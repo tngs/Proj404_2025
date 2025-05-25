@@ -1,3 +1,3 @@
 export default interface ResponsePermit {
-  permit: boolean;
+  permit: boolean;//is admin
 }

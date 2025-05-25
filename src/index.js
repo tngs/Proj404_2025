@@ -67,7 +67,6 @@ const loginAsAdmin = () => {
   );
   window.location.href = "/admin";
 };
-
 window.storeToAuthed = storeToAuthed;
 window.storeToUnauthed = storeToUnauthed;
 window.storePurge = storePurge;

@@ -1,6 +1,9 @@
 import axios from "../../axios";
 import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes";
 
+
+//* user paying the unpayed order
+//TODO make pay button
 export const getPayServiceByApplyId = (applyId) => {
   axios
     .get<ResponseServiceApplyForPayment>("/payment-service/payment-servi/payServiceByApplyId/" + applyId)
@@ -15,7 +18,7 @@ export const getPayServiceByApplyId = (applyId) => {
     });
 };
 
-
+//!!!!!skip come back
 export const getPayment = () => {
   axios
     .get<String>("/payment-service/payment/")
@@ -71,3 +74,4 @@ export const getFailPayment = () => {
     });
 };
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
