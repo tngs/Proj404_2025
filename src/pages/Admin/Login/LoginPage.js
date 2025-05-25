@@ -32,8 +32,8 @@ const LoginForm = () => {
     const result = postMakeAdministrator(
       new RequestAdministrator({ administratorName, email, password })
     ); //{administratorName, email, password} also works
-    console.log("result after createAdmin", result);
-    return result;
+    postMakeAdministrator({ administratorName, email, password }
+    ).then((obj) => console.log("obj", obj));
   };
   const loginAdmin = (email) => {
     const result = getPermitAdministrator(email);
@@ -83,18 +83,20 @@ const LoginForm = () => {
         <p className={styles.description}>Log in as admin</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          {isSignupMode && <div className={styles.inputGroup}>
-            <input
-              placeholder="AdministratorName"
-              type="text"
-              id="administratorName"
-              name="administratorName"
-              value={formData.administratorName}
-              onChange={handleInputChange}
-              className={styles.input}
-              required
-            />
-          </div>}
+          {isSignupMode && (
+            <div className={styles.inputGroup}>
+              <input
+                placeholder="AdministratorName"
+                type="text"
+                id="administratorName"
+                name="administratorName"
+                value={formData.administratorName}
+                onChange={handleInputChange}
+                className={styles.input}
+                required
+              />
+            </div>
+          )}
           <div className={styles.inputGroup}>
             <input
               placeholder="Email"
@@ -107,18 +109,20 @@ const LoginForm = () => {
               required
             />
           </div>
-          {isSignupMode && <div className={styles.inputGroup}>
-            <input
-              placeholder="Password"
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              className={styles.input}
-              required
-            />
-          </div>}
+          {isSignupMode && (
+            <div className={styles.inputGroup}>
+              <input
+                placeholder="Password"
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className={styles.input}
+                required
+              />
+            </div>
+          )}
           {isSignupMode && (
             <div className={styles.inputGroup}>
               <input

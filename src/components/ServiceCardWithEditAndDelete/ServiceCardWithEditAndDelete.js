@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const ServiceCardWithEditAndDelete = (props) => {
   const navigate = useNavigate();
-  const { service, deleteHandler, editHandler } = props;
+  const { service, permitHandler } = props;
 
   const handleClick = () => {
     navigate(`./service/${service.serviceId}`, { state: { service } });
@@ -24,27 +24,18 @@ const ServiceCardWithEditAndDelete = (props) => {
             {service.permitted ? "Permitted ✅" : "Pending ❌"}
           </span>
         </p>
-        <div className={styles.buttonGroup}>
+        
+      </div><div className={styles.buttonGroup}>
           <button
-            className={styles.editBtn}
+            className={styles.permitBtn}
             onClick={(e) => {
               e.stopPropagation();
-              editHandler(service.serviceId);
+              permitHandler(service.serviceId);
             }}
           >
-            Edit
-          </button>
-          <button
-            className={styles.deleteBtn}
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteHandler(service.serviceId);
-            }}
-          >
-            Delete
+            Permit
           </button>
         </div>
-      </div>
     </div>
   );
 };

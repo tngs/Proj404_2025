@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import NavigationBar from "../../components/NavigationBarUser/NavigationBar";
+import NavigationBarUser from "../../components/NavigationBarUser/NavigationBar";
 // import ServiceListPage from '../pages/ServiceListPage';
 // import ServiceDetailPage from '../pages/ServiceDetailPage'
 // import ProfilePage from '../pages/ProfilePage';
@@ -20,7 +20,7 @@ const MainRoutes = () => {
   const [auth, setAuth] = useState(true);
   return (
     <>
-      <NavigationBar />
+      <NavigationBarUser />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/service/:id" element={<ServicePage />} />

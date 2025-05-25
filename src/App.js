@@ -27,7 +27,6 @@ function App() {
         element: <TransporterRoute />,
         condition: account.loggedIn && account.user.role === "transporter",
       })}
-      {/*TODO might have to add permitted==true too*/}
       {ProtectedRoutes({
         path: "/admin/*",
         element: <AdminRoute />,

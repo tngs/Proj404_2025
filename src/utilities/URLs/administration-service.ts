@@ -9,7 +9,7 @@ import {
 //* admin signup
 //TODO alert the response
 export const postMakeAdministrator = (request: RequestAdministrator) => {
-  axios
+  return axios
     .post<ResponseAdministrator>("/administration-service/makeAdministrator", request)
     .then((response) => {
       console.log("response", response);
@@ -63,9 +63,9 @@ export const getGetServicesByEmail = () => {
 export const getPermitServiceByAdministrator = (
   serviceId,
 ) => {
-  axios
+  return  axios
     .get<ResponseService>(
-      `/administration-service/permitService/${serviceId}/byAdministrator/}`
+      `/administration-service/permitService/${serviceId}/byAdministrator/`
     )
     .then((response) => {
       console.log("response", response);
@@ -78,9 +78,8 @@ export const getPermitServiceByAdministrator = (
 };
 
 //*admin gets the service data at Sevice/:id page
-//TODO make Service/:id page at admin
 export const getGetServiceByAdministrator = (serviceId) => {
-  axios
+  return axios
     .get<ResponseService>(`/getService/${serviceId}/byAdministrator`)
     .then((response) => {
       console.log("response", response);
@@ -94,3 +93,4 @@ export const getGetServiceByAdministrator = (serviceId) => {
 
 
 //TODO make login
+//*/administration-service/login  - required object: RequestLogin
