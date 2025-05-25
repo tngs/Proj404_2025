@@ -4,7 +4,7 @@ import { Transporter, ResponseTransporter } from "./dataTypes";
 // Parameter name changed to avoid conflict
 //* signup transporter
 export const postTransporter = (transporter: Transporter) => {
-  axios
+  return axios
     .post<ResponseTransporter>("/transporter-service/transporter", {
       username: transporter.username,
       password: transporter.password,
@@ -23,7 +23,7 @@ export const postTransporter = (transporter: Transporter) => {
 
 //* show all transporters to admin
 export const getTransporter = (administratorEmail) => {
-  axios
+  return axios
     .get<ResponseTransporter[]>(
       `/transporter-service/transporter/${administratorEmail}`
     )
@@ -39,7 +39,7 @@ export const getTransporter = (administratorEmail) => {
 
 //* login
 export const postLogin = (request: Transporter) => {
-  axios
+  return axios
     .post<ResponseTransporter>("/transporter-service/login", { body: request })
     .then((response) => {
       console.log("response", response);

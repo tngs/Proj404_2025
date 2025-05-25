@@ -27,7 +27,7 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
 export const getPermitAdministrator = (
   UnPermittedAdministratorEmail 
 ) => {
-  axios
+  return axios
     .get<ResponsePermit>(
       `/permitAdministrator/toAdministrator/${UnPermittedAdministratorEmail}`
     )

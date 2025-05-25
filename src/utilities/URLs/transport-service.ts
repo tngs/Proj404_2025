@@ -3,7 +3,7 @@ import { ResponseTransportService,RequestTransportServiceByTransporterId, Reques
 
 //*user get services list in user home-> "/" 
 export const get = () => {
-  axios
+  return axios
     .get<ResponseTransportService[]>("/transport-service")
     .then((response) => {
       console.log("response", response);
@@ -17,7 +17,7 @@ export const get = () => {
 
 //* user?? gets service in sevice/:id page
 export const getByServiceId = (id) => {
-  axios
+  return axios
     .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
     .then((response) => {
       console.log("response", response);
@@ -32,7 +32,7 @@ export const getByServiceId = (id) => {
 //* transporter make service
 //TODO make MakeService Page
 export const getMakingService = (transporterId) => {
-  axios
+  return axios
     .get<ResponseTransportService[]>("/transport-service/makingService/" + transporterId)
     .then((response) => {
       console.log("response", response);
@@ -47,7 +47,7 @@ export const getMakingService = (transporterId) => {
 //* transporter making a weight range in service
 //TODO add a button besides the weight that send the data
 export const postMakingWeightRange = (serviceId, request: RequestWeightRange) => {
-  axios
+  return axios
     .post<RequestWeightRange[]>("/transport-service/makingWeightRange/" + serviceId)
     .then((response) => {
       console.log("response", response);
@@ -62,7 +62,7 @@ export const postMakingWeightRange = (serviceId, request: RequestWeightRange) =>
 //* user search service by name
 //TODO make search bar
 export const getByServiceName = (serviceName) => {
-  axios
+  return axios
     .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
     .then((response) => {
       console.log("response", response);
@@ -76,7 +76,7 @@ export const getByServiceName = (serviceName) => {
 
 //* transporter gets his services at home page
 export const getByTransporterId = (transporterId) => {
-  axios
+  return axios
     .get<ResponseTransportService[]>("/transport-service/byTransporterId/" + transporterId)
     .then((response) => {
       console.log("response", response);
@@ -91,7 +91,7 @@ export const getByTransporterId = (transporterId) => {
 //* transporter: this is the edit service button in service/:id page
 //* on edit mode
 export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
-  axios
+  return axios
     .post<RequestTransportServiceByTransporterId>("/transport-service/modifyService/" + serviceId, { body: request })
     .then((response) => {
       console.log("response", response);
@@ -107,7 +107,7 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
 //* on edit mode
 //TODO: add delete button
 export const getDeleteServiceByServiceId = (serviceId) => {
-  axios
+  return axios
     .get<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
     .then((response) => {
       console.log("response", response);

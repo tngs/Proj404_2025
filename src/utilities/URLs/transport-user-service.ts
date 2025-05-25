@@ -2,7 +2,7 @@ import axios from "../../axios";
 import { TransportUser, ResponseTransportUser } from "./dataTypes";
 //*login
 export const postLogin = (user: TransportUser) => {
-  axios
+  return axios
     .post<ResponseTransportUser>("/transport-user-service/login")
     .then((response) => {
       console.log("response", response);
@@ -17,7 +17,7 @@ export const postLogin = (user: TransportUser) => {
 
 //*admin gets all users
 export const getTransportUser = (administratorEmail) => {
-  axios
+  return axios
     .get<ResponseTransportUser[]>("/transport-user-service/transport-user/"+administratorEmail)
     .then((response) => {
       console.log("response", response);
