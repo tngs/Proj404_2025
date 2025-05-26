@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
-import * as request from "../../../utilities/URLs";
 import { getByServiceId } from "../../../utilities/URLs/transport-service";
 
 const ServicePage = () => {

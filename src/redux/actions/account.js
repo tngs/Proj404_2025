@@ -2,7 +2,6 @@ import { ACCOUNT } from "./types";
 import accountDB from "../../accountDB.json";
 import { store, persistor } from "../../index";
 import fetchStates from "../fetchStates";
-import * as request from "../../utilities/URLs";
 
 export const signup = ({ username, password, role }) => {
   return (dispatch) => {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./OrderPage.module.css";
-import * as request from "../../../utilities/URLs";
 import {postApplyByTransportUser} from '../../../utilities/URLs/transport-apply-service'
 
 const OrderPage = () => {

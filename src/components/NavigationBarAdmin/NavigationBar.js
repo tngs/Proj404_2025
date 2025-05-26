@@ -9,7 +9,6 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const handleLogout = () => {
-    //TODO make admin logout???
     dispatch(logout());
     navigate("/");
   };
