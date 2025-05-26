@@ -1,17 +1,10 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
-// import ServiceListPage from '../pages/ServiceListPage';
-// import ServiceDetailPage from '../pages/ServiceDetailPage'
-// import ProfilePage from '../pages/ProfilePage';
+import NavigationBar from "../../components/NavigationBarTransporter/NavigationBar";
 import Home from "./Home";
-import SimplePage from "../Simple";
-import ProfilePage from "../Profile";
-import PageNotFoundPage from "../PageNotFound";
 import ServicePage  from "./Service/ServicePage";
-
-import { useSelector } from "react-redux"; // Import useSelector from react-redux
+import MakeService from './MakeService/MakeService';
+import Orders from './Orders/Orders'
 
 const MainRoutes = () => {
   const [auth, setAuth] = useState(true);
@@ -19,9 +12,9 @@ const MainRoutes = () => {
       <NavigationBar />
       {auth ? <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/service/:id" element={<ServicePage />} />
-        <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/profile/" element={<PageNotFoundPage />} />
+        <Route path="/make-service" element={<MakeService />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       : null}

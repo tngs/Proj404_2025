@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./AdminTransporterPage.module.css";
 import TransporterCard from "../../../components/TransporterCard/TransporterCard";
 import servicesDB from "../../../servicesDB.json";
-import { getTransportUser } from "../../../utilities/URLs/transport-user-service";
+import { getTransporter } from "../../../utilities/URLs/transporter-service";
 
 const AdminTransporterPage = () => {
   const [services, setServices] = useState(servicesDB);
   useEffect(() => {
-    getTransportUser().then((obj) => {
+    getTransporter().then((obj) => {
       console.log("obj", obj)
     });
   }, []);

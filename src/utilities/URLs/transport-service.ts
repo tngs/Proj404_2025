@@ -31,7 +31,7 @@ export const getByServiceId = (id) => {
     });
 };
 
-//transportertransporter
+//DONE implemented but WHY?????????
 //* transporter make service
 //TODO make MakeService Page
 export const getMakingService = (transporterId) => {
@@ -78,7 +78,7 @@ export const getByServiceName = (serviceName) => {
     });
 }
 
-//transportertransporter
+//DONE
 //* transporter gets his services at home page
 export const getByTransporterId = (transporterId) => {
   return axios
@@ -93,12 +93,12 @@ export const getByTransporterId = (transporterId) => {
     });
 }
 
-//transportertransporter
+//DONE
 //* transporter: this is the edit service button in service/:id page
 //* on edit mode
-export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
+export const postModifyService = (serviceId, request:RequestTransportServiceByTransporterId) => {
   return axios
-    .post<RequestTransportServiceByTransporterId>("/transport-service/modifyService/" + serviceId, { body: request })
+    .post<ResponseTransportService>("/transport-service/modifyService/" + serviceId, { body: request })
     .then((response) => {
       console.log("postModifyService response", response);
       return response;
@@ -109,7 +109,7 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
     });
 }
 
-//transportertransporter
+//DONE
 //* transporter: this is the delete service button in service/:id page
 //* on edit mode
 //TODO: add delete button

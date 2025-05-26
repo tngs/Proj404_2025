@@ -22,11 +22,12 @@ export const postTransporter = (transporter: Transporter) => {
     });
 };
 
+//DONE
 //* show all transporters to admin
-export const getTransporter = (administratorEmail) => {
+export const getTransporter = () => {
   return axios
     .get<ResponseTransporter[]>(
-      `/transporter-service/transporter/${administratorEmail}`
+      `/transporter-service/transporter`
     )
     .then((response) => {
       console.log("getTransporter response", response);

@@ -1,37 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import styles from "./ServicePage.module.css";
-import servicesDB from "../../../servicesDB.json";
-import { getGetByApplyId } from "../../../utilities/URLs/transport-apply-service";
-import { postModifyService, getDeleteServiceByServiceId } from "../../../utilities/URLs/transport-service";
+import styles from "./MakeService.module.css";
+import { getMakingService } from "../../../utilities/URLs/transport-service";
 
-const ServicePage = () => {
+const MakeService = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const paid = location.state?.paid ? location.state.paid : false;
-  const [service, setService] = useState(location.state?.service || null);
+  const [service, setService] = useState({});
   console.log("location.state", location.state);
   const [weightRange, setWeightRange] = useState(
     location.state?.weightReport || "0g to 100g"
   ); //!hard value fix it
-  const [editMode, setEditMode] = useState(false);
+
+  const [editMode, setEditMode] = useState(true);
+
   const weightRangeTable = [
     [0, 100],
     [100, 1000],
     [1000, 9000],
   ];
-  useEffect(() => {
-    //TODO have to setService later
-    getGetByApplyId({ applyId: id }).then((obj) => console.log("obj", obj));
-    if (!service) {
-      const found = servicesDB.find(
-        (p) => p.serviceId === id || p.id === parseInt(id)
-      );
-      if (found) setService(found);
-    }
-  }, [id, service]);
-
   const weightConverter = (weight) => {
     return weight < 1000 ? `${weight}g` : `${weight / 1000}kg`;
   };
@@ -39,24 +27,6 @@ const ServicePage = () => {
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
   }
-  const handleDelete = () => {
-    getDeleteServiceByServiceId(id).then((obj) => console.log("obj", obj));
-    alert("Deleted: " + id);
-    navigate("../");
-  };
-  const handleEdit = () => {
-    if (!paid && editMode) {
-      postModifyService(id, {
-          serviceName: service.name,
-          serviceDescription: service.description,
-          departures: service.departures,
-          destinations: service.destinations,
-          transporterName: service.transporterName,
-          price: 0
-      }).then((obj) => console.log("obj", obj));
-    }
-    setEditMode(!editMode);
-  };
   const weightChange = (e) => {
     setWeightRange(e.target.value);
   };
@@ -66,6 +36,9 @@ const ServicePage = () => {
       ...prev,
       [name]: value,
     }));
+  };
+  const handleCreate = () => {
+    getMakingService(id); //?why not using the other inputs
   };
   return (
     <div className={styles.page}>
@@ -146,30 +119,16 @@ const ServicePage = () => {
               </select>
             )}
           </div>
-          {!paid && (
-            <div className={styles.infoBox}>
-              <h4>Edit</h4>
-              <button className={styles.button} onClick={handleEdit}>
-                {!editMode ? "Edit" : "Save"}
-              </button>
-            </div>
-          )}
-          {!paid && (
-            <div className={styles.infoBox}>
-              <h4>Delete</h4>
-              <button
-                className={styles.button}
-                style={{ backgroundColor: "#F21313" }}
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-            </div>
-          )}
+          <div className={styles.infoBox}>
+            <h4>Create</h4>
+            <button className={styles.button} onClick={handleCreate}>
+              Create
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ServicePage;
+export default MakeService;
