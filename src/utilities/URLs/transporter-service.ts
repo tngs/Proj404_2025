@@ -6,7 +6,7 @@ import { Transporter, ResponseTransporter } from "./dataTypes";
 //* signup transporter
 export const postTransporter = (transporter: Transporter) => {
   return axios
-    .post<ResponseTransporter>("/transporter-service/transporter", {
+    .post("/transporter-service/transporter", {
       username: transporter.username,
       password: transporter.password,
       email: transporter.email,

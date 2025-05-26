@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
 import { getByServiceId } from "../../../utilities/URLs/transport-service";
@@ -6,12 +6,15 @@ import { getByServiceId } from "../../../utilities/URLs/transport-service";
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
-  const service = location.state?.service;
+  const [service, setService] = useState();
+  const [loader, setLoader] = useState(<div className={styles.message}>Service data not found.</div>);
 
   const navigate = useNavigate();
-
+  console.log("service", service)
   useEffect(() => {
-    getByServiceId(id).then((obj) => console.log("obj", obj));
+    if(!service){
+      getByServiceId(id).then((obj) => setService(obj.data));
+    }
   }, []);
 
   if (!service) {
@@ -52,21 +55,6 @@ const ServicePage = () => {
             <h4>Transporter</h4>
             <p>{service.transporterName}</p>
           </div>
-
-          {/* <div className={styles.infoBox}>
-            <h4>Transporter ID</h4>
-            <p>{service.transporterId}</p>
-          </div>
-
-          <div className={styles.infoBox}>
-            <h4>Service ID</h4>
-            <p>{service.serviceId}</p>
-          </div> */}
-          {/* 
-          <div className={styles.infoBox}>
-            <h4>Permitted</h4>
-            <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
-          </div> */}
         </div>
 
         <div className={styles.buttonWrapper}>

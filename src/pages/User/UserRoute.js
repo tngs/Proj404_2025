@@ -5,21 +5,14 @@ import NavigationBarUser from "../../components/NavigationBarUser/NavigationBar"
 // import ServiceListPage from '../pages/ServiceListPage';
 // import ServiceDetailPage from '../pages/ServiceDetailPage'
 // import ProfilePage from '../pages/ProfilePage';
-import Home from "./Home";
-import SimplePage from "../Simple";
-import ProfilePage from "../Profile";
-import PageNotFoundPage from "../PageNotFound";
+import Home from "./Home/Home";
 import ServicePage from "./Service/ServicePage";
 import OrderPage from "./Order/OrderPage";
 import OrderDetailPage from "./Order/OrderDetailPage";
 import PageNotFound from "../PageNotFound";
-import PaidOrders from './Orders/PaidOrders/PaidOrders'
-import UnpaidOrders from './Orders/UnpaidOrders/UnpaidOrders'
-
-import { useSelector } from "react-redux"; // Import useSelector from react-redux
-
+import PaidOrders from "./Orders/PaidOrders/PaidOrders";
+import UnpaidOrders from "./Orders/UnpaidOrders/UnpaidOrders";
 const MainRoutes = () => {
-  const [auth, setAuth] = useState(true);
   return (
     <>
       <NavigationBarUser />

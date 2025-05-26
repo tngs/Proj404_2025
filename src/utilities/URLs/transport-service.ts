@@ -1,7 +1,7 @@
 import axios from "../../axios";
 import { ResponseTransportService,RequestTransportServiceByTransporterId, RequestWeightRange, } from "./dataTypes";
 
-//DONE
+//DONEDONE
 //*user get services list in user home-> "/" 
 export const get = () => {
   return axios
@@ -63,11 +63,11 @@ export const postMakingWeightRange = (serviceId, request: RequestWeightRange) =>
     });
 }
 
-//DONE
+//DONEDONE
 //* user search service by name
 export const getByServiceName = (serviceName) => {
   return axios
-    .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
+    .get<ResponseTransportService[]>(`/transport-service/byServiceName/${serviceName}`)
     .then((response) => {
       console.log("getByServiceName response", response);
       return response;

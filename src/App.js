@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import AdminLoginPage from "./pages/Admin/Login/LoginPage";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
   const account = useSelector((state) => state.account);
@@ -25,12 +25,12 @@ function App() {
       {ProtectedRoutes({
         path: "/transporter/*",
         element: <TransporterRoute />,
-        condition: account.loggedIn && account.user.role === "transporter",
+        condition: account.loggedIn && account.role === "transporter",
       })}
       {ProtectedRoutes({
         path: "/admin/*",
         element: <AdminRoute />,
-        condition: account.loggedIn && account.user.role === "admin",
+        condition: account.loggedIn && account.role === "admin",
       })}
       <Route path="/admin-login" element={<AdminLoginPage />} />
       <Route path="/*" element={<UserRoute />} />

@@ -1,102 +1,184 @@
 import { ACCOUNT } from "./types";
-import accountDB from "../../accountDB.json";
-import { store, persistor } from "../../index";
-import fetchStates from "../fetchStates";
+import { persistor } from "../reducers";
 
-export const signup = ({ username, password, role }) => {
+import {
+  postLogin as userLogin,
+  postTransportUser as userSignup,
+} from "../../utilities/URLs/transport-user-service";
+import {
+  postLogin as transLogin,
+  postTransporter as transSignup,
+} from "../../utilities/URLs/transporter-service";
+
+export const signup = ({ username, password, email, address, role }) => {
   return (dispatch) => {
-    dispatch({ type: ACCOUNT.SIGNING_UP, status: fetchStates.fetching });
-    if (
-      accountDB?.find(
-        (user) => user.username === username && user.role === role
-      )
-    ) {
+    dispatch({ type: ACCOUNT.SIGNUP_START});
+    if (role === "user") {
+      return userSignup({ username, password, email, address })
+        .then((obj) => {
+          if (obj.status === 200) {
+            dispatch({
+              type: ACCOUNT.SIGNUP_SUCCESS,
+              message: "User created successfully",
+            });
+            return {
+              type: ACCOUNT.SIGNUP_SUCCESS,
+              message: "User created successfully",
+            };
+          } else {
+            dispatch({
+              type: ACCOUNT.SIGNUP_UNSUCCESS,
+              message: "User not created",
+            });
+            return {
+              type: ACCOUNT.SIGNUP_UNSUCCESS,
+              message: "User not created",
+            };
+          }
+        })
+        .catch((err) => {
+          dispatch({
+            type: ACCOUNT.SIGNUP_ERROR,
+            message: err,
+          });
+          return {
+            type: ACCOUNT.SIGNUP_ERROR,
+            message: err,
+          };
+        });
+    } else if (role === "transporter") {
+      return transSignup({ username, password, email, address })
+        .then((obj) => {
+          if (obj.status === 200) {
+            dispatch({
+              type: ACCOUNT.SIGNUP_SUCCESS,
+              message: "User created successfully",
+            });
+            return {
+              type: ACCOUNT.SIGNUP_SUCCESS,
+              message: "User created successfully",
+            };
+          } else {
+            dispatch({
+              type: ACCOUNT.SIGNUP_UNSUCCESS,
+              message: "User not created",
+            });
+            return {
+              type: ACCOUNT.SIGNUP_UNSUCCESS,
+              message: "User not created",
+            };
+          }
+        })
+        .catch((err) => {
+          dispatch({
+            type: ACCOUNT.SIGNUP_ERROR,
+            message: err,
+          });
+          return {
+            type: ACCOUNT.SIGNUP_ERROR,
+            message: err,
+          };
+        });
+    } else {
       dispatch({
-        type: ACCOUNT.SIGNUP_UNSUCCESS,
-        status: fetchStates.error,
-        message: "User already exists",
+        type: ACCOUNT.SIGNUP_ERROR,
+        message: "Wrong type",
       });
       return {
-        type: ACCOUNT.SIGNUP_UNSUCCESS,
-        status: fetchStates.error,
-        message: "User already exists",
+        type: ACCOUNT.SIGNUP_ERROR,
+        message: "Wrong type",
       };
     }
-    console.log("Creating new user");
-    accountDB.push({ username, password, role });
-    dispatch({
-      type: ACCOUNT.SIGNUP_SUCCESS,
-      status: fetchStates.success,
-      payload: { username, password, role },
-      message: "User created successfully",
-    });
-    return {
-      type: ACCOUNT.SIGNUP_SUCCESS,
-      status: fetchStates.success,
-      payload: { username, password, role },
-      message: "User created successfully",
-    };
   };
-};
-
-const passwordExtractor = (account) => {
-  if (!account) {
-    return null;
-  }
-  const { password, ...accountWithoutPassword } = account;
-  return accountWithoutPassword;
 };
 
 export const login = ({ username, password, role }) => {
   return (dispatch) => {
-    dispatch({ type: ACCOUNT.LOGING_IN, status: fetchStates.fetching });
+    dispatch({ type: ACCOUNT.LOGIN_START });
     if (!username || !password || !role) {
       dispatch({
-        type: ACCOUNT.LOGIN_ERROR,
-        status: fetchStates.error,
-        message: "LOGIN_ERROR: Please check your input!!!",
+        type: ACCOUNT.LOGIN_UNSUCCESS,
+        message: "Input not valid",
       });
       return {
-        type: ACCOUNT.LOGIN_ERROR,
-        status: fetchStates.error,
-        message: "LOGIN_ERROR: Please check your input!!!",
+        type: ACCOUNT.LOGIN_UNSUCCESS,
+        message: "Input not valid",
       };
     }
-    //finding 
-    ////////////////////////////////////////////////////////
-    // if(role == "user")console.log(request.transport_user_service.postLogin());
-    // else console.log(request.transporter_service.postLogin());
-    ////////////////////////////////////////////////////////
-    const account = accountDB?.find(
-      (user) =>
-        user.username === username &&
-        user.password === password &&
-        user.role === role
-    );
-    const accountWithoutPassword = passwordExtractor(account);
-    if (accountWithoutPassword) {
+    if(role === "user"){
+      return userLogin({username, password}).then((obj) => {
+        if(obj.status === 200){
+          dispatch({
+            type: ACCOUNT.LOGIN_SUCCESS,
+            message: "Login successful",
+            payload: obj.data,
+          });
+          return {
+            type: ACCOUNT.LOGIN_SUCCESS,
+            message: "Login successful",
+            payload: obj.data,
+          };
+        }
+        else{
+          //TODO add obj error message
+          dispatch({
+            type: ACCOUNT.LOGIN_UNSUCCESS,
+            message: "Login failed",
+          });
+          return {
+            type: ACCOUNT.LOGIN_UNSUCCESS,
+            message: "Login failed",
+          };
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: ACCOUNT.LOGIN_ERROR,
+          message: err,
+        });
+      })
+    }
+    else if(role === "transporter"){
+      return transLogin({username, password}).then((obj) => {
+        if(obj.status === 200){
+          dispatch({
+            type: ACCOUNT.LOGIN_SUCCESS,
+            message: "Login successful",
+            payload: obj.data,
+          });
+          return {
+            type: ACCOUNT.LOGIN_SUCCESS,
+            message: "Login successful",
+            payload: obj.data,
+          };
+        }
+        else{
+          //TODO add obj error message
+          dispatch({
+            type: ACCOUNT.LOGIN_UNSUCCESS,
+            message: "Login failed",
+          });
+          return {
+            type: ACCOUNT.LOGIN_UNSUCCESS,
+            message: "Login failed",
+          };
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: ACCOUNT.LOGIN_ERROR,
+          message: err,
+        });
+      })
+    }
+    else{
       dispatch({
-        type: ACCOUNT.LOGIN_SUCCESS,
-        status: fetchStates.success,
-        message: "Login successful",
-        payload: accountWithoutPassword,
+        type: ACCOUNT.LOGIN_ERROR,
+        message: "Wrong type",
       });
       return {
-        type: ACCOUNT.LOGIN_SUCCESS,
-        status: fetchStates.success,
-        message: "Login successful",
-        payload: accountWithoutPassword,
-      };
-    } else {
-      dispatch({
-        type: ACCOUNT.LOGIN_UNSUCCESS,
-        status: fetchStates.error,
-        message: "LOGIN_UNSUCCESS: Invalid username, password, or role",
-      });
-      return {
-        type: ACCOUNT.LOGIN_UNSUCCESS,
-        status: fetchStates.error,
-        message: "LOGIN_UNSUCCESS: Invalid username, password, or role",
+        type: ACCOUNT.LOGIN_ERROR,
+        message: "Wrong type",
       };
     }
   };
@@ -112,30 +194,6 @@ export const logout = () => {
     return {
       type: ACCOUNT.LOGOUT,
       message: "Logged out",
-    };
-  };
-};
-
-export const updateAccount = (userToUpdateTo) => {
-  const index = accountDB.findIndex(
-    (user) =>
-      user.username === userToUpdateTo.username &&
-      user.role === userToUpdateTo.role
-  );
-  
-  if (index !== -1) {
-    accountDB[index] = userToUpdateTo;
-  }
-  return (dispatch) => {
-    dispatch({
-      type: ACCOUNT.UPDATE,
-      message: "Account updated",
-      payload: userToUpdateTo,
-    });
-    return {
-      type: ACCOUNT.UPDATE,
-      message: "Account updated",
-      payload: userToUpdateTo,
     };
   };
 };

@@ -17,6 +17,19 @@ export const postLogin = (user: TransportUser) => {
     });
 };
 
+export const postTransportUser = (user: TransportUser) => {
+  return axios
+    .post<ResponseTransportUser>("/transport-user-service/transport-user")
+    .then((response) => {
+      console.log("postLogin response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("postLogin error", error);
+      return error;
+    });
+};
+
 //DONE
 //*admin gets all users
 export const getTransportUser = (administratorEmail) => {
