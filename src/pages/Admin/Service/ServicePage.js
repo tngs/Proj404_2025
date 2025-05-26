@@ -14,9 +14,9 @@ const ServicePage = () => {
   const [service, setService] = useState(location.state?.service);
 
   useEffect(() => {
+    getGetServiceByAdministrator(id).then((obj) => console.log("obj", obj));
     if (!service) {
       //TODO setService
-      getGetServiceByAdministrator(id).then((obj) => console.log("obj", obj));
     }
   }, [id]);
 

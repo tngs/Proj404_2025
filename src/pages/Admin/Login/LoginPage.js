@@ -8,6 +8,7 @@ import styles from "./LoginPage.module.css";
 import {
   postMakeAdministrator,
   getPermitAdministrator,
+  postLogin
 } from "../../../utilities/URLs/administration-service";
 import RequestAdministrator from "../../../utilities/URLs/dataTypes/RequestAdministrator";
 
@@ -29,17 +30,12 @@ const LoginForm = () => {
   });
   const createAdmin = (administratorName, email, password) => {
     // const result = dispatch(signupAdmin({ administratorName, email, password })).type; // Dispatch signup action
-    const result = postMakeAdministrator(
-      new RequestAdministrator({ administratorName, email, password })
-    ); //{administratorName, email, password} also works
     postMakeAdministrator({ administratorName, email, password }
     ).then((obj) => console.log("obj", obj));
   };
-  const loginAdmin = (email) => {
-    const result = getPermitAdministrator(email);
-    console.log("result after loginAdmin", result);
+  const loginAdmin = (email, password) => {
+    postLogin({email, password}).then(obj => console.log('obj', obj))
     window.loginAsAdmin();
-    return result;
   };
 
   const handleInputChange = (e) => {
@@ -67,8 +63,8 @@ const LoginForm = () => {
         alert("Please fill in email!");
         return;
       }
-      loginAdmin(email);
-      navigate(`/admin`);
+      loginAdmin(email, password);
+      // navigate(`/admin`);
     }
   };
 
@@ -109,7 +105,6 @@ const LoginForm = () => {
               required
             />
           </div>
-          {isSignupMode && (
             <div className={styles.inputGroup}>
               <input
                 placeholder="Password"
@@ -122,7 +117,6 @@ const LoginForm = () => {
                 required
               />
             </div>
-          )}
           {isSignupMode && (
             <div className={styles.inputGroup}>
               <input

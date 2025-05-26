@@ -1,6 +1,7 @@
 import axios from "../../axios";
 import { Transporter, ResponseTransporter } from "./dataTypes";
 
+//DONE
 // Parameter name changed to avoid conflict
 //* signup transporter
 export const postTransporter = (transporter: Transporter) => {
@@ -37,6 +38,7 @@ export const getTransporter = (administratorEmail) => {
     });
 };
 
+//DONE
 //* login
 export const postLogin = (request: Transporter) => {
   return axios

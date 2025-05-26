@@ -8,7 +8,7 @@ const OrderCard = (props) => {
 
   const handleClick = () => {
     //TODO change the arguments
-    navigate(`/orderDetail/${service.serviceId}`, { state: { service } });
+    navigate(`/orderDetail/${service.serviceId}`, { state: { service, paid } });
   };
 //DONE
   return (

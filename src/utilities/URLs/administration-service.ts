@@ -4,8 +4,10 @@ import {
   ResponseAdministrator,
   RequestAdministrator,
   ResponsePermit,
+  RequestLogin,
 } from "./dataTypes";
 
+//DONE USED
 //* admin signup
 //TODO alert the response
 export const postMakeAdministrator = (request: RequestAdministrator) => {
@@ -21,7 +23,8 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
     });
 };
 
-//*    give the admin permitted
+//*    give the admin permitted 
+//? IDK why
 //TODO alert success
 //TODO dispatch "permitted"
 export const getPermitAdministrator = (
@@ -42,6 +45,7 @@ export const getPermitAdministrator = (
     });
 };
 
+//DONE
 //*admin page gets the services
 export const getGetServicesByEmail = () => {
   return axios
@@ -58,6 +62,7 @@ export const getGetServicesByEmail = () => {
     });
 };
 
+//DONE
 //* admin sets the service permit to true
 //TODO just make Permit Buttton at Service/:id
 export const getPermitServiceByAdministrator = (
@@ -77,6 +82,7 @@ export const getPermitServiceByAdministrator = (
     });
 };
 
+//DONE
 //*admin gets the service data at Sevice/:id page
 export const getGetServiceByAdministrator = (serviceId) => {
   return axios
@@ -91,6 +97,18 @@ export const getGetServiceByAdministrator = (serviceId) => {
     });
 };
 
-
+//DONE USED
 //TODO make login
 //*/administration-service/login  - required object: RequestLogin
+export const postLogin = (request: RequestLogin) => {
+  return axios
+    .post<ResponseAdministrator>("/administration-service/makeAdministrator", request)
+    .then((response) => {
+      console.log("postMakeAdministrator response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("postMakeAdministrator error", error);
+      return error;
+    });
+};

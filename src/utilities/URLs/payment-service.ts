@@ -1,7 +1,7 @@
 import axios from "../../axios";
 import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes";
 
-
+//DONE
 //* user paying the unpayed order
 //TODO make pay button
 export const getPayServiceByApplyId = (applyId) => {

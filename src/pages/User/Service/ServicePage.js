@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
 import * as request from "../../../utilities/URLs";
+import { getByServiceId } from "../../../utilities/URLs/transport-service";
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -11,8 +12,8 @@ const ServicePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    request.transport_service.getByServiceId(id);
-  }, [id]);
+    getByServiceId(id).then((obj) => console.log("obj", obj));
+  }, []);
 
   if (!service) {
     return <div className={styles.message}>Service data not found.</div>;
@@ -27,7 +28,9 @@ const ServicePage = () => {
       <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
         <div className={styles.overlay}>
           <h1 className={styles.coverTitle}>{service.serviceName}</h1>
-          <p className={styles.companyName}>Transported by {service.transporterName}</p>
+          <p className={styles.companyName}>
+            Transported by {service.transporterName}
+          </p>
         </div>
       </div>
 
@@ -60,7 +63,7 @@ const ServicePage = () => {
             <h4>Service ID</h4>
             <p>{service.serviceId}</p>
           </div> */}
-{/* 
+          {/* 
           <div className={styles.infoBox}>
             <h4>Permitted</h4>
             <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>

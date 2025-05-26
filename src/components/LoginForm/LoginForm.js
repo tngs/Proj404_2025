@@ -6,9 +6,11 @@ import { signup, login } from "../../redux/actions/account"; // Import your acti
 import { ACCOUNT } from '../../redux/actions/types';
 import { useLocation } from "react-router-dom";
 
+import { postLogin as userLogin } from "../../utilities/URLs/transport-user-service";
+import { postLogin as transLogin, postTransporter} from "../../utilities/URLs/transporter-service";
+
 const LoginForm = () => {
   const location = useLocation();
-  console.log("location?.state", location?.state);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Initialize useNavigate
   const [isSignupMode, setIsSignupMode] = useState(location?.state?.isSignUp ? location.state.isSignUp : false);
@@ -19,6 +21,9 @@ const LoginForm = () => {
     role: location?.state?.role ? location.state.role : "user",
   });
   const createAccount = (username, password, role) => {
+    if(role == "transporter") {
+      postTransporter({username, password}).then(obj => console.log('obj', obj))
+    }
     const result = dispatch(signup({ username, password, role })).type; // Dispatch signup action
   
     return result; // Simulate successful account creation
@@ -55,6 +60,12 @@ const LoginForm = () => {
       if(!username || !password) {
         alert("Please fill in all fields!");
         return;
+      }
+      if(role == "user") {
+        userLogin({username, password}).then(obj => console.log('obj', obj))
+      }
+      if(role == "transporter") {
+        transLogin({username, password}).then(obj => console.log('obj', obj))
       }
       const result = dispatch(login({username, password, role}))?.type; // Dispatch login action with user data
       if (result === ACCOUNT.LOGIN_SUCCESS) {

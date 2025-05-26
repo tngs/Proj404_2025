@@ -3,7 +3,8 @@ import styles from "./UnpaidOrders.module.css";
 import servicesDB from "../../../../servicesDB.json";
 import { getGetUnpaidByTransportUser } from "../../../../utilities/URLs/transport-apply-service";
 import OrderCard from "../../../../components/OrderCard/OrderCard";
-import {getDeleteByApplyId} from '../../../../utilities/URLs/transport-apply-service'
+import { getDeleteByApplyId } from "../../../../utilities/URLs/transport-apply-service";
+import { getPayServiceByApplyId } from "../../../../utilities/URLs/payment-service";
 
 const UnpaidOrders = () => {
   const [services, setServices] = useState(servicesDB);
@@ -14,10 +15,12 @@ const UnpaidOrders = () => {
   }, []);
 
   const payHandler = (id) => {
-    alert("Pay: "+id);
+    getPayServiceByApplyId(id).then((obj) => console.log("obj", obj));
+    alert("Payed: " + id);
   };
   const deleteHandler = (id) => {
-    getDeleteByApplyId(id).then(obj => console.log('obj', obj))
+    getDeleteByApplyId(id).then((obj) => console.log("obj", obj));
+    alert("Deleted: " + id);
   };
   return (
     <div className={styles["container-centers-top"]}>

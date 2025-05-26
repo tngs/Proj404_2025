@@ -1,6 +1,7 @@
 import axios from "../../axios";
 import { ResponseTransportService,RequestTransportServiceByTransporterId, RequestWeightRange, } from "./dataTypes";
 
+//DONE
 //*user get services list in user home-> "/" 
 export const get = () => {
   return axios
@@ -15,6 +16,7 @@ export const get = () => {
     });
 };
 
+//DONE
 //* user?? gets service in sevice/:id page
 export const getByServiceId = (id) => {
   return axios
@@ -29,6 +31,7 @@ export const getByServiceId = (id) => {
     });
 };
 
+//transportertransporter
 //* transporter make service
 //TODO make MakeService Page
 export const getMakingService = (transporterId) => {
@@ -44,6 +47,7 @@ export const getMakingService = (transporterId) => {
     });
 }
 
+//transportertransporter
 //* transporter making a weight range in service
 //TODO add a button besides the weight that send the data
 export const postMakingWeightRange = (serviceId, request: RequestWeightRange) => {
@@ -59,8 +63,8 @@ export const postMakingWeightRange = (serviceId, request: RequestWeightRange) =>
     });
 }
 
+//DONE
 //* user search service by name
-//TODO make search bar
 export const getByServiceName = (serviceName) => {
   return axios
     .get<ResponseTransportService[]>("/transport-service/byServiceName/" + serviceName)
@@ -74,6 +78,7 @@ export const getByServiceName = (serviceName) => {
     });
 }
 
+//transportertransporter
 //* transporter gets his services at home page
 export const getByTransporterId = (transporterId) => {
   return axios
@@ -88,6 +93,7 @@ export const getByTransporterId = (transporterId) => {
     });
 }
 
+//transportertransporter
 //* transporter: this is the edit service button in service/:id page
 //* on edit mode
 export const postModifyService = (serviceId, request/*:RequestTransportService*/) => {
@@ -103,6 +109,7 @@ export const postModifyService = (serviceId, request/*:RequestTransportService*/
     });
 }
 
+//transportertransporter
 //* transporter: this is the delete service button in service/:id page
 //* on edit mode
 //TODO: add delete button

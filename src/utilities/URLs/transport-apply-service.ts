@@ -2,6 +2,7 @@ import axios from "../../axios";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
 
 
+//DONE
 //*order                  //Order by user//
 export const postApplyByTransportUser = (serviceId, weight, request: RequestServiceApply) => {
   return axios
@@ -62,6 +63,7 @@ export const getGetByApplyId = ({ applyId }) => {
     });
 };
 
+//transportertransporter
 //*                     transporter reports completion
 export const getSetCompleteByApplyId = (applyId) => {//applyId
   return axios
@@ -91,6 +93,7 @@ export const getDeleteByApplyId = (applyId) => {
     });
 }
 
+//DONE
 //*                               user modify unpaid order
 export const postUpdateByApplyId = (applyId, request: RequestServiceApply) => {
   return axios

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./OrderPage.module.css";
 import * as request from "../../../utilities/URLs";
+import {postApplyByTransportUser} from '../../../utilities/URLs/transport-apply-service'
 
 const OrderPage = () => {
   const { id } = useParams();
@@ -26,10 +27,11 @@ const OrderPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    request.transport_apply_service.postApplyByTransportUser({
+    postApplyByTransportUser({
       erviceId: id,
       weight: weightRangeTable[weightRange],
-    });
+    }).then(obj => console.log('obj', obj));
+    alert("Order added");
     navigate("../orderDetail/" + id, {state: {service, serviceId: id,
       weightReport: weightRangeTable[weightRange][0] + " to " + weightRangeTable[weightRange][1]},});
   };

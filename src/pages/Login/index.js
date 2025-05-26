@@ -23,9 +23,7 @@ const LoginPage = () => {
         <p className={styles.description}>
           Log in to manage your cargo services efficiently.
         </p>
-        <LoginForm
-          onAuthenticate={handleAuthentication}
-        />
+        <LoginForm onAuthenticate={handleAuthentication} />
       </main>
     </div>
   );

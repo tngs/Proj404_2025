@@ -1,0 +1,19 @@
+.input {
+  border: 2px solid transparent;
+  width: 55em;
+  height: 4em;
+  padding: 1em;
+  outline: none;
+  overflow: hidden;
+  background-color: #F3F3F3;
+  border-radius: 20px;
+  transition: all 0.5s;
+  margin: 10px;
+}
+
+.input:hover,
+.input:focus {
+  border: 2px solid #4A9DEC;
+  box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+  background-color: white;
+}
