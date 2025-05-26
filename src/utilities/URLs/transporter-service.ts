@@ -42,6 +42,10 @@ export const getTransporter = () => {
 //DONE
 //* login
 export const postLogin = (request: Transporter) => {
+  //? username: string;
+  //? password: string;
+  //? email: string;
+  //? address: string;
   return axios
     .post<ResponseTransporter>("/transporter-service/login", { body: request })
     .then((response) => {
