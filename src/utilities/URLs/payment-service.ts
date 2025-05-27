@@ -14,7 +14,7 @@ export const getPayServiceByApplyId = (applyId) => {
     })
     .catch((error) => {
       console.log("getPayServiceByApplyId error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -28,7 +28,7 @@ export const getPayment = () => {
     })
     .catch((error) => {
       console.log("getPayment error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -42,7 +42,7 @@ export const postPayment = (request: PaymentCallbackRequest) => {
     })
     .catch((error) => {
       console.log("postPayment error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -56,7 +56,7 @@ export const getSuccessPayment = () => {
     })
     .catch((error) => {
       console.log("getSuccessPayment error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -70,7 +70,7 @@ export const getFailPayment = () => {
     })
     .catch((error) => {
       console.log("getFailPayment error", error);
-      return error;
+      throw error;
     });
 };
 

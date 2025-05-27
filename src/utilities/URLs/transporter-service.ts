@@ -18,7 +18,7 @@ export const postTransporter = (transporter: Transporter) => {
     })
     .catch((error) => {
       console.log("postTransporter error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -35,7 +35,7 @@ export const getTransporter = () => {
     })
     .catch((error) => {
       console.log("getTransporter error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -54,6 +54,6 @@ export const postLogin = (request: Transporter) => {
     })
     .catch((error) => {
       console.log("postLogin error", error);
-      return error;
+      throw error;
     });
 };

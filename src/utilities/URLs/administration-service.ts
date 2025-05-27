@@ -19,7 +19,7 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
     })
     .catch((error) => {
       console.log("postMakeAdministrator error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -41,7 +41,7 @@ export const getPermitAdministrator = (
     })
     .catch((error) => {
       console.log("getPermitAdministrator error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -58,7 +58,7 @@ export const getGetServicesByEmail = () => {
     })
     .catch((error) => {
       console.log("getGetServicesByEmail error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -78,7 +78,7 @@ export const getPermitServiceByAdministrator = (
     })
     .catch((error) => {
       console.log("getPermitServiceByAdministrator error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -93,7 +93,7 @@ export const getGetServiceByAdministrator = (serviceId) => {
     })
     .catch((error) => {
       console.log("getGetServiceByAdministrator error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -109,6 +109,6 @@ export const postLogin = (request: RequestLogin) => {
     })
     .catch((error) => {
       console.log("postMakeAdministrator error", error);
-      return error;
+      throw error;
     });
 };

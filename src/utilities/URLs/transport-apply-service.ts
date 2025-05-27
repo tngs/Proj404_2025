@@ -16,7 +16,7 @@ export const postApplyByTransportUser = (serviceId, weight, request: RequestServ
     })
     .catch((error) => {
       console.log("postApplyByTransportUser error", error);
-      return error;
+      throw error;
     });
 };
 //DONE
@@ -30,7 +30,7 @@ export const getGetUnpaidByTransportUser = () => {
     })
     .catch((error) => {
       console.log("getGetUnpaidByTransportUser error", error);
-      return error;
+      throw error;
     });
 };
 //DONE
@@ -44,7 +44,7 @@ export const getGetPaidByTransportUser = () => {
     })
     .catch((error) => {
       console.log("getGetPaidByTransportUser error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -59,7 +59,7 @@ export const getGetByApplyId = ({ applyId }) => {
     })
     .catch((error) => {
       console.log("getGetByApplyId error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -74,7 +74,7 @@ export const getSetCompleteByApplyId = (applyId) => {//applyId
     })
     .catch((error) => {
       console.log("getSetCompleteByApplyId error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -89,7 +89,7 @@ export const getDeleteByApplyId = (applyId) => {
     })
     .catch((error) => {
       console.log("getDeleteByApplyId error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -104,7 +104,7 @@ export const postUpdateByApplyId = (applyId, request: RequestServiceApply) => {
     })
     .catch((error) => {
       console.log("postUpdateByApplyId error", error);
-      return error;
+      throw error;
     });
 }
 

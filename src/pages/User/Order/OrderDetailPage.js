@@ -8,9 +8,12 @@ import {
   getDeleteByApplyId,
   postUpdateByApplyId,
 } from "../../../utilities/URLs/transport-apply-service";
-import { input } from "framer-motion/client";
 
 const OrderDetailPage = () => {
+  
+  // const { orderId, serviceId, userId, paid, detailed } = props;
+  // const order = detailed;
+
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();

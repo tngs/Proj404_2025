@@ -13,7 +13,7 @@ export const postLogin = (user: TransportUser) => {
     .catch((error) => {
       console.log("postLogin error", error);
       console.log(user)
-      return error;
+      throw error;
     });
 };
 
@@ -26,7 +26,7 @@ export const postTransportUser = (user: TransportUser) => {
     })
     .catch((error) => {
       console.log("postLogin error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -41,7 +41,7 @@ export const getTransportUser = (administratorEmail) => {
     })
     .catch((error) => {
       console.log("getTransportUser error", error);
-      return error;
+      throw error;
     });
 };
 

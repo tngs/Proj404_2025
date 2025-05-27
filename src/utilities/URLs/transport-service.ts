@@ -12,7 +12,7 @@ export const get = () => {
     })
     .catch((error) => {
       console.log("get error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -27,7 +27,7 @@ export const getByServiceId = (id) => {
     })
     .catch((error) => {
       console.log("getByServiceId error", error);
-      return error;
+      throw error;
     });
 };
 
@@ -43,7 +43,7 @@ export const getMakingService = (transporterId) => {
     })
     .catch((error) => {
       console.log("getMakingService error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -59,7 +59,7 @@ export const postMakingWeightRange = (serviceId, request: RequestWeightRange) =>
     })
     .catch((error) => {
       console.log("postMakingWeightRange error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -74,7 +74,7 @@ export const getByServiceName = (serviceName) => {
     })
     .catch((error) => {
       console.log("getByServiceName error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -89,7 +89,7 @@ export const getByTransporterId = (transporterId) => {
     })
     .catch((error) => {
       console.log("getByTransporterId error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -105,7 +105,7 @@ export const postModifyService = (serviceId, request:RequestTransportServiceByTr
     })
     .catch((error) => {
       console.log("postModifyService error", error);
-      return error;
+      throw error;
     });
 }
 
@@ -122,7 +122,7 @@ export const getDeleteServiceByServiceId = (serviceId) => {
     })
     .catch((error) => {
       console.log("getDeleteServiceByServiceId error", error);
-      return error;
+      throw error;
     });
 }
 

@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import styles from "./ServicePage.module.css";
 import { getByServiceId } from "../../../utilities/URLs/transport-service";
+import { toast } from "react-toastify";
 
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
   const [service, setService] = useState();
-  const [loader, setLoader] = useState(<div className={styles.message}>Service data not found.</div>);
+  const [loader, setLoader] = useState(
+    <div className={styles.message}>Service data not found.</div>
+  );
 
   const navigate = useNavigate();
-  console.log("service", service)
+  console.log("service", service);
   useEffect(() => {
-    if(!service){
-      getByServiceId(id).then((obj) => setService(obj.data));
+    if (!service) {
+      getByServiceId(id)
+        .then((obj) => setService(obj.data))
+        .catch((err) => toast.error(err.message));
     }
   }, []);
 
