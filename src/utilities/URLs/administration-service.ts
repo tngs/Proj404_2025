@@ -66,7 +66,7 @@ export const getGetServicesByEmail = () => {
 //* admin sets the service permit to true
 //TODO just make Permit Buttton at Service/:id
 export const getPermitServiceByAdministrator = (
-  serviceId,
+  serviceId,//? serviceId: 111 XXXXXXXX  admin@gmai.com111 VVVVVVVVVV
 ) => {
   return  axios
     .get<ResponseService>(

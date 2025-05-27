@@ -7,7 +7,7 @@ export const get = () => {
   return axios
     .get<ResponseTransportService[]>("/transport-service")
     .then((response) => {
-      console.log("get response", response);
+      console.log("get");
       return response;
     })
     .catch((error) => {
@@ -22,7 +22,7 @@ export const getByServiceId = (id) => {
   return axios
     .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
     .then((response) => {
-      console.log("getByServiceId response", response);
+      console.log("getByServiceId");
       return response;
     })
     .catch((error) => {
@@ -69,7 +69,7 @@ export const getByServiceName = (serviceName) => {
   return axios
     .get<ResponseTransportService[]>(`/transport-service/byServiceName/${serviceName}`)
     .then((response) => {
-      console.log("getByServiceName response", response);
+      console.log("getByServiceName");
       return response;
     })
     .catch((error) => {

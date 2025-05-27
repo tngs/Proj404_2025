@@ -7,23 +7,29 @@ import { toast } from "react-toastify";
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
-  const [service, setService] = useState();
+  const [service, setService] = useState(location.state?.service);
   const [loader, setLoader] = useState(
-    <div className={styles.message}>Service data not found.</div>
+    <div className={styles.message}>Service loading...</div>
   );
 
   const navigate = useNavigate();
-  console.log("service", service);
   useEffect(() => {
-    if (!service) {
-      getByServiceId(id)
-        .then((obj) => setService(obj.data))
-        .catch((err) => toast.error(err.message));
-    }
+    getByServiceId(id)
+      .then((obj) => {
+        setService(obj.data);
+        if (obj.data) {
+        } else {
+          setLoader(<div className={styles.message}>Service not found</div>);
+        }
+      })
+      .catch((err) => {
+        setLoader(<div className={styles.message}>Something went wrong</div>);
+        toast.error(err.message);
+      });
   }, []);
 
   if (!service) {
-    return <div className={styles.message}>Service data not found.</div>;
+    return loader;
   }
 
   const handleOrder = () => {

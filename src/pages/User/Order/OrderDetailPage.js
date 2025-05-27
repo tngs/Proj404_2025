@@ -1,151 +1,161 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./OrderDetailPage.module.css";
-import servicesDB from "../../../servicesDB.json";
-import { getGetByApplyId } from "../../../utilities/URLs/transport-apply-service";
-import { getPayServiceByApplyId } from "../../../utilities/URLs/payment-service";
 import {
+  getGetByApplyId,
   getDeleteByApplyId,
   postUpdateByApplyId,
 } from "../../../utilities/URLs/transport-apply-service";
+import { getPayServiceByApplyId } from "../../../utilities/URLs/payment-service";
+import { toast } from "react-toastify";
 
 const OrderDetailPage = () => {
-  
-  // const { orderId, serviceId, userId, paid, detailed } = props;
-  // const order = detailed;
-
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const paid = location.state?.paid ? location.state.paid : false;
-  const [service, setService] = useState(location.state?.service || null);
-  console.log("location.state", location.state);
-  const [weightRange, setWeightRange] = useState(
-    location.state?.weightReport || "0g to 100g"
-  ); //!hard value fix it
 
+  const initialOrder = location.state?.order?.detailed || {};
+  const [orderDetail, setOrderDetail] = useState(initialOrder);
+  let { orderId, paid, serviceId, userId } = location.state?.order || {};
+
+  const [departure, setDeparture] = useState(initialOrder.departure || "");
+  const [destination, setDestination] = useState(
+    initialOrder.destination || ""
+  );
+  const [description, setDescription] = useState(
+    initialOrder.serviceDescription || initialOrder.description || ""
+  );
+  const [transporterName, setTransporterName] = useState(
+    initialOrder.transporterName || ""
+  );
+  const [weight, setWeight] = useState(location.state?.weight || "0g to 100g");
   const [editMode, setEditMode] = useState(false);
-
-  const weightRangeTable = [
-    [0, 100],
-    [100, 1000],
-    [1000, 9000],
-  ];
-
-  //? departure: departures;
-  //? destination: destinations;
-  //? serviceName: serviceName;
-  //? transporterName: transporterName;
-  //? transportUserName: none;
-  //? weightRange: weightRange;
-  //? description: description;
+  const [loader, setLoader] = useState(
+    <div className={styles.message}>Order loading...</div>
+  );
 
   useEffect(() => {
-    //TODO have to setService later
-    getGetByApplyId({ applyId: id }).then((obj) => console.log("obj", obj));
-    if (!service) {
-      const found = servicesDB.find(
-        (p) => p.serviceId === id || p.id === parseInt(id)
-      );
-      if (found) setService(found);
-    }
-  }, [id, service]);
+    getGetByApplyId({ applyId: id })
+      .then((obj) => {
+        ({ orderId, paid, serviceId, userId } = obj.data);
+        setOrderDetail(obj.data.detailed);
+        setDeparture(obj.data.detailed.departure);
+        setDestination(obj.data.detailed.destination);
+        setDescription(
+          obj.data.detailed.serviceDescription || obj.data.detailed.description
+        );
+        setTransporterName(obj.data.detailed.transporterName);
+      })
+      .catch((err) => {
+        setLoader(<div className={styles.message}>Something went wrong</div>);
+        toast.error(err.message);
+      });
+  }, []);
 
-  const weightConverter = (weight) => {
-    return weight < 1000 ? `${weight}g` : `${weight / 1000}kg`;
-  };
-
-  if (!service) {
-    return <div className={styles.message}>Service data not found.</div>;
+  if (!orderDetail) {
+    return loader;
   }
+
   const handlePay = () => {
-    getPayServiceByApplyId(id).then((obj) => console.log("obj", obj));
-    alert("Payed: " + id);
+    toast.info("Paying: " + id);
   };
+
   const handleDelete = () => {
-    getDeleteByApplyId(id).then((obj) => console.log("obj", obj));
-    alert("Deleted: " + id);
-    navigate("../");
+    getDeleteByApplyId(id)
+      .then(() => {
+        toast.success("Deleted: " + id);
+        navigate("/unpaid-orders");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
+
   const handleEdit = () => {
     if (!paid && editMode) {
       postUpdateByApplyId(id, {
-        departure: service.departure,
-        destination: service.destination,
-        description: service.serviceDescription,
-      }).then(obj=>console.log('obj', obj));
+        departure,
+        destination,
+        description,
+        transporterName,
+      })
+        .then(() => {
+          toast.success("Updated: " + id);
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
     }
     setEditMode(!editMode);
   };
-  const handleChange = (e) => {
-    setWeightRange(e.target.value);
-  };
+
+  const handleInputChange = (setter) => (e) => setter(e.target.value);
+
   return (
     <div className={styles.page}>
       <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
         <div className={styles.overlay}>
           <h1 className={styles.coverTitle}>
-            {service.serviceName || service.title}
+            {orderDetail.serviceName || orderDetail.title}
           </h1>
           <p className={styles.companyName}>
-            Transported by {service.transporterName || service.companyName}
+            Transported by {transporterName || orderDetail.companyName}
           </p>
         </div>
       </div>
 
       <div className={styles.details}>
         <h2>Description</h2>
-        <p>{service.serviceDescription || service.description}</p>
+        {editMode ? (
+          <textarea
+            value={description}
+            onChange={handleInputChange(setDescription)}
+            className={styles.selectInput}
+          />
+        ) : (
+          <p>{description}</p>
+        )}
 
         <div className={styles.infoGrid}>
           <div className={styles.infoBox}>
             <h4>Departures</h4>
-            <p>{service.departures}</p>
+            {editMode ? (
+              <input
+                value={departure}
+                onChange={handleInputChange(setDeparture)}
+                className={styles.selectInput}
+              />
+            ) : (
+              <p>{departure}</p>
+            )}
           </div>
 
           <div className={styles.infoBox}>
             <h4>Destinations</h4>
-            <p>{service.destinations}</p>
+            {editMode ? (
+              <input
+                value={destination}
+                onChange={handleInputChange(setDestination)}
+                className={styles.selectInput}
+              />
+            ) : (
+              <p>{destination}</p>
+            )}
           </div>
 
           <div className={styles.infoBox}>
             <h4>Transporter</h4>
-            <p>{service.transporterName}</p>
-          </div>
-
-          {/* <div className={styles.infoBox}>
-            <h4>Transporter ID</h4>
-            <p>{service.transporterId}</p>
-          </div>
-
-          <div className={styles.infoBox}>
-            <h4>Service ID</h4>
-            <p>{service.serviceId || service.id}</p>
-          </div> */}
-
-          <div className={styles.infoBox}>
-            <h4>Selected Weight</h4>
-            {!editMode && <p>{weightRange}</p>}
-            {editMode && (
-              <select
-                id="weightRanges"
-                value={weightRange}
-                onChange={handleChange}
+            {editMode ? (
+              <input
+                value={transporterName}
+                onChange={handleInputChange(setTransporterName)}
                 className={styles.selectInput}
-              >
-                {weightRangeTable.map((w, i) => (
-                  <option
-                    key={i}
-                    value={`${weightConverter(w[0])} to ${weightConverter(
-                      w[1]
-                    )}`}
-                  >
-                    {weightConverter(w[0])} to {weightConverter(w[1])}
-                  </option>
-                ))}
-              </select>
+              />
+            ) : (
+              <p>{transporterName}</p>
             )}
           </div>
+
           {!paid && (
             <div className={styles.infoBox}>
               <h4>Edit</h4>

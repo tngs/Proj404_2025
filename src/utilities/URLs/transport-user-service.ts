@@ -7,12 +7,11 @@ export const postLogin = (user: TransportUser) => {
   return axios
     .post<ResponseTransportUser>("/transport-user-service/login")
     .then((response) => {
-      console.log("postLogin response", response);
+      console.log("postLogin");
       return response;
     })
     .catch((error) => {
       console.log("postLogin error", error);
-      console.log(user)
       throw error;
     });
 };
@@ -21,7 +20,7 @@ export const postTransportUser = (user: TransportUser) => {
   return axios
     .post<ResponseTransportUser>("/transport-user-service/transport-user")
     .then((response) => {
-      console.log("postLogin response", response);
+      console.log("postLogin");
       return response;
     })
     .catch((error) => {

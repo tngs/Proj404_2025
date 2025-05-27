@@ -6,7 +6,7 @@ import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes
 //TODO make pay button
 export const getPayServiceByApplyId = (applyId) => {
   return axios
-    .get<ResponseServiceApplyForPayment>("/payment-service/payment-servi/payServiceByApplyId/" + applyId)
+    .get<ResponseServiceApplyForPayment>("/payment-service/payment-service/payServiceByApplyId/" + applyId)
     .then((response) => {
       
       console.log("getPayServiceByApplyId response", response);
