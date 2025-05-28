@@ -6,29 +6,32 @@ import {
   getGetServiceByAdministrator,
   getPermitServiceByAdministrator,
 } from "../../../utilities/URLs/administration-service";
-import { useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
   const [service, setService] = useState(location.state?.service);
+  const [loader, setLoader] = useState(
+    <div className={styles.message}>Service loading...</div>
+  );
+
 
   useEffect(() => {
-    getGetServiceByAdministrator(id).then((obj) => console.log("obj", obj));
-    if (!service) {
-      //TODO setService
-    }
-  }, [id]);
+    getGetServiceByAdministrator(id).then((obj) => {
+      
+      setService(obj.data);
+      if (obj.data) {
+      } else {
+        setLoader(<div className={styles.message}>Service not found</div>);
+      }
+    }).catch((err) => {
+      toast.error(err.message);
+    });
+  }, []);
 
   if (!service) {
-    return <div className={styles.message}>Service data not found.</div>;
+    return loader;
   }
-  const handlePermit = () => {
-    //TODO might have setState by obj
-    getPermitServiceByAdministrator(id).then((obj) => console.log("obj", obj));
-    //TEST
-    setService({ ...service, permitted: true });
-  };
   return (
     <div className={styles.page}>
       <div className={styles.cover} style={{ backgroundColor: "#2c3e50" }}>
@@ -74,12 +77,6 @@ const ServicePage = () => {
             <h4>Permitted</h4>
             <p>{service.permitted ? "✅ Allowed" : "❌ Not Allowed"}</p>
           </div>
-        </div>
-
-        <div className={styles.buttonWrapper}>
-          <button className={styles.orderButton} onClick={handlePermit}>
-            Permit
-          </button>
         </div>
       </div>
     </div>

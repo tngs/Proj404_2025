@@ -1,25 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import ServiceList from "../../../components/List/ServiceList";
 import services from "../../../servicesDB.json";
 import { useSelector } from "react-redux";
-import { get } from "../../../utilities/URLs/transport-service";
-
+import { getByTransporterId } from "../../../utilities/URLs/transport-service";
+import { toast } from "react-toastify";
 const Home = () => {
-  const user = useSelector((state) => state.account.user);
+  const [services, setServices] = useState([]);
   useEffect(() => {
-    get().then((obj) => console.log("obj", obj));
+    getByTransporterId().then((obj) => {
+      console.log("obj", obj);
+      setServices(obj.data);
+    }).catch((err) => {
+      toast.error(err.message);
+    });
   }, []);
-
-  console.log("user", user);
-  console.log("services", services);
-  const filteredServices = services.filter(
-    (service) => service.transporterId === user.id
-  );
-  console.log("filteredServices", filteredServices);
   return (
     <div className="container-centers-top">
-      <ServiceList services={filteredServices} />
+      <ServiceList services={services} />
     </div>
   );
 };

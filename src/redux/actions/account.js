@@ -9,6 +9,7 @@ import {
   postLogin as transLogin,
   postTransporter as transSignup,
 } from "../../utilities/URLs/transporter-service";
+import { tokenSave, tokenDelete } from "./token";
 
 export const signup = ({ username, password, email, address, role }) => {
   return (dispatch) => {
@@ -16,7 +17,7 @@ export const signup = ({ username, password, email, address, role }) => {
     if (role === "user") {
       return userSignup({ username, password, email, address })
         .then((obj) => {
-          if (obj.status === 200) {
+          if (obj.status === 201) {
             dispatch({
               type: ACCOUNT.SIGNUP_SUCCESS,
               message: "User created successfully",
@@ -49,13 +50,15 @@ export const signup = ({ username, password, email, address, role }) => {
     } else if (role === "transporter") {
       return transSignup({ username, password, email, address })
         .then((obj) => {
-          if (obj.status === 200) {
+          if (obj.status === 201) {
             dispatch({
               type: ACCOUNT.SIGNUP_SUCCESS,
+              payload: {...obj.data, role: role},
               message: "User created successfully",
             });
             return {
               type: ACCOUNT.SIGNUP_SUCCESS,
+              payload: {...obj.data, role: role},
               message: "User created successfully",
             };
           } else {
@@ -92,27 +95,26 @@ export const signup = ({ username, password, email, address, role }) => {
   };
 };
 
-export const login = ({ username, password, role }) => {
+export const login = ({ email, password, role }) => {
   return (dispatch) => {
     dispatch({ type: ACCOUNT.LOGIN_START });
-    if (!username || !password || !role) {
-      dispatch({
-        type: ACCOUNT.LOGIN_UNSUCCESS,
-        message: "Input not valid",
-      });
-      return {
+    if (!email || !password || !role) {
+      const error = {
         type: ACCOUNT.LOGIN_UNSUCCESS,
         message: "Input not valid",
       };
+      dispatch(error);
+      return Promise.resolve(error);
     }
     if(role === "user"){
-      return userLogin({username, password}).then((obj) => {
+      return userLogin({email, password}).then((obj) => {
         if(obj.status === 200){
           dispatch({
             type: ACCOUNT.LOGIN_SUCCESS,
             message: "Login successful",
             payload: obj.data,
           });
+          // dispatch(tokenSave(obj.data.token));
           return {
             type: ACCOUNT.LOGIN_SUCCESS,
             message: "Login successful",
@@ -120,32 +122,33 @@ export const login = ({ username, password, role }) => {
           };
         }
         else{
-          //TODO add obj error message
-          dispatch({
+          const unsuccess = {
             type: ACCOUNT.LOGIN_UNSUCCESS,
             message: "Login failed",
-          });
-          return {
-            type: ACCOUNT.LOGIN_UNSUCCESS,
-            message: "Login failed",
-          };
+          }
+          dispatch(unsuccess);
+          return unsuccess;
         }
       })
       .catch((err) => {
-        dispatch({
+        const error = {
           type: ACCOUNT.LOGIN_ERROR,
           message: err,
-        });
+        }
+        dispatch(error);
+        return error;
       })
     }
     else if(role === "transporter"){
-      return transLogin({username, password}).then((obj) => {
+      return transLogin({email, password}).then((obj) => {
+        console.log("transLogin", obj);
         if(obj.status === 200){
           dispatch({
             type: ACCOUNT.LOGIN_SUCCESS,
             message: "Login successful",
-            payload: obj.data,
+            payload: {...obj.data, role: role},
           });
+          // dispatch(tokenSave(obj.data.token));
           return {
             type: ACCOUNT.LOGIN_SUCCESS,
             message: "Login successful",
@@ -172,14 +175,12 @@ export const login = ({ username, password, role }) => {
       })
     }
     else{
-      dispatch({
-        type: ACCOUNT.LOGIN_ERROR,
-        message: "Wrong type",
-      });
-      return {
+      const wrongType = {
         type: ACCOUNT.LOGIN_ERROR,
         message: "Wrong type",
       };
+      dispatch(wrongType);
+      return Promise.resolve(wrongType);
     }
   };
 };
@@ -190,6 +191,7 @@ export const logout = () => {
       type: ACCOUNT.LOGOUT,
       message: "Logged out",
     });
+    dispatch(tokenDelete());
     persistor.purge(); // Clear persisted state
     return {
       type: ACCOUNT.LOGOUT,

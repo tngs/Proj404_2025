@@ -12,6 +12,17 @@ const ACCOUNT = {
   // LOGOUT
   LOGOUT: 'ACCOUNT_LOGOUT',
 };
+const TOKEN = {
+  SAVE: 'TOKEN_SAVE',
+  DELETE: 'TOKEN_DELETE',
+};
+const ADMIN = {
+  LOGIN: 'ADMIN_LOGIN',
+  LOGOUT: 'ADMIN_LOGOUT',
+};
+
 export {
-  ACCOUNT
+  ACCOUNT,
+  TOKEN,
+  ADMIN,
 };

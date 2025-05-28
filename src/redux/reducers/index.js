@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
 import account from "./account";
+import admin from "./admin";
+import token from "./token";
+import { adminLogout } from "../actions/admin";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
@@ -19,15 +22,15 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({
   account,
+  token,
 }));
 
-const persistedReducerWithTest = persistReducer(
+const persistedReducerWithAdmin = persistReducer(
   persistConfig,
   combineReducers({
     account,
-    test: (state = null, action) => {
-      return state;
-    },
+    token,
+    admin,
   })
 );
 
@@ -43,8 +46,8 @@ export const store = createStore(
 
 export const persistor = persistStore(store);
 
-export const storeToTester = () => {
-  store.replaceReducer(persistedReducerWithTest);
+export const storeToAdmin = () => {
+  store.replaceReducer(persistedReducerWithAdmin);
 };
 export const storeToMain = () => {
   store.replaceReducer(persistedReducer);
@@ -53,6 +56,8 @@ export const storePurge = () => {
   store.dispatch({ type: "ACCOUNT_LOGOUT" });
 };
 
-window.storeToTester = storeToTester;
+
+window.storeToAdmin = storeToAdmin;
 window.storeToMain = storeToMain;
 window.storePurge = storePurge;
+window.adminLogout = adminLogout;

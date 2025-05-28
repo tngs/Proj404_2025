@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { signup, login } from "../../../redux/actions/account"; // Import your action
-import { ACCOUNT } from "../../../redux/actions/types";
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import {
   postMakeAdministrator,
-  getPermitAdministrator,
-  postLogin
+  postLogin,
 } from "../../../utilities/URLs/administration-service";
-import RequestAdministrator from "../../../utilities/URLs/dataTypes/RequestAdministrator";
+import { adminLogin } from "../../../redux/actions/admin";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const location = useLocation();
@@ -29,13 +27,22 @@ const LoginForm = () => {
     username: "",
   });
   const createAdmin = (administratorName, email, password) => {
-    // const result = dispatch(signupAdmin({ administratorName, email, password })).type; // Dispatch signup action
     postMakeAdministrator({ administratorName, email, password }
-    ).then((obj) => console.log("obj", obj));
+    ).then((obj) => {
+      toast.success("Administrator created successfully");
+      setIsSignupMode(false);
+    }).catch((err) => {
+      toast.error(err.message);
+    });
   };
   const loginAdmin = (email, password) => {
-    postLogin({email, password}).then(obj => console.log('obj', obj))
-    window.loginAsAdmin();
+    postLogin({email, password}).then(obj => {
+      dispatch(adminLogin(obj.data))
+      navigate("/admin");
+    })
+    .catch((err) => {
+      toast.error(err.message);
+    });
   };
 
   const handleInputChange = (e) => {
@@ -59,8 +66,8 @@ const LoginForm = () => {
       //TODO later check conditions
       setIsSignupMode(false);
     } else {
-      if (!email) {
-        alert("Please fill in email!");
+      if (!email || !password) {
+        alert("Please fill in email and password!");
         return;
       }
       loginAdmin(email, password);

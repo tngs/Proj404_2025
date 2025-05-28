@@ -1,64 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./ServicePage.module.css";
-import servicesDB from "../../../servicesDB.json";
-import { getGetByApplyId } from "../../../utilities/URLs/transport-apply-service";
-import { postModifyService, getDeleteServiceByServiceId } from "../../../utilities/URLs/transport-service";
+import { getByServiceId } from "../../../utilities/URLs/transport-service";
+import {
+  postModifyService,
+  getDeleteServiceByServiceId,
+} from "../../../utilities/URLs/transport-service";
+import { postMakingWeightRange} from "../../../utilities/URLs/transport-service"
+import { toast } from "react-toastify";
 
 const ServicePage = () => {
   const { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
-  const paid = location.state?.paid ? location.state.paid : false;
-  const [service, setService] = useState(location.state?.service || null);
-  console.log("location.state", location.state);
-  const [weightRange, setWeightRange] = useState(
-    location.state?.weightReport || "0g to 100g"
-  ); //!hard value fix it
+  const [service, setService] = useState(location.state?.service);
+  const [loader, setLoader] = useState(
+    <div className={styles.message}>Service loading...</div>
+  );
+  const [weightRanges, setWeightRanges] = useState([{minWeight: "", maxWeight: "",price: 0}]);
   const [editMode, setEditMode] = useState(false);
-  const weightRangeTable = [
-    [0, 100],
-    [100, 1000],
-    [1000, 9000],
-  ];
-  useEffect(() => {
-    //TODO have to setService later
-    getGetByApplyId({ applyId: id }).then((obj) => console.log("obj", obj));
-    if (!service) {
-      const found = servicesDB.find(
-        (p) => p.serviceId === id || p.id === parseInt(id)
-      );
-      if (found) setService(found);
-    }
-  }, [id, service]);
+  const navigate = useNavigate();
+  
 
-  const weightConverter = (weight) => {
-    return weight < 1000 ? `${weight}g` : `${weight / 1000}kg`;
-  };
+  useEffect(() => {
+    getByServiceId(id)
+      .then((obj) => {
+        console.log("obj", obj.data);
+        setService(obj.data);
+        if (obj.data) {
+        } else {
+          setLoader(<div className={styles.message}>Service not found</div>);
+        }
+      })
+      .catch((err) => {
+        setLoader(<div className={styles.message}>Something went wrong</div>);
+      });
+  }, []);
 
   if (!service) {
-    return <div className={styles.message}>Service data not found.</div>;
+    return loader;
   }
+
   const handleDelete = () => {
-    getDeleteServiceByServiceId(id).then((obj) => console.log("obj", obj));
-    alert("Deleted: " + id);
-    navigate("../");
+    getDeleteServiceByServiceId(id).then((obj) => {
+      toast.success("Service deleted"); 
+      navigate("../");
+    }).catch((err) => {
+      toast.error(err.message);
+    });
   };
   const handleEdit = () => {
-    if (!paid && editMode) {
+    if (editMode) {
       postModifyService(id, {
-          serviceName: service.name,
-          serviceDescription: service.description,
-          departures: service.departures,
-          destinations: service.destinations,
-          transporterName: service.transporterName,
-          price: 0
-      }).then((obj) => console.log("obj", obj));
+        serviceName: service.name,
+        serviceDescription: service.description,
+        departures: service.departures,
+        destinations: service.destinations,
+        transporterName: service.transporterName,
+        price: 0,
+      }).then((obj) => {
+        toast.success("Service updated");
+        setService(obj.data);
+      }).catch((err) => {
+        toast.error(err.message);
+      });
     }
     setEditMode(!editMode);
-  };
-  const weightChange = (e) => {
-    setWeightRange(e.target.value);
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,6 +72,23 @@ const ServicePage = () => {
       ...prev,
       [name]: value,
     }));
+  };
+  const handleAddRange = () => {
+    postMakingWeightRange(id, weightRanges[0]).then((res) => {
+      console.log("res", res);
+    })
+    .catch((err) => {
+      toast.error(err.message);
+    });
+    // setWeightRanges([
+    //   ...weightRanges,
+    //   { minWeight: "", maxWeight: "", price: "" },
+    // ]);
+  };
+  const handleWeightChange = (index, field, value) => {
+    const updatedRanges = [...weightRanges];
+    updatedRanges[index][field] = value;
+    setWeightRanges(updatedRanges);
   };
   return (
     <div className={styles.page}>
@@ -123,49 +146,98 @@ const ServicePage = () => {
               />
             )}
           </div>
-          <div className={styles.infoBox}>
-            <h4>Selected Weight</h4>
-            {!editMode && <p>{weightRange}</p>}
-            {editMode && (
-              <select
-                id="weightRanges"
-                value={weightRange}
-                onChange={weightChange}
-                className={styles.selectInput}
+            {editMode &&
+            <div style={{ gridColumn: "1 / -1" }}>
+            <div className={styles.infoBox} style={{ width: "100%" }}>
+              <h4 style={{marginBottom: "12px"}}>Weight Ranges</h4>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr",
+                  gap: "10px",
+                  marginBottom: "12px",
+                  padding: "12px",
+                  backgroundColor: "#fff",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                }}
               >
-                {weightRangeTable.map((w, i) => (
-                  <option
-                    key={i}
-                    value={`${weightConverter(w[0])} to ${weightConverter(
-                      w[1]
-                    )}`}
-                  >
-                    {weightConverter(w[0])} to {weightConverter(w[1])}
-                  </option>
-                ))}
-              </select>
-            )}
+                <div>
+                  <strong>Min Weight</strong>
+                </div>
+                <div>
+                  <strong>Max Weight</strong>
+                </div>
+                <div>
+                  <strong>Price</strong>
+                </div>
+              </div>
+              {weightRanges.map((range, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr 1fr",
+                    gap: "10px",
+                    marginBottom: "16px",
+                    padding: "12px",
+                    backgroundColor: "#fff", 
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                    borderTop: index === 0 ? "none" : "1px solid #eee"
+                  }}
+                >
+                  <input
+                    className={styles.input}
+                    type="number"
+                    placeholder="Min"
+                    value={range.minWeight}
+                    onChange={(e) =>
+                      handleWeightChange(index, "minWeight", e.target.value)
+                    }
+                  />
+                  <input
+                    className={styles.input}
+                    type="number"
+                    placeholder="Max"
+                    value={range.maxWeight}
+                    onChange={(e) =>
+                      handleWeightChange(index, "maxWeight", e.target.value)
+                    }
+                  />
+                  <input
+                    className={styles.input}
+                    type="number"
+                    placeholder="Price"
+                    value={range.price}
+                    onChange={(e) =>
+                      handleWeightChange(index, "price", e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+              <button className={styles.button} onClick={handleAddRange}>
+                Add Weight Range
+              </button>
+            </div>
           </div>
-          {!paid && (
-            <div className={styles.infoBox}>
-              <h4>Edit</h4>
-              <button className={styles.button} onClick={handleEdit}>
-                {!editMode ? "Edit" : "Save"}
-              </button>
-            </div>
-          )}
-          {!paid && (
-            <div className={styles.infoBox}>
-              <h4>Delete</h4>
-              <button
-                className={styles.button}
-                style={{ backgroundColor: "#F21313" }}
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-            </div>
-          )}
+            }
+          <div className={styles.infoBox}>
+            <h4>Edit</h4>
+            <button className={styles.button} onClick={handleEdit}>
+              {!editMode ? "Edit" : "Save"}
+            </button>
+          </div>
+          <div className={styles.infoBox}>
+            <h4>Delete</h4>
+            <button
+              className={styles.button}
+              style={{ backgroundColor: "#F21313" }}
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -37,7 +37,6 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
       };
     case ACCOUNT.LOGIN_SUCCESS:
       return {
-        //?MIGHT BE WRONG
         ...DEFAULT_ACCOUNT,
         loggedIn: true,
         message: "Login successful",

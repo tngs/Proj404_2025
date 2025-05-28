@@ -2,25 +2,26 @@
 import { useEffect, useState } from "react";
 import styles from "./AdminPage.module.css";
 import ServiceCardWithEditAndDelete from "../../../components/ServiceCardWithEditAndDelete/ServiceCardWithEditAndDelete";
-import servicesDB from "../../../servicesDB.json";
+// import servicesDB from "../../../servicesDB.json";
 import { getGetServicesByEmail, getPermitServiceByAdministrator } from "../../../utilities/URLs/administration-service";
-
+import { toast } from "react-toastify";
 
 const AdminPage = () => {
-  const [services, setServices] = useState(servicesDB);
+  const [services, setServices] = useState([]);
   useEffect(() => {
     getGetServicesByEmail().then((obj) => {
-      // console.log("obj", obj)
+      setServices(obj.data);
+    }).catch((err) => {
+      toast.error(err.message);
     });
   }, []);
   const permitHandler = (id) => {
-    //TEST //!TEST
-    getPermitServiceByAdministrator(id).then(obj => console.log('obj', obj))
-    setServices(
-      services.map((service) =>
-        service.serviceId === id ? { ...service, permitted: true } : service
-      )
-    );
+    getPermitServiceByAdministrator(id).then(obj => {
+      toast.success("Service permitted");
+      setServices(obj.data);
+    }).catch((err) => {
+      toast.error(err.message);
+    });
   };
   return (
     <div className={styles.page}>

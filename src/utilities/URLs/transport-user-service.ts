@@ -1,13 +1,16 @@
 import axios from "../../axios";
 import { TransportUser, ResponseTransportUser } from "./dataTypes";
+import { tokenSave } from "../../redux/actions/token";
 
 //DONE
 //*login
-export const postLogin = (user: TransportUser) => {
+export const postLogin = (body: TransportUser) => {
   return axios
-    .post<ResponseTransportUser>("/transport-user-service/login")
+    .post<ResponseTransportUser>("/transport-user-service/login", body, {
+      withCredentials: true,
+    })
     .then((response) => {
-      console.log("postLogin");
+      console.log("postLogin", response);
       return response;
     })
     .catch((error) => {
@@ -16,9 +19,9 @@ export const postLogin = (user: TransportUser) => {
     });
 };
 
-export const postTransportUser = (user: TransportUser) => {
+export const postTransportUser = (body: TransportUser) => {
   return axios
-    .post<ResponseTransportUser>("/transport-user-service/transport-user")
+    .post<ResponseTransportUser>("/transport-user-service/transport-user", body)
     .then((response) => {
       console.log("postLogin");
       return response;
@@ -31,9 +34,9 @@ export const postTransportUser = (user: TransportUser) => {
 
 //DONE
 //*admin gets all users
-export const getTransportUser = (administratorEmail) => {
+export const getTransportUser = () => {
   return axios
-    .get<ResponseTransportUser[]>("/transport-user-service/transport-user/"+administratorEmail)
+    .get<ResponseTransportUser[]>("/transport-user-service/transport-user")
     .then((response) => {
       console.log("getTransportUser response", response);
       return response;

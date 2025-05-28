@@ -3,27 +3,16 @@ import styles from './TransporterCard.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
-const TransporterCard = ({ service }) => {
+const TransporterCard = ({ transporter }) => {
   const navigate = useNavigate();
-    const user = {  email:"email@email.com",
-                    username:"username1",
-                    transportUserId:"id1",
-                    address:"somehwere",}
   const handleClick = () => {
-    // navigate(`./service/${service.serviceId}`, { state: { service } }),
   };
-/*
-    ? email: string;
-    ? username: string;
-    ? transportUserId: string;
-    ? address: string;
-  */
   return (
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.details}>
-        <h2 className={styles.title}>{user.username}</h2>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p className={styles.description}>{user.address}</p>
+        <h2 className={styles.title}>{transporter.username}</h2>
+        <p><strong>Email:</strong> {transporter.email}</p>
+        <p className={styles.description}>{transporter.address}</p>
       </div>
     </div>
   );

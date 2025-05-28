@@ -46,23 +46,6 @@ export const getPermitAdministrator = (
 };
 
 //DONE
-//*admin page gets the services
-export const getGetServicesByEmail = () => {
-  return axios
-    .get<ResponseService[]>(
-      `/administration-service/getServicesByEmail`
-    )
-    .then((response) => {
-      console.log("getGetServicesByEmail response", response);
-      return response;
-    })
-    .catch((error) => {
-      console.log("getGetServicesByEmail error", error);
-      throw error;
-    });
-};
-
-//DONE
 //* admin sets the service permit to true
 //TODO just make Permit Buttton at Service/:id
 export const getPermitServiceByAdministrator = (
@@ -82,6 +65,39 @@ export const getPermitServiceByAdministrator = (
     });
 };
 
+//DONE USED
+//TODO make login
+//*/administration-service/login  - required object: RequestLogin
+export const postLogin = (request: RequestLogin) => {
+  return axios
+    .post<ResponseAdministrator>("/administration-service/login", request)
+    .then((response) => {
+      console.log("postMakeAdministrator response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("postMakeAdministrator error", error);
+      throw error;
+    });
+};
+
+//DONE
+//*admin page gets the services
+export const getGetServicesByEmail = () => {
+  return axios
+    .get<ResponseService[]>(
+      `/administration-service/getServicesByEmail`
+    )
+    .then((response) => {
+      console.log("getGetServicesByEmail response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("getGetServicesByEmail error", error);
+      throw error;
+    });
+};
+
 //DONE
 //*admin gets the service data at Sevice/:id page
 export const getGetServiceByAdministrator = (serviceId) => {
@@ -93,22 +109,6 @@ export const getGetServiceByAdministrator = (serviceId) => {
     })
     .catch((error) => {
       console.log("getGetServiceByAdministrator error", error);
-      throw error;
-    });
-};
-
-//DONE USED
-//TODO make login
-//*/administration-service/login  - required object: RequestLogin
-export const postLogin = (request: RequestLogin) => {
-  return axios
-    .post<ResponseAdministrator>("/administration-service/makeAdministrator", request)
-    .then((response) => {
-      console.log("postMakeAdministrator response", response);
-      return response;
-    })
-    .catch((error) => {
-      console.log("postMakeAdministrator error", error);
       throw error;
     });
 };

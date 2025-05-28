@@ -22,7 +22,7 @@ const Home = () => {
   const enterHandler = (e) => {
     if (e.key === "Enter") {
       getByServiceName(search)
-        .then((obj) => setServices(obj.data))
+        .then((obj) => setServices([obj.data]))
         .catch((err) => toast.error(err.message));
     }
   };

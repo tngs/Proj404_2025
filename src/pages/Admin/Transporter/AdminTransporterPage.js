@@ -2,65 +2,24 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AdminTransporterPage.module.css";
 import TransporterCard from "../../../components/TransporterCard/TransporterCard";
-import servicesDB from "../../../servicesDB.json";
 import { getTransporter } from "../../../utilities/URLs/transporter-service";
-
+import { toast } from "react-toastify";
 const AdminTransporterPage = () => {
-  const [services, setServices] = useState(servicesDB);
+  const [transporters, setTransporters] = useState([]);
   useEffect(() => {
     getTransporter().then((obj) => {
-      console.log("obj", obj)
+      setTransporters(obj.data);
+    }).catch((err) => {
+      toast.error(err.message);
     });
   }, []);
-
-  const permitHandler = (id) => {
-    //TEST //!TEST
-    setServices(
-      services.map((service) =>
-        service.serviceId === id ? { ...service, permitted: true } : service
-      )
-    );
-  };
   return (
     <div className={styles.page}>
-      {/* <header className={styles.header}>
-        <h1 className={styles.title}>Transport Services Admin</h1>
-        <div className={styles.filters}>
-          <select
-            value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-          >
-            <option value="all">All</option>
-            <option value="permitted">Permitted</option>
-            <option value="pending">Pending</option>
-          </select>
-          <select
-            value={filters.transporter}
-            onChange={(e) =>
-              setFilters({ ...filters, transporter: e.target.value })
-            }
-          >
-            <option value="all">All Transporters</option>
-            {transporterOptions.map((name, i) => (
-              <option key={i} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={filters.search}
-            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-          />
-        </div>
-      </header> */}
       <main className={styles.main}>
-        {services.map((service) => (
+        {transporters.map((transporter) => (
           <TransporterCard
-            key={service.serviceId}
-            service={service}
-            permitHandler={permitHandler}
+            key={transporter.email}
+            transporter={transporter}
           />
         ))}
       </main>

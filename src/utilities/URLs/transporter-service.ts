@@ -6,12 +6,7 @@ import { Transporter, ResponseTransporter } from "./dataTypes";
 //* signup transporter
 export const postTransporter = (transporter: Transporter) => {
   return axios
-    .post("/transporter-service/transporter", {
-      username: transporter.username,
-      password: transporter.password,
-      email: transporter.email,
-      address: transporter.address,
-    })
+    .post("/transporter-service/transporter", transporter)
     .then((response) => {
       console.log("postTransporter response", response);
       return response;
@@ -47,7 +42,7 @@ export const postLogin = (request: Transporter) => {
   //? email: string;
   //? address: string;
   return axios
-    .post<ResponseTransporter>("/transporter-service/login", { body: request })
+    .post<ResponseTransporter>("/transporter-service/login", request)
     .then((response) => {
       console.log("postLogin response", response);
       return response;

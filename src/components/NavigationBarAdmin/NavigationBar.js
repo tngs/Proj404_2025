@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/actions/account";
+import { adminLogout } from "../../redux/actions/admin";
 import NavButton from "../Button/NavButton"
 
 const NavigationBar = () => {
@@ -9,7 +9,7 @@ const NavigationBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const handleLogout = () => {
-    dispatch(logout());
+    adminLogout();
     navigate("/");
   };
   const goToServices = () => {

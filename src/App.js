@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const account = useSelector((state) => state.account);
+  const admin = useSelector((state) => state?.admin);
   const ProtectedRoutes = ({ path, element, condition }) => {
     return condition ? <Route path={path} element={element} /> : null;
   };
@@ -30,7 +31,7 @@ function App() {
       {ProtectedRoutes({
         path: "/admin/*",
         element: <AdminRoute />,
-        condition: account.loggedIn && account.role === "admin",
+        condition: admin,
       })}
       <Route path="/admin-login" element={<AdminLoginPage />} />
       <Route path="/*" element={<UserRoute />} />

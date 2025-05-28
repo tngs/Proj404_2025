@@ -8,6 +8,7 @@ import {
 } from "../../redux/actions/account";
 import { ACCOUNT } from "../../redux/actions/types";
 import { toast } from "react-toastify";
+import { tokenSave } from "../../redux/actions/token";
 
 const LoginPage = () => {
   const location = useLocation();
@@ -42,12 +43,14 @@ const LoginPage = () => {
           if (type === ACCOUNT.SIGNUP_SUCCESS) {
             toast.success(message);
           } else {
-            toast.error(message);
+            toast.error(message.message);
           }
         }
-      );
+      ).catch((error) => {
+        toast.error(error.message);
+      });
     } else {
-      dispatch(loginAction({ username, password, role })).then((result) => {
+      dispatch(loginAction({ email, password, role })).then((result) => {
         const { type, message } = result;
         if (type === ACCOUNT.LOGIN_SUCCESS) {
           toast.success(message);
@@ -61,6 +64,9 @@ const LoginPage = () => {
         } else {
           toast.error(message);
         }
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
     }
   };
