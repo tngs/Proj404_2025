@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./ServicePage.module.css";
-import { getByServiceId } from "../../../utilities/URLs/transport-service";
 import {
+  getByServiceId,
+  postMakingWeightRange,
   postModifyService,
   getDeleteServiceByServiceId,
+  getDeleteWeightRange,
+  postUpdateWeightRange,
 } from "../../../utilities/URLs/transport-service";
-import { postMakingWeightRange } from "../../../utilities/URLs/transport-service";
 import { toast } from "react-toastify";
+import { deleteIcon, editIcon } from "../../../components/icon";
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -108,6 +111,45 @@ const ServicePage = () => {
       ...prev,
       [field]: value,
     }));
+  };
+  const handleWeightDelete = (weight) => {
+    const { id } = weight;
+    getDeleteWeightRange(id)
+      .then((obj) => {
+        console.log(obj);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleWeightEdit = (weight) => {
+    console.log(weight);
+    postUpdateWeightRange(weight.id, weight).then(obj => {
+
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    // getDeleteWeightRange(id)
+    //   .then((obj) => {
+    //     console.log(obj);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+  const handleWeighValChange = (_name, id, val) => {
+    let wr = service.responseWeightRanges;
+    wr.map((e) => {
+      if (e.id == id) {
+        e[_name] = val;
+      }
+      return e;
+    });
+    setService((prev) => {
+      return { ...prev, responseWeightRanges: wr };
+    });
+    // console.log({_name, id, val});
   };
   return (
     <div className={styles.page}>
@@ -221,6 +263,24 @@ const ServicePage = () => {
                       >
                         Price
                       </th>
+                      <th
+                        style={{
+                          padding: "12px",
+                          textAlign: "left",
+                          borderBottom: "2px solid #ddd",
+                        }}
+                      >
+                        Edit
+                      </th>
+                      <th
+                        style={{
+                          padding: "12px",
+                          textAlign: "left",
+                          borderBottom: "2px solid #ddd",
+                        }}
+                      >
+                        Delete
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -229,9 +289,70 @@ const ServicePage = () => {
                         key={index}
                         style={{ borderBottom: "1px solid #eee" }}
                       >
-                        <td style={{ padding: "12px" }}>{range.minWeight}</td>
-                        <td style={{ padding: "12px" }}>{range.maxWeight}</td>
-                        <td style={{ padding: "12px" }}>{range.price}</td>
+                        <td style={{ padding: "12px" }}>
+                          <input
+                            className={styles.input}
+                            style={{ width: "auto" }}
+                            placeholder="Min Weight"
+                            value={range.minWeight}
+                            name="minWeight"
+                            onChange={(e) => {
+                              handleWeighValChange(
+                                e.target.name,
+                                range.id,
+                                e.target.value
+                              );
+                            }}
+                          />
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <input
+                            className={styles.input}
+                            style={{ width: "auto" }}
+                            placeholder="Max Weight"
+                            value={range.maxWeight}
+                            name="maxWeight"
+                            onChange={(e) => {
+                              handleWeighValChange(
+                                e.target.name,
+                                range.id,
+                                e.target.value
+                              );
+                            }}
+                          />
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <input
+                            className={styles.input}
+                            style={{ width: "auto" }}
+                            placeholder="Price"
+                            value={range.price}
+                            name="price"
+                            onChange={(e) => {
+                              handleWeighValChange(
+                                e.target.name,
+                                range.id,
+                                e.target.value
+                              );
+                            }}
+                          />
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <button
+                            onClick={() => handleWeightEdit(range)}
+                            style={{ border: 0 }}
+                          >
+                            <img className={styles.img} src={editIcon} />
+                          </button>
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <button
+                            onClick={() => handleWeightDelete(range)}
+                            style={{ border: 0 }}
+                          >
+                            <img className={styles.img} src={deleteIcon} />
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -251,7 +372,6 @@ const ServicePage = () => {
                 >
                   <input
                     className={styles.input}
-                    type="number"
                     placeholder="Min Weight"
                     onChange={(e) =>
                       handleWeightChange("minWeight", e.target.value)
@@ -259,7 +379,6 @@ const ServicePage = () => {
                   />
                   <input
                     className={styles.input}
-                    type="number"
                     placeholder="Max Weight"
                     onChange={(e) =>
                       handleWeightChange("maxWeight", e.target.value)
@@ -267,7 +386,6 @@ const ServicePage = () => {
                   />
                   <input
                     className={styles.input}
-                    type="number"
                     placeholder="Price"
                     onChange={(e) =>
                       handleWeightChange("price", e.target.value)

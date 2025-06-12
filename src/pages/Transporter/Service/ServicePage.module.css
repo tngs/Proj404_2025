@@ -182,3 +182,8 @@
   transition: border 0.2s ease;
   width: 100%;
 }
+
+.img {
+  height: 40px;
+  width: 40px;
+}

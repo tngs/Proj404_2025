@@ -144,14 +144,11 @@ export const getByServiceName = (serviceName) => {
 export const getByTransporterId = () => {
   const token = store.getState()?.account?.token;
   return axios
-    .get<ResponseTransportService[]>(
-      "/transport-service/byTransporterId",
-      {
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
-    )
+    .get<ResponseTransportService[]>("/transport-service/byTransporterId", {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
     .then((response) => {
       console.log("getByTransporterId response", response);
       return response;
@@ -169,7 +166,6 @@ export const postModifyService = (
   serviceId,
   request: RequestTransportServiceByTransporterId
 ) => {
-  
   const token = store.getState()?.account?.token;
   return axios
     .post<ResponseTransportService>(
@@ -198,8 +194,45 @@ export const postModifyService = (
 export const getDeleteServiceByServiceId = (serviceId) => {
   const token = store.getState()?.account?.token;
   return axios
-    .get<String>(
-      "/transport-service/deleteServiceByServiceId/" + serviceId,
+    .get<String>("/transport-service/deleteServiceByServiceId/" + serviceId, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => {
+      console.log("getDeleteServiceByServiceId response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("getDeleteServiceByServiceId error", error);
+      throw error;
+    });
+};
+
+export const getDeleteWeightRange = (weightRangeId) => {
+  const token = store.getState()?.account?.token;
+  return axios
+    .get<String>("/transport-service/deleteWeightRange/" + weightRangeId, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => {
+      console.log("getDeleteWeightRange response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("getDeleteWeightRange error", error);
+      throw error;
+    });
+};
+
+export const postUpdateWeightRange = (weightRangeId, body) => {
+  const token = store.getState()?.account?.token;
+  return axios
+    .post<String>(
+      "/transport-service/updateWeightRange/" + weightRangeId,
+      body,
       {
         headers: {
           Authorization: `${token}`,
@@ -207,11 +240,11 @@ export const getDeleteServiceByServiceId = (serviceId) => {
       }
     )
     .then((response) => {
-      console.log("getDeleteServiceByServiceId response", response);
+      console.log("postUpdateWeightRange response", response);
       return response;
     })
     .catch((error) => {
-      console.log("getDeleteServiceByServiceId error", error);
+      console.log("postUpdateWeightRange error", error);
       throw error;
     });
 };
