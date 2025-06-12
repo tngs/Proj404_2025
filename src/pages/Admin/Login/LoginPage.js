@@ -36,6 +36,7 @@ const LoginForm = () => {
     });
   };
   const loginAdmin = (email, password) => {
+    console.log("loginAdmin");
     postLogin({email, password}).then(obj => {
       dispatch(adminLogin(obj.data))
       navigate("/admin");

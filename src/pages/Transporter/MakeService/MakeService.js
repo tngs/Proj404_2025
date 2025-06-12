@@ -29,7 +29,11 @@ const MakeService = () => {
         toast.success("Service created");
       })
       .catch((err) => {
-        toast.error(err.message);
+        if (err.status === 500) {
+          toast.error("Service already exists");
+        } else {
+          toast.error(err.message);
+        }
       });
   };
   return (

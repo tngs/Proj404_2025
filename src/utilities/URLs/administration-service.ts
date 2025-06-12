@@ -6,6 +6,14 @@ import {
   ResponsePermit,
   RequestLogin,
 } from "./dataTypes";
+import { store } from "../../redux/reducers";
+
+// Add store state type
+interface StoreState {
+  account: any;
+  token: any;
+  admin?: { token: string };
+}
 
 //DONE USED
 //* admin signup
@@ -51,9 +59,15 @@ export const getPermitAdministrator = (
 export const getPermitServiceByAdministrator = (
   serviceId,//? serviceId: 111 XXXXXXXX  admin@gmai.com111 VVVVVVVVVV
 ) => {
+  const token = store.getState()?.account?.token;
   return  axios
     .get<ResponseService>(
-      `/administration-service/permitService/${serviceId}/byAdministrator/`
+      `/administration-service/permitService/${serviceId}/byAdministrator`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("getPermitServiceByAdministrator response", response);
@@ -69,14 +83,15 @@ export const getPermitServiceByAdministrator = (
 //TODO make login
 //*/administration-service/login  - required object: RequestLogin
 export const postLogin = (request: RequestLogin) => {
+  console.log("postLogin");
   return axios
     .post<ResponseAdministrator>("/administration-service/login", request)
     .then((response) => {
-      console.log("postMakeAdministrator response", response);
+      console.log("postLogin response", response);
       return response;
     })
     .catch((error) => {
-      console.log("postMakeAdministrator error", error);
+      console.log("postLogin error", error);
       throw error;
     });
 };
@@ -84,9 +99,15 @@ export const postLogin = (request: RequestLogin) => {
 //DONE
 //*admin page gets the services
 export const getGetServicesByEmail = () => {
+  const token = store.getState()?.account?.token;
   return axios
     .get<ResponseService[]>(
-      `/administration-service/getServicesByEmail`
+      `/administration-service/getServicesByEmail`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("getGetServicesByEmail response", response);

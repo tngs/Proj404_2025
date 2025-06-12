@@ -71,7 +71,6 @@ export const getByServiceId = (id) => {
     });
 };
 
-//DONE implemented but WHY?????????
 //* transporter make service
 //TODO make MakeService Page
 export const getMakingService = (request) => {
@@ -98,7 +97,6 @@ export const getMakingService = (request) => {
 
 //transportertransporter
 //* transporter making a weight range in service
-//TODO add a button besides the weight that send the data
 export const postMakingWeightRange = (
   serviceId,
   request: RequestWeightRange
@@ -171,10 +169,17 @@ export const postModifyService = (
   serviceId,
   request: RequestTransportServiceByTransporterId
 ) => {
+  
+  const token = store.getState()?.account?.token;
   return axios
     .post<ResponseTransportService>(
       "/transport-service/modifyService/" + serviceId,
-      request
+      request,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("postModifyService response", response);
@@ -191,8 +196,16 @@ export const postModifyService = (
 //* on edit mode
 //TODO: add delete button
 export const getDeleteServiceByServiceId = (serviceId) => {
+  const token = store.getState()?.account?.token;
   return axios
-    .get<String>("/transport-service/deleteServiceByServiceId/" + serviceId)
+    .get<String>(
+      "/transport-service/deleteServiceByServiceId/" + serviceId,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    )
     .then((response) => {
       console.log("getDeleteServiceByServiceId response", response);
       return response;

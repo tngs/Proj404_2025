@@ -3,10 +3,9 @@ import {ResponseServiceApplyForPayment,PaymentCallbackRequest} from "./dataTypes
 
 //DONE
 //* user paying the unpayed order
-//TODO make pay button
 export const getPayServiceByApplyId = (applyId) => {
   return axios
-    .get<ResponseServiceApplyForPayment>("/payment-service/payment-service/payServiceByApplyId/" + applyId)
+    .get<ResponseServiceApplyForPayment>("/payment-service/payServiceByApplyId/" + applyId)
     .then((response) => {
       
       console.log("getPayServiceByApplyId response", response);

@@ -23,7 +23,7 @@ const PaidOrders = () => {
       <div className={styles.container}>
         <div className={styles.grid}>
           {orders.map((order) => (
-            <OrderCard key={order.orderId} {...order}/>
+            <OrderCard key={order.serviceApplyId} orderDetail={order} paid={false}/>
           ))}
         </div>
       </div>

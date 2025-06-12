@@ -1,4 +1,4 @@
-import { ACCOUNT } from "../actions/types";
+import { ACCOUNT, ADMIN } from "../actions/types";
 
 const DEFAULT_ACCOUNT = {
   loggedIn: false,
@@ -57,6 +57,14 @@ const account = (state = DEFAULT_ACCOUNT, action) => {
       return {
         ...DEFAULT_ACCOUNT,
         message: "Logged out",
+      }
+    case ADMIN.LOGIN:
+      return {
+        ...DEFAULT_ACCOUNT,
+        message: "Logged in as admin",
+        role: "admin",
+        ...action.payload,
+        loggedIn: true,
       };
     default:
       return state;

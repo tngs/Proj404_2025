@@ -42,6 +42,7 @@ const LoginPage = () => {
           console.log("result", result);
           if (type === ACCOUNT.SIGNUP_SUCCESS) {
             toast.success(message);
+            setIsSignupMode(false);
           } else {
             toast.error(message.message);
           }

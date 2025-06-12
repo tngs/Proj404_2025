@@ -1,6 +1,7 @@
 import axios from "../../axios";
 import { TransportUser, ResponseTransportUser } from "./dataTypes";
 import { tokenSave } from "../../redux/actions/token";
+import { store } from "../../redux/reducers";
 
 //DONE
 //*login
@@ -35,8 +36,15 @@ export const postTransportUser = (body: TransportUser) => {
 //DONE
 //*admin gets all users
 export const getTransportUser = () => {
+  const token = store.getState()?.account?.token;
   return axios
-    .get<ResponseTransportUser[]>("/transport-user-service/transport-user")
+    .get<ResponseTransportUser[]>("/transport-user-service/transport-user/checkByAdministrator",
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    )
     .then((response) => {
       console.log("getTransportUser response", response);
       return response;

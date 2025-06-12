@@ -1,17 +1,28 @@
 import axios from "../../axios";
+import { store } from "../../redux/reducers";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
+
 
 //DONE
 //*order                  //Order by user//
 export const postApplyByTransportUser = (
   serviceId,
   weight,
-  body: RequestServiceApply
+  body
 ) => {
+  console.log(body);
+  const token = store.getState()?.account?.token;
+  const localDate = new Date().toISOString().split('T')[0];
+  // console.log({departure: body.departure, destination: body.destination, description: body.description, date: localDate});
   return axios
     .post<ResponseServiceApply>(
-      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`, //?????????
-      body
+      `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`,
+      {departure: body.departure, destination: body.destination, description: body.description, date: localDate},
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("postApplyByTransportUser");
@@ -25,9 +36,15 @@ export const postApplyByTransportUser = (
 //DONE
 //*get unpaid order list //user gets the unpaid order list
 export const getGetUnpaidByTransportUser = () => {
+  const token = store.getState()?.account?.token;
   return axios
     .get<ResponseServiceApply[]>(
-      "/transport-apply-service/getUnpaidByTransportUser"
+      "/transport-apply-service/getUnpaidByTransportUser",
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("getGetUnpaidByTransportUser");
@@ -91,8 +108,13 @@ export const getSetCompleteByApplyId = (applyId) => {
 //DONE
 //*                     user discards the unpaid order
 export const getDeleteByApplyId = (applyId) => {
+  const token = store.getState()?.account?.token;
   return axios
-    .get<String>("/transport-apply-service/deleteByApplyId/" + applyId)
+    .get<String>("/transport-apply-service/deleteByApplyId/" + applyId, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
     .then((response) => {
       console.log("getDeleteByApplyId");
       return response;
@@ -106,10 +128,16 @@ export const getDeleteByApplyId = (applyId) => {
 //DONE
 //*                               user modify unpaid order
 export const postUpdateByApplyId = (applyId, body: RequestServiceApply) => {
+  const token = store.getState()?.account?.token;
   return axios
     .post<ResponseServiceApply>(
       "/transport-apply-service/updateByApplyId/" + applyId,
-      body
+      body,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("postUpdateByApplyId");

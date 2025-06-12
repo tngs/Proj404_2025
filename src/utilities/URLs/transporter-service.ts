@@ -1,4 +1,5 @@
 import axios from "../../axios";
+import { store } from "../../redux/reducers";
 import { Transporter, ResponseTransporter } from "./dataTypes";
 
 //DONE
@@ -20,9 +21,15 @@ export const postTransporter = (transporter: Transporter) => {
 //DONE
 //* show all transporters to admin
 export const getTransporter = () => {
+  const token = store.getState()?.account?.token;
   return axios
     .get<ResponseTransporter[]>(
-      `/transporter-service/transporter`
+      `/transporter-service/transporter/checkByAdministrator`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       console.log("getTransporter response", response);

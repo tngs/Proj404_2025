@@ -6,26 +6,19 @@ import { toast } from "react-toastify";
 
 const OrderCard = (props) => {
   const navigate = useNavigate();
-  const { orderId, serviceId, userId, paid, detailed } = props;
-  const order = detailed;
+  const orderDetail = props.orderDetail;
+  const paid = props.paid;
   const handleClick = () => {
     //TODO change the arguments
-    navigate(`/orderDetail/${orderId}`, { state: { order: props } });
+    navigate(`/orderDetail/${orderDetail.serviceApplyId}`, { state: { orderDetail, paid } });
   };
-  //? departure:"Daegu"
-  //? description:"Gift box for event"
-  //? destination:"Jeonju"
-  //? serviceName:"RoyalPost"
-  //? transportUserName:"royal_jang"
-  //? transporterName:"PostPlus"
-  //? weightRange:"0g - 300g"
   const payHandler = () => {
-    toast.info(`Paying ${order.serviceName}...`);
+    // console.log(orderDetail);
+    navigate("/payment", {state: {...orderDetail}})
   };
   const deleteHandler = () => {
-    getDeleteByApplyId(orderId)
+    getDeleteByApplyId(orderDetail.serviceApplyId)
       .then((res) => {
-        console.log("deleted", res);
         toast.success("Order deleted successfully");
         navigate(0)
       })
@@ -34,16 +27,16 @@ const OrderCard = (props) => {
   return (
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.details}>
-        <h2 className={styles.title}>{order.serviceName}</h2>
-        <p className={styles.description}>{order.serviceDescription}</p>
+        <h2 className={styles.title}>{orderDetail.serviceName}</h2>
+        <p className={styles.description}>{orderDetail.description}</p>
         <p>
-          <strong>From:</strong> {order.departure}
+          <strong>From:</strong> {orderDetail.departure}
         </p>
         <p>
-          <strong>To:</strong> {order.destination}
+          <strong>To:</strong> {orderDetail.destination}
         </p>
         <p>
-          <strong>Transporter:</strong> {order.transporterName}
+          <strong>Transporter:</strong> {orderDetail.transporterName}
         </p>
       </div>
       {!paid && (

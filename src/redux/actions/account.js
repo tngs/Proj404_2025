@@ -1,4 +1,4 @@
-import { ACCOUNT } from "./types";
+import { ACCOUNT, ADMIN } from "./types";
 import { persistor } from "../reducers";
 
 import {
@@ -51,36 +51,29 @@ export const signup = ({ username, password, email, address, role }) => {
       return transSignup({ username, password, email, address })
         .then((obj) => {
           if (obj.status === 201) {
-            dispatch({
+            const success = {
               type: ACCOUNT.SIGNUP_SUCCESS,
               payload: {...obj.data, role: role},
               message: "User created successfully",
-            });
-            return {
-              type: ACCOUNT.SIGNUP_SUCCESS,
-              payload: {...obj.data, role: role},
-              message: "User created successfully",
-            };
+            }
+            dispatch(success);
+            return success;
           } else {
-            dispatch({
+            const unsuccess = {
               type: ACCOUNT.SIGNUP_UNSUCCESS,
               message: "User not created",
-            });
-            return {
-              type: ACCOUNT.SIGNUP_UNSUCCESS,
-              message: "User not created",
-            };
+            }
+            dispatch(unsuccess);
+            return unsuccess;
           }
         })
         .catch((err) => {
-          dispatch({
+          const error = {
             type: ACCOUNT.SIGNUP_ERROR,
             message: err,
-          });
-          return {
-            type: ACCOUNT.SIGNUP_ERROR,
-            message: err,
-          };
+          }
+          dispatch(error);
+          return error;
         });
     } else {
       dispatch({
@@ -199,3 +192,15 @@ export const logout = () => {
     };
   };
 };
+
+export const adminLogin = (administrator) => {
+  window.storeToAdmin();
+  return (dispatch) => {
+    dispatch({
+      type: ADMIN.LOGIN,
+      payload: administrator,
+    });
+  };
+};
+
+//admin signup

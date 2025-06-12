@@ -13,38 +13,18 @@ const OrderDetailPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const paid = location.state.paid ? location.state.paid : false;
 
-  const initialOrder = location.state?.order?.detailed || {};
-  const [orderDetail, setOrderDetail] = useState(initialOrder);
-  let { orderId, paid, serviceId, userId } = location.state?.order || {};
-
-  const [departure, setDeparture] = useState(initialOrder.departure || "");
-  const [destination, setDestination] = useState(
-    initialOrder.destination || ""
-  );
-  const [description, setDescription] = useState(
-    initialOrder.serviceDescription || initialOrder.description || ""
-  );
-  const [transporterName, setTransporterName] = useState(
-    initialOrder.transporterName || ""
-  );
-  const [weight, setWeight] = useState(location.state?.weight || "0g to 100g");
+  const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
   const [editMode, setEditMode] = useState(false);
+
   const [loader, setLoader] = useState(
     <div className={styles.message}>Order loading...</div>
   );
-
   useEffect(() => {
     getGetByApplyId({ applyId: id })
       .then((obj) => {
-        ({ orderId, paid, serviceId, userId } = obj.data);
-        setOrderDetail(obj.data.detailed);
-        setDeparture(obj.data.detailed.departure);
-        setDestination(obj.data.detailed.destination);
-        setDescription(
-          obj.data.detailed.serviceDescription || obj.data.detailed.description
-        );
-        setTransporterName(obj.data.detailed.transporterName);
+        setOrderDetail(obj.data);
       })
       .catch((err) => {
         setLoader(<div className={styles.message}>Something went wrong</div>);
@@ -56,7 +36,15 @@ const OrderDetailPage = () => {
     return loader;
   }
 
+  const handleInputChange = (field, value) => {
+    setOrderDetail(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   const handlePay = () => {
+    navigate("/payment", {state: {...orderDetail}})
     toast.info("Paying: " + id);
   };
 
@@ -73,14 +61,11 @@ const OrderDetailPage = () => {
 
   const handleEdit = () => {
     if (!paid && editMode) {
-      postUpdateByApplyId(id, {
-        departure,
-        destination,
-        description,
-        transporterName,
-      })
-        .then(() => {
-          toast.success("Updated: " + id);
+      postUpdateByApplyId(id, orderDetail)
+        .then((obj) => {
+          toast.success("Updated successfully!");
+          console.log(obj.data);
+          // setOrderDetail(obj.data);
         })
         .catch((err) => {
           toast.error(err.message);
@@ -88,8 +73,6 @@ const OrderDetailPage = () => {
     }
     setEditMode(!editMode);
   };
-
-  const handleInputChange = (setter) => (e) => setter(e.target.value);
 
   return (
     <div className={styles.page}>
@@ -99,63 +82,112 @@ const OrderDetailPage = () => {
             {orderDetail.serviceName || orderDetail.title}
           </h1>
           <p className={styles.companyName}>
-            Transported by {transporterName || orderDetail.companyName}
+            Transported by {orderDetail.companyName}
           </p>
         </div>
       </div>
 
       <div className={styles.details}>
-        <h2>Description</h2>
+        <h2>Item Description</h2>
         {editMode ? (
           <textarea
-            value={description}
-            onChange={handleInputChange(setDescription)}
             className={styles.selectInput}
+            value={orderDetail.description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            rows={4}
+            style={{ width: '100%', marginBottom: '24px', resize: 'vertical' }}
           />
         ) : (
-          <p>{description}</p>
+          <p>{orderDetail.description}</p>
         )}
 
         <div className={styles.infoGrid}>
           <div className={styles.infoBox}>
-            <h4>Departures</h4>
+            <h4>Departure</h4>
             {editMode ? (
               <input
-                value={departure}
-                onChange={handleInputChange(setDeparture)}
+                type="text"
                 className={styles.selectInput}
+                value={orderDetail.departure}
+                onChange={(e) => handleInputChange('departure', e.target.value)}
               />
             ) : (
-              <p>{departure}</p>
+              <p>{orderDetail.departure}</p>
             )}
           </div>
 
           <div className={styles.infoBox}>
-            <h4>Destinations</h4>
+            <h4>Destination</h4>
             {editMode ? (
               <input
-                value={destination}
-                onChange={handleInputChange(setDestination)}
+                type="text"
                 className={styles.selectInput}
+                value={orderDetail.destination}
+                onChange={(e) => handleInputChange('destination', e.target.value)}
               />
             ) : (
-              <p>{destination}</p>
+              <p>{orderDetail.destination}</p>
             )}
           </div>
 
           <div className={styles.infoBox}>
             <h4>Transporter</h4>
-            {editMode ? (
-              <input
-                value={transporterName}
-                onChange={handleInputChange(setTransporterName)}
-                className={styles.selectInput}
-              />
-            ) : (
-              <p>{transporterName}</p>
-            )}
+            <p>{orderDetail.transporterName}</p>
           </div>
+          <div
+            className={styles.infoBox}
+            style={{ width: "100%", marginTop: "20px", gridColumn: "1 / -1" }}
+          >
+            <h4 style={{ marginBottom: "12px" }}>Weight Ranges</h4>
 
+            {/* Display existing weight ranges as table */}
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                marginBottom: "20px",
+              }}
+            >
+              <thead>
+                <tr style={{ backgroundColor: "#f5f5f5" }}>
+                  <th
+                    style={{
+                      padding: "12px",
+                      textAlign: "left",
+                      borderBottom: "2px solid #ddd",
+                    }}
+                  >
+                    Min Weight
+                  </th>
+                  <th
+                    style={{
+                      padding: "12px",
+                      textAlign: "left",
+                      borderBottom: "2px solid #ddd",
+                    }}
+                  >
+                    Max Weight
+                  </th>
+                  <th
+                    style={{
+                      padding: "12px",
+                      textAlign: "left",
+                      borderBottom: "2px solid #ddd",
+                    }}
+                  >
+                    Price
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr style={{ borderBottom: "1px solid #eee" }}>
+                    <td style={{ padding: "12px" }}>{orderDetail.weightRange.minWeight}</td>
+                    <td style={{ padding: "12px" }}>{orderDetail.weightRange.maxWeight}</td>
+                    <td style={{ padding: "12px" }}>{orderDetail.weightRange.price}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
           {!paid && (
             <div className={styles.infoBox}>
               <h4>Edit</h4>

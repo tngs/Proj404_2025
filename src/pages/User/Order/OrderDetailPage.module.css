@@ -94,18 +94,30 @@
 /* Input and textarea styles for edit mode */
 .selectInput {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #ccd6e0;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid #e1e5eb;
+  border-radius: 6px;
   font-size: 15px;
-  background-color: #ffffff;
-  transition: border 0.2s ease;
+  color: #2c3e50;
+  background-color: white;
+  transition: all 0.3s ease;
+  margin-top: 8px;
 }
 
 .selectInput:focus {
   outline: none;
   border-color: #0077cc;
-  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.1);
+}
+
+.selectInput::placeholder {
+  color: #a0aec0;
+}
+
+textarea.selectInput {
+  min-height: 100px;
+  line-height: 1.6;
+  resize: vertical;
 }
 
 /* Fallback message */

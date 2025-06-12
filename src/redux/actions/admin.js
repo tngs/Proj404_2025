@@ -1,17 +1,14 @@
-import { ADMIN } from "./types";
+import { ADMIN, ACCOUNT } from "./types";
 import { persistor } from "../reducers";
 
 export const adminLogin = (administrator) => {
-  window.storeToAdmin();
   return (dispatch) => {
-    dispatch({
-      type: "ADMIN_LOGIN",
+    const action = {
+      type: ADMIN.LOGIN,
       payload: administrator,
-    });
-    return {
-      type: "ADMIN_LOGIN",
-      payload: administrator,
-    };
+    }
+    dispatch(action);
+    return action;
   };
 };
 

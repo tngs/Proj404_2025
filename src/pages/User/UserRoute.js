@@ -12,19 +12,29 @@ import OrderDetailPage from "./Order/OrderDetailPage";
 import PageNotFound from "../PageNotFound";
 import PaidOrders from "./Orders/PaidOrders/PaidOrders";
 import UnpaidOrders from "./Orders/UnpaidOrders/UnpaidOrders";
+import PaymentPage from "./Payment/PaymentPage";
+import PaymentDetailPage from "./Payment/PaymentDetailPage";
+import { useSelector } from "react-redux";
+
 const MainRoutes = () => {
+  const account = useSelector((state) => state.account);
   return (
     <>
       <NavigationBarUser />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/paid-orders" element={<PaidOrders />} />
-        <Route path="/unpaid-orders" element={<UnpaidOrders />} />
         <Route path="/service/:id" element={<ServicePage />} />
-        <Route path="/order/:id" element={<OrderPage />} />
-        <Route path="/orderDetail/:id" element={<OrderDetailPage />} />
-
         <Route path="/pnf" element={<PageNotFound />} />
+        {account.loggedIn && account.role === "user" && (
+          <>
+            <Route path="/paid-orders" element={<PaidOrders />} />
+            <Route path="/unpaid-orders" element={<UnpaidOrders />} />
+            <Route path="/order/:id" element={<OrderPage />} />
+            <Route path="/orderDetail/:id" element={<OrderDetailPage />} />
+          </>
+        )}
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment/detail/:id" element={<PaymentDetailPage />} />}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
