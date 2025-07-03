@@ -21,11 +21,15 @@ const NavigationBar = () => {
   const goToTransporters = () => {
     navigate("/admin/transporters");
   };
+  const goToPermit = () => {
+    navigate("/admin/permit");
+  };
   return (
     <div className={styles.navbar}>
       {location.pathname != "/admin" && location.pathname != "/admin/" && <NavButton onClick={goToServices}>Services</NavButton>}
       {location.pathname != "/admin/users" && <NavButton onClick={goToUsers}>Users</NavButton>}
       {location.pathname != "/admin/transporters" && <NavButton onClick={goToTransporters}>Transporters</NavButton>}
+      {location.pathname != "/admin/permit" && <NavButton onClick={goToPermit}>Permit</NavButton>}
 
       <div className={styles.spacer} />
 

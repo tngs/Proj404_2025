@@ -18,11 +18,11 @@ const LoginPage = () => {
     location?.state?.isSignUp || false
   );
   const [formData, setFormData] = useState({
-    email: "123@gmail.com",
-    username: "123",
-    address: "123",
-    password: "123",
-    confirmPassword: "123",
+    email: "",
+    username: "",
+    address: "",
+    password: "",
+    confirmPassword: "",
     role: location?.state?.role || "user",
   });
 
@@ -36,39 +36,44 @@ const LoginPage = () => {
       formData;
 
     if (isSignupMode) {
-      dispatch(signupAction({ username, password, role, email, address })).then(
-        (result) => {
-          const { type, message } = result;
-          console.log("result", result);
-          if (type === ACCOUNT.SIGNUP_SUCCESS) {
-            toast.success(message);
-            setIsSignupMode(false);
-          } else {
-            toast.error(message.message);
-          }
-        }
-      ).catch((error) => {
-        toast.error(error.message);
-      });
+      if (password != confirmPassword) {
+        toast.info("passwords do not match");
+      } else
+        dispatch(signupAction({ username, password, role, email, address }))
+          .then((result) => {
+            const { type, message } = result;
+            console.log("result", result);
+            if (type === ACCOUNT.SIGNUP_SUCCESS) {
+              toast.success(message);
+              setIsSignupMode(false);
+            } else {
+              toast.error(message.message);
+            }
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
     } else {
-      dispatch(loginAction({ email, password, role })).then((result) => {
-        const { type, message } = result;
-        if (type === ACCOUNT.LOGIN_SUCCESS) {
-          toast.success(message);
-          if (role === "user") {
-            navigate(`/`);
-          } else if (role === "transporter") {
-            navigate(`/transporter`);
+      dispatch(loginAction({ email, password, role }))
+        .then((result) => {
+          const { type, message } = result;
+          if (type === ACCOUNT.LOGIN_SUCCESS) {
+            toast.success(message);
+            if (role === "user") {
+              navigate(`/`);
+            } else if (role === "transporter") {
+              navigate(`/transporter`);
+            } else {
+              toast.error(message);
+            }
           } else {
             toast.error(message);
           }
-        } else {
-          toast.error(message);
-        }
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.message);
+        });
     }
   };
 
@@ -117,7 +122,7 @@ const LoginPage = () => {
               </div>
               <div className={styles.inputGroup}>
                 <input
-                  placeholder="Address"
+                  placeholder="Company Address"
                   type="text"
                   name="address"
                   value={formData.address}

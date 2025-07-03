@@ -1,28 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from './Orders.module.css'
-import services from "../../../servicesDB.json";
 import { useSelector } from "react-redux";
-import { getGetPaidByTransportUser } from "../../../utilities/URLs/transport-apply-service";
+import { getGetAppliesByTransporter } from "../../../utilities/URLs/transport-apply-service";
 import ServiceCardWithComplete from '../../../components/ServiceCardWithComplete/ServiceCardWithComplete'
 
 const Orders = () => {
+  const [paidOrders,setOrders] = useState([])
   const user = useSelector((state) => state.account.user);
   useEffect(() => {
-    getGetPaidByTransportUser().then((obj) => console.log("obj", obj));
+    getGetAppliesByTransporter().then((obj) => setOrders(obj.data));
   }, []);
-
-  console.log("user", user);
-  console.log("services", services);
-  const filteredServices = services.filter(
-    (service) => service.transporterId === user.id
-  );
-  console.log("filteredServices", filteredServices);
+  const refresh = () => {
+    getGetAppliesByTransporter().then((obj) => setOrders(obj.data));
+  }
+  console.log(paidOrders);
   return (
     <div className={styles["container-centers-top"]}>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {services.map((service) => (
-            <ServiceCardWithComplete key={service.serviceId} service={service} />
+          {paidOrders.map((order) => (
+            <ServiceCardWithComplete key={order.serviceApplyId} order={order} refresh={refresh}/>
           ))}
         </div>
       </div>

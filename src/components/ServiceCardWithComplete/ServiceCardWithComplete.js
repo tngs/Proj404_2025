@@ -5,28 +5,28 @@ import { getSetCompleteByApplyId } from "../../utilities/URLs/transport-apply-se
 
 const ServiceCardWithComplete = (props) => {
   const navigate = useNavigate();
-  const { service } = props;
-  const handleClick = () => {
-    navigate(`./service/${service.serviceId}`, { state: { service } });
-  };
+  const { order } = props;
+  // const handleClick = () => {
+  //   navigate(`./service/${order.serviceId}`, { state: { service } });
+  // };
   const completeHandler = () => {
-    getSetCompleteByApplyId(props.service.serviceId).then((obj) =>
-      console.log("obj", obj)
+    getSetCompleteByApplyId(order.serviceApplyId).then((obj) =>
+      props.refresh()
     );
   };
   return (
     <div className={styles.card}>
       <div className={styles.details}>
-        <h2 className={styles.title}>{service.serviceName}</h2>
-        <p className={styles.description}>{service.serviceDescription}</p>
+        <h2 className={styles.title}>{order.serviceName}</h2>
+        <p className={styles.description}>{order.serviceDescription}</p>
         <p>
-          <strong>From:</strong> {service.departures}
+          <strong>From:</strong> {order.departure}
         </p>
         <p>
-          <strong>To:</strong> {service.destinations}
+          <strong>To:</strong> {order.destination}
         </p>
         <p>
-          <strong>Transporter:</strong> {service.transporterName}
+          <strong>Transporter:</strong> {order.transporterName}
         </p>
       </div>
       <div className={styles.buttonGroup}>
@@ -34,7 +34,7 @@ const ServiceCardWithComplete = (props) => {
           className={styles.permitBtn}
           onClick={(e) => {
             e.stopPropagation();
-            completeHandler(service.serviceId);
+            completeHandler(order.serviceId);
           }}
         >
           Complete

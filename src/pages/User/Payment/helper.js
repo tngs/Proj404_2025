@@ -28,7 +28,7 @@ const requestPay = async ({
     await loadIamportScript();
 
     const IMP = window.IMP;
-    IMP.init("imp25405264"); // Replace with your own imp key
+    IMP.init("imp25405264"); // *Replace with your own imp key
 
     IMP.request_pay(
       {
@@ -43,19 +43,50 @@ const requestPay = async ({
         buyer_addr: buyerAddr,
         buyer_postcode: buyerPostcode,
       },
-      function (rsp) {
+      (rsp) => {
         if (rsp.success) {
-          alert("call back!!: " + JSON.stringify(rsp));
+          /*
+          {//?/payment: paymentUid, applyUid
+          * "success": true,
+          * "imp_uid": "imp_291827799149",//?paymentUid
+          * "pay_method": "point",
+          * "merchant_uid": "704d47db-9eef-46ef-9877-1f5db20535d8",//?applyUid
+          * "name": "TransportServiceNo1",
+          * "paid_amount": 100,
+          * "currency": "KRW",
+          * "pg_provider": "html5_inicis",
+          * "pg_type": "payment",
+          * "pg_tid": "StdpayCARDINIpayTest20250616171814084928",
+          * "apply_num": "",
+          * "buyer_name": "buyer",
+          * "buyer_email": "buyer@gmail.com",
+          * "buyer_tel": "010-1234-5678",
+          * "buyer_addr": "buyerAddress",
+          * "buyer_postcode": "123-456",
+          * "custom_data": null,
+          * "status": "paid",
+          * "paid_at": 1750061894,
+          * "receipt_url": "https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayCARDINIpayTest20250616171814084928&noMethod=1",
+          * "card_name": null,
+          * "bank_name": null,
+          * "card_quota": 0,
+          * "card_number": "*********"
+        }
+    */
+          console.log(rsp);
           axios
-            .post("/payment", {
+            .post("/payment-service/payment", {
+              // imp_uid: rsp.imp_uid,
+              // ...rsp,
               payment_uid: rsp.imp_uid,
               apply_uid: rsp.merchant_uid,
             })
             .then((obj) => {
               console.log(obj);
-            });
+            })
+            .catch((err) => console.error(err));
         } else {
-          console.error("Payment failed:", rsp);
+          console.error(rsp);
           alert("Payment failed: " + JSON.stringify(rsp));
         }
       }

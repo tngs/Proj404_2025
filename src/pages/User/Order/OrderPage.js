@@ -110,7 +110,7 @@ const ServicePage = () => {
           <h4>Item Description</h4>
           <input
             type="text"
-            value={service.description || service.serviceDescription}
+            value={service.description}
             onChange={(e) =>
               setService({ ...service, description: e.target.value })
             }

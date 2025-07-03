@@ -187,6 +187,30 @@ export const postModifyService = (
     });
 };
 
+export const postModifyServiceContent = (
+  serviceId,
+  request: RequestTransportServiceByTransporterId
+) => {
+  const token = store.getState()?.account?.token;
+  return axios
+    .post<ResponseTransportService>(
+      "/transport-service/modifyServiceContent/" + serviceId,
+      request,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    )
+    .then((response) => {
+      console.log("postModifyService response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("postModifyService error", error);
+      throw error;
+    });
+};
 //DONE
 //* transporter: this is the delete service button in service/:id page
 //* on edit mode

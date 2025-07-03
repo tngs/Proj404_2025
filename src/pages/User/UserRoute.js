@@ -34,7 +34,7 @@ const MainRoutes = () => {
           </>
         )}
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/payment/detail/:id" element={<PaymentDetailPage />} />}
+        <Route path="/payment/detail/:id" element={<PaymentDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

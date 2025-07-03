@@ -4,13 +4,15 @@ import styles from "./ServicePage.module.css";
 import {
   getByServiceId,
   postMakingWeightRange,
-  postModifyService,
+  postModifyServiceContent,
   getDeleteServiceByServiceId,
   getDeleteWeightRange,
   postUpdateWeightRange,
 } from "../../../utilities/URLs/transport-service";
 import { toast } from "react-toastify";
 import { deleteIcon, editIcon } from "../../../components/icon";
+import { setStyle } from "framer-motion";
+import { filter } from "framer-motion/client";
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -30,6 +32,17 @@ const ServicePage = () => {
   useEffect(() => {
     getByServiceId(id)
       .then((obj) => {
+        /*
+         *{
+         *    "serviceId",
+         *    "serviceName",
+         *    "serviceDescription",
+         *    "departures",
+         *    "destinations",
+         *    "transporterName",
+         *    "transporterId",
+         *    "responseWeightRanges": []
+         *}*/
         setService(obj.data);
         if (obj.data) {
         } else {
@@ -57,13 +70,14 @@ const ServicePage = () => {
   };
   const handleEdit = () => {
     if (editMode) {
-      postModifyService(id, {
+      postModifyServiceContent(id, {
         serviceName: service.serviceName,
         serviceDescription: service.serviceDescription,
         departures: service.departures,
         destinations: service.destinations,
       })
         .then((obj) => {
+          //*same data
           toast.success("Service updated");
           obj.data.responseWeightRanges = service.responseWeightRanges;
           setService(obj.data);
@@ -88,7 +102,11 @@ const ServicePage = () => {
       .then((res) => {
         getByServiceId(id)
           .then((obj) => {
-            setService(obj.data);
+            const prev = service;
+            setService({
+              ...service,
+              responseWeightRanges: obj.data.responseWeightRanges,
+            });
             if (obj.data) {
             } else {
               setLoader(
@@ -113,10 +131,28 @@ const ServicePage = () => {
     }));
   };
   const handleWeightDelete = (weight) => {
-    const { id } = weight;
-    getDeleteWeightRange(id)
+    const w_id = weight.id;
+    getDeleteWeightRange(w_id)
       .then((obj) => {
-        console.log(obj);
+        getByServiceId(id)
+          .then((obj) => {
+            const prev = service;
+            setService({
+              ...service,
+              responseWeightRanges: obj.data.responseWeightRanges,
+            });
+            if (obj.data) {
+            } else {
+              setLoader(
+                <div className={styles.message}>Service not found</div>
+              );
+            }
+          })
+          .catch((err) => {
+            setLoader(
+              <div className={styles.message}>Something went wrong</div>
+            );
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -124,19 +160,31 @@ const ServicePage = () => {
   };
   const handleWeightEdit = (weight) => {
     console.log(weight);
-    postUpdateWeightRange(weight.id, weight).then(obj => {
-
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    // getDeleteWeightRange(id)
-    //   .then((obj) => {
-    //     console.log(obj);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    postUpdateWeightRange(weight.id, weight)
+      .then((obj) => {
+        getByServiceId(id)
+          .then((obj) => {
+            const prev = service;
+            setService({
+              ...service,
+              responseWeightRanges: obj.data.responseWeightRanges,
+            });
+            if (obj.data) {
+            } else {
+              setLoader(
+                <div className={styles.message}>Service not found</div>
+              );
+            }
+          })
+          .catch((err) => {
+            setLoader(
+              <div className={styles.message}>Something went wrong</div>
+            );
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleWeighValChange = (_name, id, val) => {
     let wr = service.responseWeightRanges;
@@ -396,6 +444,81 @@ const ServicePage = () => {
                 <button className={styles.button} onClick={handleAddRange}>
                   Add Weight Range
                 </button>
+              </div>
+            </div>
+          )}
+          {!editMode && (
+            <div style={{ gridColumn: "1 / -1" }}>
+              <div className={styles.infoBox} style={{ width: "100%" }}>
+                <h4 style={{ marginBottom: "12px" }}>Weight Ranges</h4>
+
+                {/* Display existing weight ranges as table */}
+                <table
+                  style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <thead>
+                    <tr style={{ backgroundColor: "#f5f5f5" }}>
+                      <th
+                        style={{
+                          padding: "12px",
+                          textAlign: "left",
+                          borderBottom: "2px solid #ddd",
+                        }}
+                      >
+                        Min Weight
+                      </th>
+                      <th
+                        style={{
+                          padding: "12px",
+                          textAlign: "left",
+                          borderBottom: "2px solid #ddd",
+                        }}
+                      >
+                        Max Weight
+                      </th>
+                      <th
+                        style={{
+                          padding: "12px",
+                          textAlign: "left",
+                          borderBottom: "2px solid #ddd",
+                        }}
+                      >
+                        Price
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {service.responseWeightRanges.map((range, index) => (
+                      <tr
+                        key={index}
+                        style={{ borderBottom: "1px solid #eee" }}
+                      >
+                        <td style={{ padding: "12px" }}>
+                          <text
+                            // className={styles.input}
+                            style={{ width: "auto" }}
+                          >{range.minWeight}</text>
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <text
+                            // className={styles.input}
+                            style={{ width: "auto" }}
+                          >{range.maxWeight}</text>
+                        </td>
+                        <td style={{ padding: "12px" }}>
+                          <text
+                            // className={styles.input}
+                            style={{ width: "auto" }}
+                          >{range.price}</text>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}

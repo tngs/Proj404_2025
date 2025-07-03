@@ -2,22 +2,22 @@ import axios from "../../axios";
 import { store } from "../../redux/reducers";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
 
-
 //DONE
 //*order                  //Order by user//
-export const postApplyByTransportUser = (
-  serviceId,
-  weight,
-  body
-) => {
+export const postApplyByTransportUser = (serviceId, weight, body) => {
   console.log(body);
   const token = store.getState()?.account?.token;
-  const localDate = new Date().toISOString().split('T')[0];
+  const localDate = new Date().toISOString().split("T")[0];
   // console.log({departure: body.departure, destination: body.destination, description: body.description, date: localDate});
   return axios
     .post<ResponseServiceApply>(
       `/transport-apply-service/${serviceId}/applyByTransportUser/option/${weight}`,
-      {departure: body.departure, destination: body.destination, description: body.description, date: localDate},
+      {
+        departure: body.departure,
+        destination: body.destination,
+        description: body.description,
+        date: localDate,
+      },
       {
         headers: {
           Authorization: `${token}`,
@@ -58,12 +58,18 @@ export const getGetUnpaidByTransportUser = () => {
 //DONE
 //*get paid order list //user gets the paid order list
 export const getGetPaidByTransportUser = () => {
+  const token = store.getState()?.account?.token;
   return axios
     .get<ResponseServiceApply[]>(
-      "/transport-apply-service/getPaidByTransportUser"
+      "/transport-apply-service/getPaidByTransportUser",
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
-      console.log("getGetPaidByTransportUser");
+      console.log("getGetPaidByTransportUser", response);
       return response;
     })
     .catch((error) => {
@@ -92,9 +98,14 @@ export const getGetByApplyId = ({ applyId }) => {
 //transportertransporter
 //*                     transporter reports completion
 export const getSetCompleteByApplyId = (applyId) => {
+  const token = store.getState()?.account?.token;
   //applyId
   return axios
-    .get<String>("/transport-apply-service/setCompleteByApplyId/" + applyId)
+    .get<String>("/transport-apply-service/setCompleteByApplyId/" + applyId, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
     .then((response) => {
       console.log("getSetCompleteByApplyId response", response);
       return response;
@@ -145,6 +156,24 @@ export const postUpdateByApplyId = (applyId, body: RequestServiceApply) => {
     })
     .catch((error) => {
       console.log("postUpdateByApplyId error", error);
+      throw error;
+    });
+};
+
+export const getGetAppliesByTransporter = () => {
+  const token = store.getState()?.account?.token;
+  return axios
+    .get(`/transport-apply-service/getAppliesByTransporter`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+    .then((response) => {
+      console.log("getGetAppliesByTransporter response", response);
+      return response;
+    })
+    .catch((error) => {
+      console.log("getGetAppliesByTransporter error", error);
       throw error;
     });
 };

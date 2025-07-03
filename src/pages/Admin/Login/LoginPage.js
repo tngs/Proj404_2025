@@ -27,23 +27,27 @@ const LoginForm = () => {
     username: "",
   });
   const createAdmin = (administratorName, email, password) => {
-    postMakeAdministrator({ administratorName, email, password }
-    ).then((obj) => {
-      toast.success("Administrator created successfully");
-      setIsSignupMode(false);
-    }).catch((err) => {
-      toast.error(err.message);
-    });
+    postMakeAdministrator({ administratorName, email, password })
+      .then((obj) => {
+        toast.success("Administrator created successfully");
+        setIsSignupMode(false);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   const loginAdmin = (email, password) => {
     console.log("loginAdmin");
-    postLogin({email, password}).then(obj => {
-      dispatch(adminLogin(obj.data))
-      navigate("/admin");
-    })
-    .catch((err) => {
-      toast.error(err.message);
-    });
+    postLogin({ email, password })
+      .then((obj) => {
+        dispatch(adminLogin(obj.data));
+        navigate("/admin");
+      })
+      .catch((err) => {
+        if (err.status == 500) toast.error("Invalid entry");
+        else if (err.status == 401) toast.error("This account is not permited");
+        else toast.error(err.message);
+      });
   };
 
   const handleInputChange = (e) => {
@@ -56,11 +60,11 @@ const LoginForm = () => {
 
     if (isSignupMode) {
       if (!administratorName || !email || !password || !confirmPassword) {
-        alert("Please fill in all fields!");
+        toast.info("Please fill in all fields!");
         return;
       }
       if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+        toast.info("Passwords do not match!");
         return;
       }
       createAdmin(administratorName, email, password);
@@ -68,7 +72,7 @@ const LoginForm = () => {
       setIsSignupMode(false);
     } else {
       if (!email || !password) {
-        alert("Please fill in email and password!");
+        toast.info("Please fill in email and password!");
         return;
       }
       loginAdmin(email, password);
@@ -113,18 +117,18 @@ const LoginForm = () => {
               required
             />
           </div>
-            <div className={styles.inputGroup}>
-              <input
-                placeholder="Password"
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                className={styles.input}
-                required
-              />
-            </div>
+          <div className={styles.inputGroup}>
+            <input
+              placeholder="Password"
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+          </div>
           {isSignupMode && (
             <div className={styles.inputGroup}>
               <input

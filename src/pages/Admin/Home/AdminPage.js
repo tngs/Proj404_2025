@@ -11,7 +11,12 @@ import { toast } from "react-toastify";
 
 const AdminPage = () => {
   const [services, setServices] = useState([]);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getGetServicesByEmail().then(obj => {
+      setServices(obj.data)
+    })
+    .catch(err => console.error(err))
+  }, []);
   const permitHandler = (id) => {
     getPermitServiceByAdministrator(id)
       .then((obj) => {

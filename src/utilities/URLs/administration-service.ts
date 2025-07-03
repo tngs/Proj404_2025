@@ -38,9 +38,16 @@ export const postMakeAdministrator = (request: RequestAdministrator) => {
 export const getPermitAdministrator = (
   UnPermittedAdministratorEmail 
 ) => {
+  
+  const token = store.getState()?.account?.token;
   return axios
     .get<ResponsePermit>(
-      `/permitAdministrator/toAdministrator/${UnPermittedAdministratorEmail}`
+      `/administration-service/permitAdministrator/${UnPermittedAdministratorEmail}`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     )
     .then((response) => {
       //TODO should save the response to store
@@ -133,3 +140,4 @@ export const getGetServiceByAdministrator = (serviceId) => {
       throw error;
     });
 };
+

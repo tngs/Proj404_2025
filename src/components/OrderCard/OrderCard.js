@@ -24,6 +24,22 @@ const OrderCard = (props) => {
       })
       .catch((err) => toast.error(err.message));
   };
+  
+//*   {
+//*     "serviceApplyId": "01f32e4f-b3f0-4a0e-8271-7b658550262b",
+//*     "departure": "Busan",
+//*     "destination": "Seoul",
+//*     "serviceName": "TransportServiceNo1",
+//*     "transporterName": "transporter",
+//*     "transportUserId": "TransportUsere3244eb6-ce4f-4aa9-875b-21b685b972f1",
+//*     "weightRange": {
+//*         "minWeight": "0",
+//*         "maxWeight": "100kg",
+//*         "price": 100
+//*     },
+//*     "description": "7",
+//*     "date": "2025-06-17"
+//* }
   return (
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.details}>
