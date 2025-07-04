@@ -3,38 +3,34 @@ import styles from "./PaidOrders.module.css";
 import { getGetPaidByTransportUser } from "../../../../utilities/URLs/transport-apply-service";
 import OrderCard from "../../../../components/OrderCard/OrderCard";
 import { toast } from "react-toastify";
+import CDT from "../../../../components/centered_div_text";
 
 const PaidOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [placeHolder, setPlaceHolder] = useState(<h1>Loading...</h1>);
   useEffect(() => {
     //TODO setServices
     getGetPaidByTransportUser()
       .then((obj) => {
         setOrders(obj.data);
+        setPlaceHolder(<CDT error="No orders" />);
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => {
+        setPlaceHolder(<CDT error={err.error} message={err.message} />);
+        toast.error(err.message);
+      });
   }, []);
-//*   {
-//*     "serviceApplyId": "01f32e4f-b3f0-4a0e-8271-7b658550262b",
-//*     "departure": "Busan",
-//*     "destination": "Seoul",
-//*     "serviceName": "TransportServiceNo1",
-//*     "transporterName": "transporter",
-//*     "transportUserId": "TransportUsere3244eb6-ce4f-4aa9-875b-21b685b972f1",
-//*     "weightRange": {
-//*         "minWeight": "0",
-//*         "maxWeight": "100kg",
-//*         "price": 100
-//*     },
-//*     "description": "7",
-//*     "date": "2025-06-17"
-//* }
   return (
+    orders.length == 0 ? placeHolder :
     <div className={styles["container-centers-top"]}>
       <div className={styles.container}>
         <div className={styles.grid}>
           {orders.map((order) => (
-            <OrderCard key={order.serviceApplyId} orderDetail={order} paid={true}/>
+            <OrderCard
+              key={order.serviceApplyId}
+              orderDetail={order}
+              paid={true}
+            />
           ))}
         </div>
       </div>

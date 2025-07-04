@@ -1,6 +1,7 @@
 import axios from "../../axios";
 import { store } from "../../redux/reducers";
 import { ResponseServiceApply, RequestServiceApply } from "./dataTypes";
+import errors from "./errors.json";
 
 //DONE
 //*order                  //Order by user//
@@ -30,6 +31,15 @@ export const postApplyByTransportUser = (serviceId, weight, body) => {
     })
     .catch((error) => {
       console.log("postApplyByTransportUser error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -52,6 +62,15 @@ export const getGetUnpaidByTransportUser = () => {
     })
     .catch((error) => {
       console.log("getGetUnpaidByTransportUser error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -74,6 +93,15 @@ export const getGetPaidByTransportUser = () => {
     })
     .catch((error) => {
       console.log("getGetPaidByTransportUser error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -91,6 +119,15 @@ export const getGetByApplyId = ({ applyId }) => {
     })
     .catch((error) => {
       console.log("getGetByApplyId error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -112,6 +149,15 @@ export const getSetCompleteByApplyId = (applyId) => {
     })
     .catch((error) => {
       console.log("getSetCompleteByApplyId error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -132,6 +178,15 @@ export const getDeleteByApplyId = (applyId) => {
     })
     .catch((error) => {
       console.log("getDeleteByApplyId error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -156,6 +211,15 @@ export const postUpdateByApplyId = (applyId, body: RequestServiceApply) => {
     })
     .catch((error) => {
       console.log("postUpdateByApplyId error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -174,6 +238,15 @@ export const getGetAppliesByTransporter = () => {
     })
     .catch((error) => {
       console.log("getGetAppliesByTransporter error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };

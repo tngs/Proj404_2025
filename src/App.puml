@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Frontend" as FE
+participant "Backend" as BE
+database "Database" as DB
+
+User -> FE : Clicks "Login"
+FE -> BE : POST /login with credentials
+BE -> DB : Validate user
+DB --> BE : Return user data
+BE --> FE : Response with auth token
+FE --> User : Display dashboard
+@enduml

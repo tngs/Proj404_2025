@@ -6,36 +6,27 @@ import {
 } from "./dataTypes";
 import { useSelector } from "react-redux";
 import { store } from "../../redux/reducers";
+import errors from "./errors.json";
 
 //*user get services list in user home-> "/"
 export const get = () => {
   return axios
     .get<ResponseTransportService[]>("/transport-service/")
     .then((response) => {
-      //*   [
-      //*     {
-      //*         "serviceId": "Transporterjohn.doe@example.com14service001001",
-      //*         "serviceName": "service001001",
-      //*         "serviceDescription": "thisisDescription",
-      //*         "departures": "seoul, busan",
-      //*         "destinations": "seoul, busan",
-      //*         "transporterName": "john_doe14",
-      //*         "transporterId": "Transporterjohn.doe@example.com14",
-      //*         "responseWeightRanges": [
-      //*             {
-      //*                 "id": 1,
-      //*                 "minWeight": "100kg",
-      //*                 "maxWeight": "2t",
-      //*                 "price": 100
-      //*             }
-      //*         ]
-      //*     }
-      //* ]
       console.log("get");
       return response;
     })
     .catch((error) => {
-      console.log("get error", error);
+      console.log("error /get", error);
+     if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
       throw error;
     });
 };
@@ -45,28 +36,26 @@ export const getByServiceId = (id) => {
   return axios
     .get<ResponseTransportService>(`/transport-service/byServiceId/${id}`)
     .then((response) => {
-      //*   {
-      //*     "serviceId": "Transporterjohn.doe@example.com14service001001",
-      //*     "serviceName": "service001001",
-      //*     "serviceDescription": "thisisDescription",
-      //*     "departures": "seoul, busan",
-      //*     "destinations": "seoul, busan",
-      //*     "transporterName": "john_doe14",
-      //*     "transporterId": "Transporterjohn.doe@example.com14",
-      //*     "responseWeightRanges": [
-      //*         {
-      //*             "id": 1,
-      //*             "minWeight": "100kg",
-      //*             "maxWeight": "2t",
-      //*             "price": 100
-      //*         }
-      //*     ]
-      //* }
       console.log("getByServiceId", response);
       return response;
     })
     .catch((error) => {
-      console.log("getByServiceId error", error);
+      console.log("error /getByServiceId ", error);
+      // if(error.status == 503)
+      //   error.message = "Service Unavailable"
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -86,11 +75,24 @@ export const getMakingService = (request) => {
       }
     )
     .then((response) => {
-      console.log("getMakingService response");
+      console.log("response /getMakingService");
       return response;
     })
     .catch((error) => {
-      console.log("getMakingService error", error);
+      console.log("error /getMakingService", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -114,11 +116,24 @@ export const postMakingWeightRange = (
     )
     .then((response) => {
       //*same
-      console.log("postMakingWeightRange response");
+      console.log("response /postMakingWeightRange");
       return response;
     })
     .catch((error) => {
-      console.log("postMakingWeightRange error", error);
+      console.log("error /postMakingWeightRange", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -130,11 +145,24 @@ export const getByServiceName = (serviceName) => {
       `/transport-service/byServiceName/${serviceName}`
     )
     .then((response) => {
-      console.log("getByServiceName", response);
+      console.log("response /getByServiceName", response);
       return response;
     })
     .catch((error) => {
-      console.log("getByServiceName error", error);
+      console.log("error /getByServiceName ", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -150,11 +178,24 @@ export const getByTransporterId = () => {
       },
     })
     .then((response) => {
-      console.log("getByTransporterId response", response);
+      console.log("response /getByTransporterId", response);
       return response;
     })
     .catch((error) => {
-      console.log("getByTransporterId error", error);
+      console.log("error /getByTransporterId", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -178,11 +219,24 @@ export const postModifyService = (
       }
     )
     .then((response) => {
-      console.log("postModifyService response", response);
+      console.log("response /postModifyService", response);
       return response;
     })
     .catch((error) => {
-      console.log("postModifyService error", error);
+      console.log("error /postModifyService", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -203,11 +257,24 @@ export const postModifyServiceContent = (
       }
     )
     .then((response) => {
-      console.log("postModifyService response", response);
+      console.log("response /postModifyService ", response);
       return response;
     })
     .catch((error) => {
-      console.log("postModifyService error", error);
+      console.log("error /postModifyService", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -224,11 +291,23 @@ export const getDeleteServiceByServiceId = (serviceId) => {
       },
     })
     .then((response) => {
-      console.log("getDeleteServiceByServiceId response", response);
+      console.log("response /getDeleteServiceByServiceId", response);
       return response;
     })
     .catch((error) => {
-      console.log("getDeleteServiceByServiceId error", error);
+      console.log("error /getDeleteServiceByServiceId", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -242,11 +321,24 @@ export const getDeleteWeightRange = (weightRangeId) => {
       },
     })
     .then((response) => {
-      console.log("getDeleteWeightRange response", response);
+      console.log("response /getDeleteWeightRange", response);
       return response;
     })
     .catch((error) => {
-      console.log("getDeleteWeightRange error", error);
+      console.log("error /getDeleteWeightRange", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };
@@ -264,11 +356,24 @@ export const postUpdateWeightRange = (weightRangeId, body) => {
       }
     )
     .then((response) => {
-      console.log("postUpdateWeightRange response", response);
+      console.log("response /postUpdateWeightRange ", response);
       return response;
     })
     .catch((error) => {
-      console.log("postUpdateWeightRange error", error);
+      console.log("error /postUpdateWeightRange", error);
+
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if(error.code=="ERR_NETWORK"){
+        error.error = "Network Error";
+        error.message = "Somthing wrong with the network. Please check you internet!";
+      } 
+      if(error.code=="ERR_NETWORK"){
+
+      }
       throw error;
     });
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import ServiceList from "../../../components/List/ServiceList";
+import CDT from "../../../components/centered_div_text";
 // import servicesDB from "../../../servicesDB.json";
 import {
   get as getServices,
@@ -12,12 +13,18 @@ import { toast } from "react-toastify";
 const Home = () => {
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState("");
+  const [placeHolder, setPlaceHolder] = useState(<h1>Loading...</h1>);
   useEffect(() => {
     getServices()
       .then((obj) => {
         setServices(obj.data);
+        setPlaceHolder(<CDT error="No services available"/>)
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => {
+        console.log(err);
+        setPlaceHolder(<CDT error={err.error} message={err.message}/>)
+        toast.error(err.message);
+      });
   }, []);
   const enterHandler = (e) => {
     if (e.key === "Enter") {
@@ -29,7 +36,9 @@ const Home = () => {
   const eventHandler = (e) => {
     setSearch(e.target.value);
   };
+  console.log(services.length);
   return (
+    services.length == 0 ? placeHolder :
     <div className={styles["container-centers-top"]}>
       <Searchbar
         onKeyDown={enterHandler}

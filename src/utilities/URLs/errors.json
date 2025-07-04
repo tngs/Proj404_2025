@@ -1,0 +1,102 @@
+{
+  "400": {
+    "message": "Bad Request",
+    "korean": "잘못된 요청",
+    "friendly": "Oops! Your request couldn’t be understood. Please check and try again."
+  },
+  "401": {
+    "message": "Unauthorized",
+    "korean": "인증되지 않음",
+    "friendly": "You're not logged in or authorized to see this page."
+  },
+  "403": {
+    "message": "Forbidden",
+    "korean": "금지됨",
+    "friendly": "You don't have permission to access this content."
+  },
+  "404": {
+    "message": "Not Found",
+    "korean": "찾을 수 없음",
+    "friendly": "Sorry, we couldn’t find what you were looking for."
+  },
+  "405": {
+    "message": "Method Not Allowed",
+    "korean": "허용되지 않는 메서드",
+    "friendly": "This action isn’t allowed on this page."
+  },
+  "408": {
+    "message": "Request Timeout",
+    "korean": "요청 시간 초과",
+    "friendly": "It’s taking too long. Try again in a moment!"
+  },
+  "409": {
+    "message": "Conflict",
+    "korean": "충돌",
+    "friendly": "There’s a conflict in your request. Please refresh or check again."
+  },
+  "410": {
+    "message": "Gone",
+    "korean": "더 이상 존재하지 않음",
+    "friendly": "This content is no longer available."
+  },
+  "411": {
+    "message": "Length Required",
+    "korean": "콘텐츠 길이 필요함",
+    "friendly": "We need to know how much data you're sending. Try again with content length."
+  },
+  "413": {
+    "message": "Payload Too Large",
+    "korean": "요청 본문이 너무 큼",
+    "friendly": "That’s a big upload! Try a smaller file."
+  },
+  "414": {
+    "message": "URI Too Long",
+    "korean": "요청 URI가 너무 김",
+    "friendly": "The link is too long. Something went wrong with the request."
+  },
+  "415": {
+    "message": "Unsupported Media Type",
+    "korean": "지원되지 않는 미디어 타입",
+    "friendly": "We can’t process that file format."
+  },
+  "429": {
+    "message": "Too Many Requests",
+    "korean": "요청이 너무 많음",
+    "friendly": "You’re going too fast! Please wait a bit before trying again."
+  },
+  "500": {
+    "message": "Internal server error has occured.",
+    "korean": "현재 서버 오류가 발생했습니다",
+    "friendly": "Something went wrong on our side. We ask for your understanding. We’re fixing it!"
+  },
+  "501": {
+    "message": "Not Implemented",
+    "korean": "구현되지 않음",
+    "friendly": "This feature isn’t ready yet. Please check back later."
+  },
+  "502": {
+    "message": "Bad Gateway",
+    "korean": "잘못된 게이트웨이",
+    "friendly": "There’s a communication issue between servers. Hang tight!"
+  },
+  "503": {
+    "message": "This service is not available now.",
+    "korean": "현재 서비스가 이용 가능하지 않습니다.",
+    "friendly": "Please wait unitl it works."
+  },
+  "504": {
+    "message": "Gateway Timeout",
+    "korean": "게이트웨이 응답 시간 초과",
+    "friendly": "The server took too long to respond. Try again in a bit."
+  },
+  "505": {
+    "message": "HTTP Version Not Supported",
+    "korean": "HTTP 버전 지원 안 됨",
+    "friendly": "Your browser or request version isn’t supported."
+  },
+  "511": {
+    "message": "Network Authentication Required",
+    "korean": "네트워크 인증 필요",
+    "friendly": "Please connect to a network or sign in to proceed."
+  }
+}
