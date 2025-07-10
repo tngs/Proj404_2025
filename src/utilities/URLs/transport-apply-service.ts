@@ -80,7 +80,7 @@ export const getGetPaidByTransportUser = () => {
   const token = store.getState()?.account?.token;
   return axios
     .get<ResponseServiceApply[]>(
-      "/transport-apply-service/getPaidByTransportUser",
+      " ",
       {
         headers: {
           Authorization: `${token}`,
