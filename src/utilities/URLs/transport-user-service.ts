@@ -1,7 +1,7 @@
 import axios from "../../axios";
 import { TransportUser, ResponseTransportUser } from "./dataTypes";
-import { tokenSave } from "../../redux/actions/token";
 import { store } from "../../redux/reducers";
+import errors from "./errors.json";/////
 
 //DONE
 //*login
@@ -16,6 +16,16 @@ export const postLogin = (body: TransportUser) => {
     })
     .catch((error) => {
       console.log("postLogin error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if (error.code === "ERR_NETWORK") {
+        error.error = "Network Error";
+        error.message =
+          "Somthing wrong with the network. Please check you internet!";
+      }
       throw error;
     });
 };
@@ -29,6 +39,16 @@ export const postTransportUser = (body: TransportUser) => {
     })
     .catch((error) => {
       console.log("postLogin error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if (error.code === "ERR_NETWORK") {
+        error.error = "Network Error";
+        error.message =
+          "Somthing wrong with the network. Please check you internet!";
+      }
       throw error;
     });
 };
@@ -51,6 +71,16 @@ export const getTransportUser = () => {
     })
     .catch((error) => {
       console.log("getTransportUser error", error);
+      if (errors[error.status]) {
+        console.log(error.status);
+        error.error = errors[error.status].message;
+        error.message = errors[error.status].friendly;
+      }
+      if (error.code === "ERR_NETWORK") {
+        error.error = "Network Error";
+        error.message =
+          "Somthing wrong with the network. Please check you internet!";
+      }
       throw error;
     });
 };

@@ -36,7 +36,7 @@ export const postApplyByTransportUser = (serviceId, weight, body) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -67,7 +67,7 @@ export const getGetUnpaidByTransportUser = () => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -98,7 +98,7 @@ export const getGetPaidByTransportUser = () => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -124,7 +124,7 @@ export const getGetByApplyId = ({ applyId }) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -154,7 +154,7 @@ export const getSetCompleteByApplyId = (applyId) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -183,7 +183,7 @@ export const getDeleteByApplyId = (applyId) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -216,7 +216,7 @@ export const postUpdateByApplyId = (applyId, body: RequestServiceApply) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -243,7 +243,7 @@ export const getGetAppliesByTransporter = () => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 

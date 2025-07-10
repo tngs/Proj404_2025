@@ -4,7 +4,6 @@ import {
   RequestTransportServiceByTransporterId,
   RequestWeightRange,
 } from "./dataTypes";
-import { useSelector } from "react-redux";
 import { store } from "../../redux/reducers";
 import errors from "./errors.json";
 
@@ -23,7 +22,7 @@ export const get = () => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
@@ -41,7 +40,7 @@ export const getByServiceId = (id) => {
     })
     .catch((error) => {
       console.log("error /getByServiceId ", error);
-      // if(error.status == 503)
+      // if(error.status === 503)
       //   error.message = "Service Unavailable"
 
       if (errors[error.status]) {
@@ -49,11 +48,11 @@ export const getByServiceId = (id) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -86,11 +85,11 @@ export const getMakingService = (request) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -127,11 +126,11 @@ export const postMakingWeightRange = (
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -156,11 +155,11 @@ export const getByServiceName = (serviceName) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -189,11 +188,11 @@ export const getByTransporterId = () => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -230,11 +229,11 @@ export const postModifyService = (
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -268,11 +267,11 @@ export const postModifyServiceContent = (
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -301,11 +300,11 @@ export const getDeleteServiceByServiceId = (serviceId) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -332,11 +331,11 @@ export const getDeleteWeightRange = (weightRangeId) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
@@ -367,11 +366,11 @@ export const postUpdateWeightRange = (weightRangeId, body) => {
         error.error = errors[error.status].message;
         error.message = errors[error.status].friendly;
       }
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
         error.error = "Network Error";
         error.message = "Somthing wrong with the network. Please check you internet!";
       } 
-      if(error.code=="ERR_NETWORK"){
+      if(error.code==="ERR_NETWORK"){
 
       }
       throw error;
